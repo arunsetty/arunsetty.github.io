@@ -7,3 +7,6 @@ layout: home
 
 
 This is homepage
+
+
+Find all my info here
