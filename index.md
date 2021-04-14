@@ -15,9 +15,12 @@ Find all my info here
     {% for category in site.categories %}
         {% for post in site.posts %}
             {% if post.category == category[0] %}
-                <li>
+                <div>
+                <!-- The image size is 500px*320px -->
+                <img src="./professional.gif" style="width:250px;height:160px;">
                 <a href="{{ post.category }}">{{ post.category }}</a>
-                </li>
+                </div>
+                <br>
             {% endif %}
         {% endfor %}
     {% endfor %}
