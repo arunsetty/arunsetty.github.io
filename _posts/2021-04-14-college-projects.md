@@ -2,6 +2,7 @@
 layout: college-projects
 permalink: /college-projects
 category: college-projects
+description: These are my college projects
 ---
 
 
