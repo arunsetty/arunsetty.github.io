@@ -17,7 +17,7 @@ Find all my info here
             {% if post.category == category[0] %}
                 <div>
                 <!-- The image size is 500px*320px -->
-                <img src="./professional.gif" style="width:250px;height:160px;">
+                <img src="./{{ post.category }}.gif" style="width:250px;height:160px;">
                 <a href="{{ post.category }}">{{ post.category }}</a>
                 </div>
                 <br>
