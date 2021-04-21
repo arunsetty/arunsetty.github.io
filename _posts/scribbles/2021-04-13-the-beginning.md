@@ -1,6 +1,6 @@
 ---
-layout: blog
-post_category: blog
+layout: scribbles
+post_category: scribbles
 title: The Beginning
 ---
 

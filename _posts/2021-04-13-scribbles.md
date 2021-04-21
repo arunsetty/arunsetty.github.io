@@ -1,7 +1,7 @@
 ---
-layout: blog
-permalink: /blog
-category: blog
+layout: scribbles
+permalink: /scribbles
+category: scribbles
 description: This is my blog
 ---
 
