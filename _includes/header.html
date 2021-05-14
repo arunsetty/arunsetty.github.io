@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
   <title>Header</title>
@@ -91,4 +91,160 @@ function myFunction() {
 </script>
 
 </body>
+</html> -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Header</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <style>
+    .topnav {
+      overflow: hidden;
+      background-color: white;
+    }
+    
+    .topnav a {
+      float: left;
+      display: block;
+      color: black;
+      text-align: center;
+      padding: 14px 16px;
+      text-decoration: none;
+      font-size: 17px;
+    }
+    
+    .topnav a:hover {
+      color: blue;
+    }
+    
+    .topnav a.active {
+      background-color: #04AA6D;
+      color: white;
+    }
+
+    .dropdown {
+      display: none;
+    }
+
+    .example {
+      overflow-y: scroll;
+    }
+
+    /* Hide scrollbar for Chrome, Safari and Opera */
+    .example::-webkit-scrollbar {
+      display: none;
+    }
+
+    /* Hide scrollbar for IE, Edge and Firefox */
+    .example {
+      -ms-overflow-style: none;  /* IE and Edge */
+      scrollbar-width: none;  /* Firefox */
+    }
+    
+    @media screen and (min-width: 600px) {
+      .logo {
+        display: none;
+      }
+    }
+
+    @media screen and (max-width: 600px) {
+      .topnav {display: none;}
+    }
+
+    @media screen and (max-width: 600px) {
+      .logo a {
+        float: left;
+        display: block;
+        color: black;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+        font-size: 17px;
+      }
+
+      .logo a:hover{
+        color: blue;
+      }
+
+      .dropbtn {
+        background-color: white;
+        color: black;
+        padding: 14px;
+        font-size: 17px;
+        border: none;
+      }
+
+      .dropdown {
+        position: relative;
+        float: right;
+        display: block;
+      }
+
+      .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f1f1f1;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 1;
+      }
+
+      .dropdown-content a {
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+      }
+
+      .dropdown-content a:hover {background-color: #ddd;}
+
+      .dropdown:hover .dropdown-content {display: block; color: blue;}
+    }
+  </style>    
+</head>
+
+<body class="example">
+
+<div>
+  <div class="topnav">
+    <div class="container-fluid">
+      <div>
+        <a href="/">Arun Setty</a>
+      </div>
+      <div style="float: right;">
+        <a></a>
+        <a href="/">Home</a>
+        <a href="/about">About</a>
+        <a href="/professional-experience">Career</a>
+        <a href="/scribbles">Scribbles</a>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div class="container-fluid">
+      <div class="logo">
+        <a href="/">Arun Setty</a>
+      </div>
+      <div class="dropdown">
+      <button class="dropbtn">Menu</button>
+      <div class="dropdown-content">
+        <a href="/">Home</a>
+        <a href="/about">About</a>
+        <a href="/professional-experience">Career</a>
+        <a href="/scribbles">Scribbles</a>
+      </div>
+    </div>
+    </div>
+  </div>
+</div>
+
+</body>
+
 </html>
