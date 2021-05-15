@@ -6,7 +6,7 @@ layout: home
 ---
 
 
-This is homepage
+This is my mandatory homepage
 
 
 Find all my info here
