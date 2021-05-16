@@ -17,7 +17,7 @@ Find all my info here
 
 <!-- The image size is 500px*320px -->
 
-<ul>
+<!-- <ul>
     {% for category in site.categories %}
         {% for post in site.posts %}
             {% if post.category == category[0] %}
@@ -29,9 +29,9 @@ Find all my info here
             {% endif %}
         {% endfor %}
     {% endfor %}
-</ul>
+</ul> -->
 
-<!-- <div class="w3-row" style="padding-left:1%; padding-right:1%;">
+<div class="w3-row" style="padding-left:1%; padding-right:1%;">
   <div class="w3-third w3-aqua" style="height:250px;">
     <h2 class="w3-center">About Me</h2>
     <ul style="float:left">
@@ -67,6 +67,6 @@ Find all my info here
       <li></li>
     </ul>
   </div>
-</div> -->
+</div>
 
 <br>
