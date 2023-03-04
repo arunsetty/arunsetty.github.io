@@ -6,14 +6,14 @@
       <div class="job">
         <div class="time-place">
           <div class="job__company">
-            <a href="{{job.url}}" target="_blank">{{job.company}}</a> (<div class="job__position">{{job.position}}</div>)
+            <a href="{{job.url}}" target="_blank">{{job.company}}</a> ({{job.position}})
           </div>
           <div class="job__time">{{job.time}}</div>
         </div>
         <ul>
           {% for point in job.points %}
           <li>
-            {{point}}
+            - {{point}}
           </li>
           {% endfor %}
         </ul>
