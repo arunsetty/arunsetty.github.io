@@ -31,4 +31,6 @@ tools:
   - item: SQLite
   - item: Docker
   - item: Cloudflare
+
+design:
   - item: Figma
