@@ -2,38 +2,60 @@
   url: https://brokenatom.io
   time: Jun 2022 - Present
   position: Software Developer
+  points: 
 
 - company: Foxsense Innovations
   url: https://www.foxsense.io
   time: Jan - Apr 2022
   position: Software Developer
+  points: 
 
 - company: Hotstar
   url: https://www.hotstar.com/in
   time: May - Jul 2021
   position: Software Developer
+  points: 
+    - Designed and developed a service which handles the whole spectrum of activities from dawn of a project through its entire lifecycle using GoCD pipelines
+    - Integrated various github APIs ranging from generating a repo to setting up checks for its content with the aforementioned service to build a state maintained system for tracking all the changes in the organisation
+    - Designed the service to be OpenAPI compliant so that it could be transitioned into a CLI tool
 
 - company: Inscripta
   url: https://inscripta.ai
   time: Nov 2020 - Jan 2021
   position: AI Developer
+  points: 
+    - Created an API which collects details from a conversation and searches for most suitable product in scraped data from a wide range of articles gathered from various sources
 
 - company: Oficio Cloud Software
   url: https://talkingmart.com
   time: May - Jul 2020
   position: AI Developer
+  points: 
+    - Developed APIs that enable creation and management of events in Google Calendar
+    - Integrated the aforementioned APIs with an AI powered conversational bot using RASA system
+    - Interpreted the data models and designed the bot with ability to handle various conversations and reply in given context by gathering sufficient information from the ongoing discussion
 
 - company: The Right Doctors
   url: https://therightdoctors.com
   time: Dec 2019 - Jan 2020
   position: MEAN Stack Developer
+  points: 
+    - Implemented a pipeline for automated continuous integration and continuous deployment for a web application built on MEAN Stack using CIRCLE CI and bitbucket integration in GCP
+    - Wrote testcases for testing functionality and UI of the web application using Protractor and Jasmine
+    - Built and developed Auto Draft Saving System and Payment Integration for web application
+    - Developed a custom mailer for sending mails automatically during a period of time with a chosen frequency
 
 - company: MyTutor 247
   url: https://www.mytutor247.in/
   time: Jul - Nov 2019
   position: Mentor
+  points: 
+    - Mentored a group of 83 students preparing for JEE through an official android application
+    - Created a suitable time table for each student on daily basis to excel in their preparation
+    - Taught and cleared the doubts in various topics for all the students during the period
 
 - company: Dubbtr
   url: https://in.linkedin.com/company/dubbtr-edu
   time: Nov 2018 - May 2019
   position: Mentor
+  points: 
