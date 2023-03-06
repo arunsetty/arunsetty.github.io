@@ -18,7 +18,7 @@
     - thing: CSS
     - thing: MySQL
 
-- name: Grammar Correction and Word Predictor Tool
+- name: Grammar Correction Tool
   url: /
   description: Designed an offline grammar correction and word prediction tool using Racket language. Used variety of strategies and a database of over 2,50,000 english words including famous phrases for prediction using the optimised Decision Tree Algorithm. Used Racket Graphical Interface Toolkit to make a user-friendly interface for the application.
   used:
