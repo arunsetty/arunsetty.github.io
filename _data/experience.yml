@@ -3,12 +3,18 @@
   time: Jun 2022 - Present
   position: Software Developer
   points: 
+    - Been involved in the development of main product for the company.
+    - Developed a no-code system which can successfully create a structural application from scratch given the specifications from the user.
 
 - company: Foxsense Innovations
   url: https://www.foxsense.io
   time: Jan - Apr 2022
   position: Software Developer
   points: 
+    - Designed and Developed a service which accurately determines the Application Health analysing each of the APIs and their dependencies.
+    - Integrated the service with the existing monitoring system to provide a holistic view of the application health.
+    - Designed a fully integratable user system for the service which can be used by other services to provide a unified user experience.
+    - Developed a notification system which can be used by other services to notify the user about any changes in the application health.
 
 - company: Hotstar
   url: https://www.hotstar.com/in
@@ -50,7 +56,7 @@
   time: Jul - Nov 2019
   position: Mentor
   points: 
-    - Mentored a group of 83 students preparing for JEE through an official android application.
+    - Mentored a group of 83 students preparing for JEE through the platform.
     - Created a suitable time table for each student on daily basis to excel in their preparation.
     - Taught and cleared the doubts in various topics for all the students during the period.
 
