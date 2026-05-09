@@ -1,0 +1,124 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout title="404 — Page Not Found | Arun Setty" description="The page you're looking for doesn't exist.">
+  <!-- Cinematic 404 -->
+  <section class="hero-section cinematic-only">
+    <div class="container">
+      <span class="page-label">Error 404</span>
+      <h1 class="gradient-text page-title">Lost in the void</h1>
+      <p class="page-desc">
+        The page you're looking for doesn't exist — or it once did and has
+        moved on. Either way, let's get you back to somewhere real.
+      </p>
+
+      <div class="four-oh-four-links">
+        <a href="/" class="glass-card four-oh-four-link">Take me home &rarr;</a>
+        <a href="/work" class="glass-card four-oh-four-link">View my work &rarr;</a>
+        <a href="/writing" class="glass-card four-oh-four-link">Read my writing &rarr;</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Terminal 404 -->
+  <section class="hero-section terminal-only">
+    <div class="container">
+      <span class="page-label">Error 404</span>
+      <h1 class="gradient-text page-title">$ cat ./requested-page.md</h1>
+
+      <div class="terminal-error">
+        <span class="terminal-comment">// stderr</span><br />
+        <span class="terminal-err">cat: ./requested-page.md: No such file or directory</span>
+      </div>
+
+      <p class="terminal-hint">
+        // the page you requested doesn't exist on this filesystem.
+        <br />// try one of the directories below.
+      </p>
+
+      <div class="four-oh-four-links">
+        <a href="/" class="glass-card four-oh-four-link">$ cd /</a>
+        <a href="/work" class="glass-card four-oh-four-link">$ cd ./work</a>
+        <a href="/writing" class="glass-card four-oh-four-link">$ cd ./writing</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .hero-section {
+    padding-top: 140px;
+    padding-bottom: 120px;
+  }
+
+  .page-label {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--accent-primary);
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    display: block;
+    margin-bottom: 12px;
+  }
+
+  .page-title {
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    margin: 0 0 24px;
+  }
+
+  .page-desc {
+    color: var(--text-muted);
+    font-size: 1.05rem;
+    max-width: 600px;
+    line-height: 1.7;
+    margin: 0 0 40px;
+  }
+
+  .four-oh-four-links {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 32px;
+  }
+
+  .four-oh-four-link {
+    padding: 10px 24px;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--accent-primary);
+    text-decoration: none;
+    letter-spacing: 0.05em;
+  }
+
+  .terminal-only { display: none; }
+  :global([data-theme="terminal"]) .cinematic-only { display: none; }
+  :global([data-theme="terminal"]) .terminal-only { display: block; }
+
+  .terminal-error {
+    font-family: var(--font-mono);
+    font-size: 0.95rem;
+    line-height: 1.8;
+    margin: 24px 0;
+    padding: 16px 20px;
+    border-left: 2px solid #ff5555;
+    background: rgba(255, 85, 85, 0.05);
+  }
+
+  .terminal-comment {
+    color: #009922;
+    opacity: 0.7;
+  }
+
+  .terminal-err {
+    color: #ff5555;
+  }
+
+  .terminal-hint {
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    color: #009922;
+    margin: 24px 0 32px;
+    line-height: 1.8;
+  }
+</style>

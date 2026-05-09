@@ -2,6 +2,7 @@
   "name": "arunsetty.github.io",
   "private": true,
   "devDependencies": {
+    "@astrojs/sitemap": "^3.7.2",
     "@types/bun": "latest",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3"

@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://arunsetty.github.io/sitemap-index.xml

@@ -119,3 +119,48 @@ export const EXPERIENCE = [
     ],
   },
 ] as const;
+
+export const COLLEGE_PROJECTS = [
+  {
+    name: "Movie Recommendation System",
+    description:
+      "Web application that recommends movies based on user ratings, with a buddy system for sharing recommendations between friends.",
+    tags: ["AngularJS", "Node.js", "JavaScript"],
+  },
+  {
+    name: "Online Forms & Surveys",
+    description:
+      "Platform for creating forms and surveys with built-in analytics — graphs and charts over MySQL — and granular sharing controls (public, organization, or specific users).",
+    tags: ["Django", "JavaScript", "MySQL"],
+  },
+  {
+    name: "Grammar Correction Tool",
+    description:
+      "Offline grammar correction and word-prediction tool over a 250k+ word corpus, using an optimised Decision Tree algorithm and a Racket GUI.",
+    tags: ["Racket", "Decision Trees", "NLP"],
+  },
+  {
+    name: "Basic Machine Learning",
+    description:
+      "Decision-tree predictor in Racket using entropy reduction as the splitting criterion, with custom abstract data structures for the tree.",
+    tags: ["Racket", "Decision Trees"],
+  },
+  {
+    name: "Racket Interpreter",
+    description:
+      "Internal interpreter for Racket using the environment model of execution — frames, pointers, and lexical scope from scratch.",
+    tags: ["Racket", "Interpreters"],
+  },
+  {
+    name: "Cryptanalysis & Decryption",
+    description:
+      "Decrypted mono-alphabetic substitution ciphers using ETAOIN frequency analysis and common-word heuristics for finding the key.",
+    tags: ["Racket", "Prolog", "Heuristics"],
+  },
+  {
+    name: "C-like Language Interpreter",
+    description:
+      "Compiler/interpreter for a C-like language with AST generation and intermediate-code emission.",
+    tags: ["Lex", "Yacc", "Compilers"],
+  },
+] as const;
