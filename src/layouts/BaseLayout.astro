@@ -27,11 +27,15 @@ import "../styles/global.css";
 interface Props {
   title: string;
   description?: string;
+  ogSlug?: string;
 }
 
-const { title, description = SITE.description } = Astro.props;
+const { title, description = SITE.description, ogSlug } = Astro.props;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? "https://arunsetty.github.io");
-const ogImage = new URL(SITE.image, Astro.site ?? "https://arunsetty.github.io").toString();
+
+const trimmed = Astro.url.pathname.replace(/^\/+|\/+$/g, "");
+const slug = ogSlug ?? (trimmed === "" ? "index" : trimmed);
+const ogImage = new URL(`/og/${slug}.png`, Astro.site ?? "https://arunsetty.github.io").toString();
 
 const personSchema = {
   "@context": "https://schema.org",
