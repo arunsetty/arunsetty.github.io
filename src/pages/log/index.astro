@@ -1,0 +1,331 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
+import { LOG } from "../../consts";
+
+const allEntries = (await getCollection("log"))
+  .filter((e) => !e.data.draft)
+  .sort((a, b) => b.data.firstWatched.getTime() - a.data.firstWatched.getTime());
+
+const total = allEntries.length;
+
+// Stats
+const ratedEntries = allEntries.filter((e) => typeof e.data.rating === "number" && e.data.rating > 0);
+const avgRating =
+  ratedEntries.length > 0
+    ? (
+        ratedEntries.reduce((sum, e) => sum + (e.data.rating ?? 0), 0) / ratedEntries.length
+      ).toFixed(1)
+    : null;
+
+const thisYear = new Date().getFullYear();
+const thisYearCount = allEntries.filter(
+  (e) => e.data.firstWatched.getFullYear() === thisYear
+).length;
+
+const typeCounts = allEntries.reduce<Record<string, number>>((acc, e) => {
+  acc[e.data.type] = (acc[e.data.type] ?? 0) + 1;
+  return acc;
+}, {});
+
+const typeOrder = ["movie", "tv", "anime", "book", "game", "other"] as const;
+const typeLabels: Record<string, string> = {
+  movie: "Movies",
+  tv: "TV",
+  anime: "Anime",
+  book: "Books",
+  game: "Games",
+  other: "Other",
+};
+
+const formatDate = (d: Date) =>
+  d.toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" });
+
+const statusLabels: Record<string, string> = {
+  completed: "Completed",
+  watching: "Watching",
+  reading: "Reading",
+  playing: "Playing",
+  dropped: "Dropped",
+  rewatching: "Rewatching",
+  rereading: "Rereading",
+};
+---
+
+<BaseLayout
+  title={`${LOG.brand} | Arun Setty`}
+  description={`${LOG.tagline} ${LOG.blurb}`}
+>
+  <article class="log-archive">
+    <div class="container narrow">
+      <header class="log-header">
+        <span class="eyebrow">The Log</span>
+        <h1 class="log-title">{LOG.tagline}</h1>
+        <p class="log-blurb">{LOG.blurb}</p>
+      </header>
+
+      <div class="log-stats">
+        <div class="log-stat">
+          <span class="log-stat-num">{total}</span>
+          <span class="log-stat-label">{total === 1 ? "entry" : "entries"}</span>
+        </div>
+        <div class="log-stat">
+          <span class="log-stat-num">{thisYearCount}</span>
+          <span class="log-stat-label">in {thisYear}</span>
+        </div>
+        {avgRating && (
+          <div class="log-stat">
+            <span class="log-stat-num">{avgRating}</span>
+            <span class="log-stat-label">avg rating</span>
+          </div>
+        )}
+        {typeOrder.filter((t) => typeCounts[t]).map((t) => (
+          <div class="log-stat log-stat-type">
+            <span class="log-stat-num">{typeCounts[t]}</span>
+            <span class="log-stat-label">{typeLabels[t]}</span>
+          </div>
+        ))}
+      </div>
+
+      {total === 0 ? (
+        <p class="log-empty">
+          Log is empty. First entries arriving soon.
+        </p>
+      ) : (
+        <ol class="log-list">
+          {allEntries.map((entry) => (
+            <li class="log-item">
+              <a href={`/log/${entry.slug}`} class="log-link">
+                <div class="log-item-row">
+                  <span class="log-type">[{entry.data.type.toUpperCase()}]</span>
+                  <h2 class="log-name">
+                    {entry.data.title}
+                    {entry.data.year && (
+                      <span class="log-year">({entry.data.year})</span>
+                    )}
+                  </h2>
+                  <span class="log-rule" aria-hidden="true"></span>
+                  {typeof entry.data.rating === "number" && entry.data.rating > 0 ? (
+                    <span class="log-rating">{entry.data.rating.toFixed(1)}</span>
+                  ) : (
+                    <span class="log-rating-empty">—</span>
+                  )}
+                </div>
+                <div class="log-meta">
+                  {entry.data.creator && <span>{entry.data.creator}</span>}
+                  {entry.data.creator && <span class="log-meta-sep">·</span>}
+                  <time>{formatDate(entry.data.firstWatched)}</time>
+                  <span class="log-meta-sep">·</span>
+                  <span class="log-status">{statusLabels[entry.data.status] ?? entry.data.status}</span>
+                  {entry.data.tags.length > 0 && (
+                    <>
+                      <span class="log-meta-sep">·</span>
+                      <span class="log-tags">
+                        {entry.data.tags.map((tag) => (
+                          <span class="log-tag">#{tag}</span>
+                        ))}
+                      </span>
+                    </>
+                  )}
+                </div>
+              </a>
+            </li>
+          ))}
+        </ol>
+      )}
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .log-archive {
+    padding-top: 120px;
+    padding-bottom: 80px;
+  }
+
+  .log-header {
+    margin-bottom: 28px;
+  }
+
+  .log-title {
+    font-family: var(--font-display);
+    font-size: clamp(2.2rem, 5.5vw, 3.5rem);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+    margin: 12px 0 16px;
+    color: var(--text-primary);
+  }
+
+  .log-blurb {
+    font-family: var(--font-serif);
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    font-style: italic;
+    line-height: 1.6;
+    margin: 0;
+    max-width: 60ch;
+  }
+
+  .log-stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 28px 36px;
+    padding: 24px 0;
+    margin: 24px 0 8px;
+    border-top: 1px solid var(--rule-color);
+    border-bottom: 1px solid var(--rule-color);
+  }
+
+  .log-stat {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .log-stat-num {
+    font-family: var(--font-mono);
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--accent-primary);
+    font-variant-numeric: tabular-nums;
+    line-height: 1;
+  }
+
+  .log-stat-label {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  .log-list {
+    list-style: none;
+    padding: 0;
+    margin: 32px 0 0;
+  }
+
+  .log-item {
+    border-bottom: 1px solid var(--rule-color);
+  }
+
+  .log-link {
+    display: block;
+    padding: 18px 0;
+    text-decoration: none;
+    color: inherit;
+    transition: padding 0.18s ease;
+  }
+
+  .log-link:hover {
+    padding-left: 8px;
+  }
+
+  .log-link:hover .log-name {
+    color: var(--accent-primary);
+  }
+
+  .log-item-row {
+    display: grid;
+    grid-template-columns: auto minmax(0, auto) 1fr auto;
+    align-items: baseline;
+    gap: 12px;
+    margin-bottom: 6px;
+  }
+
+  .log-type {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--accent-primary);
+    letter-spacing: 0.04em;
+    font-weight: 500;
+  }
+
+  .log-name {
+    font-family: var(--font-display);
+    font-size: 1.18rem;
+    font-weight: 500;
+    color: var(--text-primary);
+    margin: 0;
+    letter-spacing: -0.01em;
+    transition: color 0.18s ease;
+    line-height: 1.25;
+  }
+
+  .log-year {
+    font-family: var(--font-serif);
+    font-weight: 400;
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    margin-left: 4px;
+  }
+
+  .log-rule {
+    height: 1px;
+    background: var(--rule-color);
+    align-self: center;
+    opacity: 0.7;
+  }
+
+  .log-rating {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+    font-size: 0.95rem;
+    color: var(--accent-primary);
+    font-weight: 600;
+    letter-spacing: 0.02em;
+  }
+
+  .log-rating-empty {
+    font-family: var(--font-mono);
+    color: var(--text-quiet);
+    font-size: 0.95rem;
+  }
+
+  .log-meta {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    padding-left: 60px;
+    letter-spacing: 0.03em;
+  }
+
+  .log-meta-sep {
+    color: var(--text-quiet);
+  }
+
+  .log-status {
+    color: var(--text-secondary);
+  }
+
+  .log-tags {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+
+  .log-tag {
+    color: var(--text-muted);
+  }
+
+  .log-empty {
+    color: var(--text-secondary);
+    font-style: italic;
+    font-size: 1.05rem;
+    padding: 32px 0;
+  }
+
+  @media (max-width: 640px) {
+    .log-item-row {
+      grid-template-columns: auto minmax(0, 1fr) auto;
+    }
+    .log-rule { display: none; }
+    .log-meta { padding-left: 0; }
+    .log-name { font-size: 1.05rem; }
+  }
+</style>

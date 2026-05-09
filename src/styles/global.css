@@ -1,40 +1,44 @@
 @import "tailwindcss";
 
-/* ===== DESIGN TOKENS — single editorial dark theme ===== */
+/* ============================================
+   DESIGN TOKENS — Editorial light theme.
+   Paper cream, ink, crimson. Magazine voice.
+   ============================================ */
 :root {
   /* Surfaces */
-  --bg-primary: #14110d;
-  --bg-secondary: #1c1814;
-  --bg-card: #1a1611;
-  --bg-card-hover: #221d16;
+  --bg-primary: #f5efe1;
+  --bg-secondary: #ede5d3;
+  --bg-card: #ede5d3;
+  --bg-card-hover: #e6dcc6;
 
   /* Type */
-  --text-primary: #ebe5d7;
-  --text-secondary: #a89e89;
-  --text-muted: #6e6553;
-  --text-quiet: #4a4338;
+  --text-primary: #1a1715;
+  --text-secondary: #5a534a;
+  --text-muted: #8a8175;
+  --text-quiet: #b5ad9d;
 
-  /* Accent (warm amber — editorial, not neon) */
-  --accent-primary: #e8b658;
-  --accent-soft: #c89846;
-  --accent-quiet: rgba(232, 182, 88, 0.6);
-  --glow-color: rgba(232, 182, 88, 0.18);
+  /* Accent — deep crimson, not signal-red */
+  --accent-primary: #b8362d;
+  --accent-soft: #a02d24;
+  --accent-quiet: rgba(184, 54, 45, 0.55);
+  --glow-color: rgba(184, 54, 45, 0.15);
 
   /* Lines */
-  --border-color: #2a2620;
-  --border-soft: #1f1c17;
-  --rule-color: #2d2a25;
+  --border-color: #d8cfbc;
+  --border-soft: #e2dac9;
+  --rule-color: #d8cfbc;
 
   /* Selection */
-  --selection-bg: rgba(232, 182, 88, 0.25);
+  --selection-bg: rgba(184, 54, 45, 0.18);
 
   /* Type stacks */
   --font-serif: "Newsreader", "Source Serif 4", "Iowan Old Style", "Charter", Georgia, serif;
+  --font-display: "Fraunces", "Newsreader", Georgia, serif;
   --font-sans: "Inter", "SF Pro Text", system-ui, sans-serif;
   --font-mono: "JetBrains Mono", "Fira Code", ui-monospace, monospace;
 }
 
-/* ===== BASE ===== */
+/* ============================================ */
 @layer base {
   * { box-sizing: border-box; }
 
@@ -43,7 +47,7 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
-    font-feature-settings: "kern", "liga", "calt", "ss01";
+    font-feature-settings: "kern", "liga", "calt", "ss01", "onum";
   }
 
   body {
@@ -57,17 +61,18 @@
   }
 
   h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-sans);
-    line-height: 1.2;
-    font-weight: 700;
+    font-family: var(--font-display);
+    line-height: 1.1;
+    font-weight: 600;
     letter-spacing: -0.015em;
     color: var(--text-primary);
+    font-feature-settings: "kern", "liga", "ss01";
   }
 
   a {
     color: var(--accent-primary);
     text-decoration: underline;
-    text-decoration-color: rgba(232, 182, 88, 0.35);
+    text-decoration-color: rgba(184, 54, 45, 0.35);
     text-underline-offset: 3px;
     text-decoration-thickness: 1px;
     transition: color 0.18s ease, text-decoration-color 0.18s ease;
@@ -78,9 +83,7 @@
     text-decoration-color: var(--accent-primary);
   }
 
-  code, pre, kbd, samp {
-    font-family: var(--font-mono);
-  }
+  code, pre, kbd, samp { font-family: var(--font-mono); }
 
   ::selection {
     background: var(--selection-bg);
@@ -94,9 +97,11 @@
   }
 }
 
-/* ===== UTILITIES ===== */
+/* ============================================
+   UTILITIES
+   ============================================ */
 
-/* Title accent — warm amber, no gradient */
+/* Title accent — flat crimson, not gradient */
 .gradient-text {
   color: var(--accent-primary);
   background: none;
@@ -105,7 +110,7 @@
   background-clip: unset;
 }
 
-/* Block primitive (replaces glass-card — flat editorial border) */
+/* Block primitive — flat editorial border */
 .glass-card {
   background: var(--bg-card);
   border: 1px solid var(--border-color);
@@ -132,13 +137,13 @@
 /* Container */
 .container {
   width: 100%;
-  max-width: 1100px;
+  max-width: 1200px;
   margin: 0 auto;
   padding: 0 24px;
 }
 
 .container.narrow {
-  max-width: 720px;
+  max-width: 760px;
 }
 
 @media (min-width: 768px) {
@@ -149,110 +154,76 @@
   .container { padding: 0 64px; }
 }
 
-/* Section spacing — editorial breathing room */
 section {
   padding: 64px 0;
 }
 
 @media (min-width: 768px) {
-  section {
-    padding: 96px 0;
-  }
+  section { padding: 96px 0; }
 }
 
-/* ===== EDITORIAL HELPERS ===== */
+/* ============================================
+   EDITORIAL HELPERS
+   ============================================ */
 
-/* Eyebrow / section label (small caps mono) */
 .eyebrow {
   font-family: var(--font-mono);
-  font-size: 0.72rem;
+  font-size: 0.7rem;
   color: var(--text-muted);
   text-transform: uppercase;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.2em;
   display: inline-block;
 }
 
-/* Mono date stamp */
 .timestamp {
   font-family: var(--font-mono);
   font-size: 0.78rem;
   color: var(--text-muted);
   letter-spacing: 0.04em;
+  font-variant-numeric: tabular-nums;
 }
 
-/* Numbered list rendering for archives */
-.numbered-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  counter-reset: nlist;
-}
-
-.numbered-list > li {
-  counter-increment: nlist;
+/* Mono numerals (tabular) for archive numbers */
+.mono-num {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.01em;
 }
 
 /* Drop cap for essay first paragraph */
 .drop-cap > p:first-of-type::first-letter {
-  font-family: var(--font-serif);
-  font-size: 4.2em;
+  font-family: var(--font-display);
+  font-size: 4.4em;
   font-weight: 600;
   float: left;
   line-height: 0.85;
-  margin: 0.05em 0.08em 0 0;
+  margin: 0.04em 0.08em -0.05em 0;
   color: var(--accent-primary);
 }
 
-/* Pull quote */
-.prose blockquote {
-  border-left: 2px solid var(--accent-primary);
-  padding: 4px 0 4px 24px;
-  margin: 32px 0;
-  font-size: 1.2rem;
-  line-height: 1.55;
-  font-style: italic;
-  color: var(--text-primary);
+/* Section ornament — three dots, centered */
+.essay-ornament {
+  text-align: center;
+  margin: 48px 0;
+  color: var(--text-quiet);
+  font-family: var(--font-mono);
+  letter-spacing: 0.5em;
+  font-size: 0.9rem;
 }
 
-.prose blockquote p {
-  margin: 0;
-}
+.essay-ornament::before { content: "· · ·"; }
 
-/* Code blocks — beautiful but quiet */
-.prose pre {
-  background: var(--bg-secondary);
-  border: 1px solid var(--border-color);
-  border-radius: 6px;
-  padding: 18px 20px;
-  overflow-x: auto;
-  margin: 28px 0;
-  font-size: 0.875rem;
-  line-height: 1.6;
-}
+/* ============================================
+   PROSE — body content styling
+   ============================================ */
 
-.prose pre code {
-  background: none;
-  padding: 0;
-  font-size: inherit;
-  color: var(--text-primary);
-}
-
-.prose code {
-  font-size: 0.9em;
-  padding: 2px 6px;
-  background: var(--bg-card);
-  border: 1px solid var(--border-color);
-  border-radius: 3px;
-  color: var(--accent-primary);
-}
-
-/* Prose body styles */
 .prose {
   font-family: var(--font-serif);
-  font-size: 1.125rem;
-  line-height: 1.75;
+  font-size: 1.18rem;
+  line-height: 1.78;
   color: var(--text-primary);
   max-width: 64ch;
+  position: relative;
 }
 
 .prose p {
@@ -260,16 +231,19 @@ section {
 }
 
 .prose h2 {
-  font-family: var(--font-sans);
-  font-size: 1.4rem;
-  margin: 2.6em 0 0.8em;
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 2.6em 0 0.7em;
   color: var(--text-primary);
+  letter-spacing: -0.01em;
 }
 
 .prose h3 {
-  font-family: var(--font-sans);
-  font-size: 1.15rem;
-  margin: 2em 0 0.6em;
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin: 2em 0 0.5em;
   color: var(--text-primary);
 }
 
@@ -289,8 +263,85 @@ section {
 
 .prose em {
   color: var(--text-primary);
+  font-style: italic;
 }
 
 .prose a {
   color: var(--accent-primary);
+}
+
+/* Pull quote */
+.prose blockquote {
+  border-left: 3px solid var(--accent-primary);
+  padding: 4px 0 4px 24px;
+  margin: 32px 0;
+  font-size: 1.3rem;
+  line-height: 1.5;
+  font-style: italic;
+  color: var(--text-primary);
+  font-family: var(--font-display);
+}
+
+.prose blockquote p { margin: 0; }
+
+/* Code blocks — quiet, no aggressive styling */
+.prose pre {
+  background: #efe9da;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  padding: 18px 20px;
+  overflow-x: auto;
+  margin: 28px 0;
+  font-size: 0.875rem;
+  line-height: 1.6;
+}
+
+.prose pre code {
+  background: none;
+  padding: 0;
+  font-size: inherit;
+  color: var(--text-primary);
+}
+
+.prose code {
+  font-size: 0.9em;
+  padding: 1px 6px;
+  background: #ebe2cf;
+  border: 1px solid var(--border-color);
+  border-radius: 3px;
+  color: var(--accent-soft);
+}
+
+/* ============================================
+   MARGIN FOOTNOTES
+   On wide viewports, <aside class="note"> floats
+   into the right margin. On narrow, falls inline.
+   ============================================ */
+
+.prose aside.note,
+.prose-with-margins aside.note {
+  display: block;
+  margin: 1em 0;
+  padding: 8px 0 8px 14px;
+  border-left: 2px solid var(--accent-soft);
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  line-height: 1.55;
+  color: var(--text-secondary);
+}
+
+@media (min-width: 1180px) {
+  .prose-with-margins {
+    /* The reading column stays narrow; margins extend into the gutter */
+  }
+  .prose-with-margins aside.note {
+    float: right;
+    width: 220px;
+    margin: 6px -260px 18px 0;
+    clear: right;
+    border-left: 1px solid var(--rule-color);
+    padding: 0 0 0 14px;
+    font-size: 0.78rem;
+    color: var(--text-muted);
+  }
 }

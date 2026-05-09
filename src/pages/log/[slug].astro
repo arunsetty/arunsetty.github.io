@@ -1,0 +1,411 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
+
+export async function getStaticPaths() {
+  const entries = await getCollection("log");
+  return entries.map((entry) => ({
+    params: { slug: entry.slug },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+const { data } = entry;
+
+const formatDate = (d: Date) =>
+  d.toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" });
+
+const statusLabels: Record<string, string> = {
+  completed: "Completed",
+  watching: "Currently watching",
+  reading: "Currently reading",
+  playing: "Currently playing",
+  dropped: "Dropped",
+  rewatching: "Rewatching",
+  rereading: "Rereading",
+};
+---
+
+<BaseLayout title={`${data.title} | Log | Arun Setty`} description={`Notes on ${data.title}`}>
+  <article class="log-entry">
+    <div class="container narrow">
+      <a href="/log" class="back-link">← All log entries</a>
+
+      <header class="entry-header">
+        <div class="entry-meta-top">
+          <span class="entry-type">[{data.type.toUpperCase()}]</span>
+          <span class="entry-meta-sep">·</span>
+          <span class="entry-status">{statusLabels[data.status] ?? data.status}</span>
+          {typeof data.rating === "number" && data.rating > 0 && (
+            <>
+              <span class="entry-meta-sep">·</span>
+              <span class="entry-rating">
+                <span class="entry-rating-num">{data.rating.toFixed(1)}</span>
+                <span class="entry-rating-max">/10</span>
+              </span>
+            </>
+          )}
+        </div>
+
+        <h1 class="entry-title">
+          {data.title}
+          {data.year && <span class="entry-year">({data.year})</span>}
+        </h1>
+
+        {data.creator && (
+          <p class="entry-creator">{data.creator}</p>
+        )}
+
+        <div class="entry-dates">
+          <div class="entry-date-row">
+            <span class="entry-date-label">First {data.type === "book" ? "read" : "watched"}</span>
+            <time>{formatDate(data.firstWatched)}</time>
+          </div>
+          {data.completed && (
+            <div class="entry-date-row">
+              <span class="entry-date-label">Completed</span>
+              <time>{formatDate(data.completed)}</time>
+            </div>
+          )}
+        </div>
+
+        {data.tags.length > 0 && (
+          <div class="entry-tags">
+            {data.tags.map((tag) => (
+              <span class="entry-tag">#{tag}</span>
+            ))}
+          </div>
+        )}
+      </header>
+
+      <div class="entry-rule"></div>
+
+      <div class="prose">
+        <Content />
+      </div>
+
+      {data.seasons && data.seasons.length > 0 && (
+        <section class="seasons-section">
+          <h2 class="section-heading">Seasons</h2>
+          <ol class="season-list">
+            {data.seasons.map((s) => (
+              <li class="season-item">
+                <div class="season-row">
+                  <span class="season-num">S{s.number}{s.title && ` · ${s.title}`}</span>
+                  {typeof s.rating === "number" && (
+                    <span class="season-rating">{s.rating.toFixed(1)}</span>
+                  )}
+                </div>
+                {s.thoughts && <p class="season-thoughts">{s.thoughts}</p>}
+                {s.watched && (
+                  <time class="season-date">{formatDate(s.watched)}</time>
+                )}
+              </li>
+            ))}
+          </ol>
+        </section>
+      )}
+
+      {data.episodes && data.episodes.length > 0 && (
+        <section class="episodes-section">
+          <h2 class="section-heading">Episode highlights</h2>
+          <ol class="episode-list">
+            {data.episodes.map((ep) => (
+              <li class="episode-item">
+                <div class="episode-row">
+                  <span class="episode-num">
+                    {ep.season ? `S${ep.season}E${ep.episode}` : `E${ep.episode}`}
+                    {ep.title && ` · ${ep.title}`}
+                  </span>
+                  {typeof ep.rating === "number" && (
+                    <span class="episode-rating">{ep.rating.toFixed(1)}</span>
+                  )}
+                </div>
+                {ep.thoughts && <p class="episode-thoughts">{ep.thoughts}</p>}
+                {ep.watched && (
+                  <time class="episode-date">{formatDate(ep.watched)}</time>
+                )}
+              </li>
+            ))}
+          </ol>
+        </section>
+      )}
+
+      {data.rewatches && data.rewatches.length > 0 && (
+        <section class="rewatches-section">
+          <h2 class="section-heading">Rewatches</h2>
+          <ol class="rewatch-list">
+            {data.rewatches.map((r) => (
+              <li class="rewatch-item">
+                <time class="rewatch-date">{formatDate(r.date)}</time>
+                {r.note && <p class="rewatch-note">{r.note}</p>}
+              </li>
+            ))}
+          </ol>
+        </section>
+      )}
+
+      {data.related && (
+        <section class="related-section">
+          <p class="related-label">Related essay</p>
+          <a href={data.related} class="related-link">{data.related} →</a>
+        </section>
+      )}
+
+      <footer class="entry-footer">
+        <a href="/log" class="back-link">← Back to the log</a>
+      </footer>
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .log-entry {
+    padding-top: 120px;
+    padding-bottom: 80px;
+  }
+
+  .back-link {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    text-decoration: none;
+    letter-spacing: 0.04em;
+    margin-bottom: 48px;
+    transition: color 0.18s ease;
+  }
+
+  .back-link:hover {
+    color: var(--accent-primary);
+  }
+
+  .entry-header {
+    margin-bottom: 28px;
+  }
+
+  .entry-meta-top {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    margin-bottom: 16px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: baseline;
+    letter-spacing: 0.03em;
+  }
+
+  .entry-type {
+    color: var(--accent-primary);
+    font-weight: 500;
+  }
+
+  .entry-meta-sep {
+    color: var(--text-quiet);
+  }
+
+  .entry-rating {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+    color: var(--accent-primary);
+    font-weight: 600;
+    font-size: 0.92rem;
+  }
+
+  .entry-rating-max {
+    color: var(--text-muted);
+    font-weight: 400;
+    font-size: 0.78rem;
+  }
+
+  .entry-title {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 4.5vw, 3rem);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    margin: 0 0 8px;
+    color: var(--text-primary);
+  }
+
+  .entry-year {
+    font-family: var(--font-serif);
+    font-weight: 400;
+    color: var(--text-muted);
+    font-size: 0.7em;
+    margin-left: 8px;
+  }
+
+  .entry-creator {
+    font-family: var(--font-serif);
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    font-style: italic;
+    margin: 0 0 24px;
+  }
+
+  .entry-dates {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-bottom: 18px;
+    padding: 12px 0;
+    border-top: 1px solid var(--rule-color);
+    border-bottom: 1px solid var(--rule-color);
+  }
+
+  .entry-date-row {
+    display: flex;
+    gap: 16px;
+    align-items: baseline;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+  }
+
+  .entry-date-label {
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-size: 0.7rem;
+    min-width: 110px;
+  }
+
+  .entry-date-row time {
+    color: var(--text-secondary);
+    letter-spacing: 0.02em;
+  }
+
+  .entry-tags {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+
+  .entry-tag {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--text-muted);
+  }
+
+  .entry-rule {
+    height: 1px;
+    background: var(--rule-color);
+    margin: 36px 0;
+  }
+
+  .section-heading {
+    font-family: var(--font-display);
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin: 56px 0 20px;
+    color: var(--text-primary);
+    letter-spacing: -0.01em;
+  }
+
+  /* Seasons */
+  .season-list, .episode-list, .rewatch-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    border-top: 1px solid var(--rule-color);
+  }
+
+  .season-item, .episode-item, .rewatch-item {
+    border-bottom: 1px solid var(--rule-color);
+    padding: 16px 0;
+  }
+
+  .season-row, .episode-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 12px;
+    margin-bottom: 4px;
+  }
+
+  .season-num, .episode-num {
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    color: var(--text-primary);
+    font-weight: 500;
+    letter-spacing: 0.02em;
+  }
+
+  .season-rating, .episode-rating {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+    color: var(--accent-primary);
+    font-weight: 600;
+    font-size: 0.85rem;
+  }
+
+  .season-thoughts, .episode-thoughts {
+    font-family: var(--font-serif);
+    font-size: 1rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin: 6px 0 4px;
+  }
+
+  .season-date, .episode-date {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    letter-spacing: 0.04em;
+  }
+
+  /* Rewatches */
+  .rewatch-date {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--text-primary);
+    font-weight: 500;
+  }
+
+  .rewatch-note {
+    font-family: var(--font-serif);
+    font-size: 1rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin: 6px 0 0;
+  }
+
+  /* Related */
+  .related-section {
+    margin-top: 56px;
+    padding: 18px 20px;
+    border: 1px solid var(--border-color);
+    background: var(--bg-card);
+    border-radius: 4px;
+  }
+
+  .related-label {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    margin: 0 0 6px;
+  }
+
+  .related-link {
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+    color: var(--accent-primary);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(184, 54, 45, 0.4);
+  }
+
+  .related-link:hover {
+    border-bottom-color: var(--accent-primary);
+  }
+
+  .entry-footer {
+    margin-top: 80px;
+    padding-top: 32px;
+    border-top: 1px solid var(--rule-color);
+  }
+</style>

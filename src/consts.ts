@@ -16,9 +16,10 @@ export const SOCIAL = [
 ] as const;
 
 export const NAV_LINKS = [
-  { name: "Work", href: "/work" },
-  { name: "Journey", href: "/journey" },
   { name: "Thoughts", href: "/thoughts" },
+  { name: "Work", href: "/work" },
+  { name: "Log", href: "/log" },
+  { name: "Journey", href: "/journey" },
   { name: "About", href: "/about" },
   { name: "Now", href: "/now" },
 ] as const;
@@ -27,6 +28,13 @@ export const THOUGHTS = {
   brand: "Ephemeral Thoughts",
   tagline: "Things I think before I forget.",
   blurb: "Short, often half-formed. Notes I'd rather catch than lose.",
+  cadence: "New essay most days.",
+} as const;
+
+export const LOG = {
+  brand: "Log",
+  tagline: "Everything I watch, read, play.",
+  blurb: "Films, shows, anime, books, games — episode-level when something hits, with what I was thinking at the time.",
 } as const;
 
 export const NOW_UPDATED = "May 2026";

@@ -1,71 +1,119 @@
-export default function Hero() {
+interface FeaturedThought {
+  title: string;
+  description: string;
+  pubDate: Date;
+  slug: string;
+  number: number;
+}
+
+interface HeroProps {
+  featured?: FeaturedThought;
+}
+
+const formatDate = (d: Date) =>
+  d.toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" });
+
+export default function Hero({ featured }: HeroProps) {
   return (
     <section className="hero">
       <div className="container">
-        <div className="hero-inner">
-          <p className="hero-eyebrow">Software developer · Essayist</p>
-          <h1 className="hero-name">Arun Setty</h1>
-          <p className="hero-frame">
-            Currently building{" "}
-            <a href="https://brokenatom.io" target="_blank" rel="noopener noreferrer">
-              Broken
-            </a>
-            , a no-code platform. IIT&nbsp;Bombay alum, eight years in the
-            industry, somewhere between a fullstack engineer and a
-            philosopher.
-          </p>
-          <p className="hero-frame">
-            I write at <a href="/thoughts">Ephemeral Thoughts</a> — short
-            essays on decisions, systems, and the spaces in between. Things I
-            think before I forget.
-          </p>
+        <div className="hero-grid">
+          <div className="hero-left">
+            <p className="hero-eyebrow">Software developer · Essayist</p>
+            <h1 className="hero-name">Arun Setty</h1>
+            <p className="hero-frame">
+              Currently building{" "}
+              <a href="https://brokenatom.io" target="_blank" rel="noopener noreferrer">
+                Broken
+              </a>
+              , a no-code platform. IIT&nbsp;Bombay alum, eight years in,
+              somewhere between a fullstack engineer and a philosopher.
+            </p>
+            <p className="hero-frame">
+              I write at <a href="/thoughts">Ephemeral Thoughts</a> — short
+              essays on decisions, systems, behavior. <strong>New essay
+              most days.</strong>
+            </p>
 
-          <div className="hero-meta">
-            <a href="/thoughts" className="hero-cta">Read the thoughts →</a>
-            <span className="hero-sep">·</span>
-            <a href="/work" className="hero-cta hero-cta-quiet">See the work</a>
+            <div className="hero-meta">
+              <a href="/thoughts" className="hero-cta">Read the thoughts →</a>
+              <span className="hero-sep">·</span>
+              <a href="/log" className="hero-cta hero-cta-quiet">The log</a>
+              <span className="hero-sep">·</span>
+              <a href="/work" className="hero-cta hero-cta-quiet">Work</a>
+            </div>
           </div>
+
+          {featured && (
+            <aside className="hero-featured">
+              <a href={`/thoughts/${featured.slug}`} className="hero-featured-link">
+                <div className="hero-featured-meta">
+                  <span className="hero-featured-num">№ {String(featured.number).padStart(2, "0")}</span>
+                  <span className="hero-featured-tag">Latest</span>
+                </div>
+                <h2 className="hero-featured-title">{featured.title}</h2>
+                <p className="hero-featured-desc">{featured.description}</p>
+                <div className="hero-featured-foot">
+                  <time>{formatDate(featured.pubDate)}</time>
+                  <span className="hero-featured-arrow">Read →</span>
+                </div>
+              </a>
+            </aside>
+          )}
         </div>
       </div>
 
       <style>{`
         .hero {
-          padding-top: 140px;
-          padding-bottom: 40px;
+          padding-top: 120px;
+          padding-bottom: 32px;
         }
-        .hero-inner {
-          max-width: 720px;
+        .hero-grid {
+          display: grid;
+          grid-template-columns: 1fr;
+          gap: 48px;
+          align-items: start;
+        }
+        @media (min-width: 980px) {
+          .hero-grid {
+            grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+            gap: 64px;
+          }
         }
         .hero-eyebrow {
           font-family: var(--font-mono);
-          font-size: 0.78rem;
-          letter-spacing: 0.18em;
+          font-size: 0.74rem;
+          letter-spacing: 0.2em;
           text-transform: uppercase;
           color: var(--text-muted);
-          margin: 0 0 24px;
+          margin: 0 0 28px;
         }
         .hero-name {
-          font-family: var(--font-sans);
-          font-size: clamp(2.6rem, 7vw, 4.8rem);
-          font-weight: 800;
-          letter-spacing: -0.03em;
+          font-family: var(--font-display);
+          font-size: clamp(3rem, 8vw, 5.6rem);
+          font-weight: 600;
+          letter-spacing: -0.025em;
           line-height: 0.95;
-          margin: 0 0 32px;
+          margin: 0 0 36px;
           color: var(--text-primary);
         }
         .hero-frame {
           font-family: var(--font-serif);
           font-size: 1.18rem;
-          line-height: 1.7;
-          color: var(--text-secondary);
+          line-height: 1.65;
+          color: var(--text-primary);
           margin: 0 0 18px;
-          max-width: 60ch;
+          max-width: 56ch;
         }
         .hero-frame a {
           color: var(--accent-primary);
           text-decoration: underline;
-          text-decoration-color: rgba(232, 182, 88, 0.4);
+          text-decoration-color: rgba(184, 54, 45, 0.4);
           text-underline-offset: 4px;
+        }
+        .hero-frame strong {
+          font-weight: 600;
+          color: var(--text-primary);
         }
         .hero-meta {
           margin-top: 32px;
@@ -76,12 +124,12 @@ export default function Hero() {
         }
         .hero-cta {
           font-family: var(--font-mono);
-          font-size: 0.85rem;
+          font-size: 0.8rem;
           letter-spacing: 0.05em;
           color: var(--accent-primary);
           text-decoration: none;
           padding: 4px 0;
-          border-bottom: 1px solid rgba(232, 182, 88, 0.4);
+          border-bottom: 1px solid rgba(184, 54, 45, 0.4);
           transition: border-color 0.18s ease, color 0.18s ease;
         }
         .hero-cta:hover {
@@ -97,6 +145,79 @@ export default function Hero() {
         }
         .hero-sep {
           color: var(--text-quiet);
+        }
+
+        /* Featured thought card */
+        .hero-featured {
+          border-top: 2px solid var(--text-primary);
+          border-bottom: 1px solid var(--rule-color);
+          padding: 0;
+          background: transparent;
+          align-self: start;
+          position: relative;
+        }
+        @media (min-width: 980px) {
+          .hero-featured {
+            margin-top: 48px;
+          }
+        }
+        .hero-featured-link {
+          display: block;
+          padding: 18px 0 22px;
+          text-decoration: none;
+          color: inherit;
+        }
+        .hero-featured-meta {
+          display: flex;
+          justify-content: space-between;
+          align-items: baseline;
+          margin-bottom: 14px;
+          font-family: var(--font-mono);
+        }
+        .hero-featured-num {
+          font-size: 0.78rem;
+          color: var(--text-muted);
+          letter-spacing: 0.04em;
+          font-variant-numeric: tabular-nums;
+        }
+        .hero-featured-tag {
+          font-size: 0.68rem;
+          letter-spacing: 0.2em;
+          text-transform: uppercase;
+          color: var(--accent-primary);
+        }
+        .hero-featured-title {
+          font-family: var(--font-display);
+          font-size: clamp(1.6rem, 3vw, 2.2rem);
+          font-weight: 600;
+          line-height: 1.1;
+          letter-spacing: -0.015em;
+          color: var(--text-primary);
+          margin: 0 0 14px;
+          transition: color 0.18s ease;
+        }
+        .hero-featured-link:hover .hero-featured-title {
+          color: var(--accent-primary);
+        }
+        .hero-featured-desc {
+          font-family: var(--font-serif);
+          font-size: 1.02rem;
+          line-height: 1.55;
+          color: var(--text-secondary);
+          margin: 0 0 18px;
+          max-width: 38ch;
+        }
+        .hero-featured-foot {
+          display: flex;
+          justify-content: space-between;
+          align-items: baseline;
+          font-family: var(--font-mono);
+          font-size: 0.74rem;
+          color: var(--text-muted);
+          letter-spacing: 0.04em;
+        }
+        .hero-featured-arrow {
+          color: var(--accent-primary);
         }
       `}</style>
     </section>

@@ -1,22 +1,35 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Hero from "../components/Hero.tsx";
-import { RecentThoughts, CurrentlyBuilding } from "../components/HomeSections.tsx";
+import { RecentThoughts, BuildingAndLately } from "../components/HomeSections.tsx";
 import { getCollection } from "astro:content";
 
+// Thoughts
 const allThoughts = (await getCollection("thoughts"))
   .filter((p) => !p.data.draft)
   .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
 
-const recent = allThoughts.slice(0, 4).map((p, i) => ({
+const totalThoughts = allThoughts.length;
+
+const featured = allThoughts[0]
+  ? {
+      title: allThoughts[0].data.title,
+      description: allThoughts[0].data.description,
+      pubDate: allThoughts[0].data.pubDate,
+      slug: allThoughts[0].slug,
+      number: totalThoughts,
+    }
+  : undefined;
+
+const recent = allThoughts.slice(1, 7).map((p, i) => ({
   title: p.data.title,
-  description: p.data.description,
   pubDate: p.data.pubDate,
   slug: p.slug,
-  number: allThoughts.length - i,
+  number: totalThoughts - 1 - i,
 }));
 
-const featured = (await getCollection("projects"))
+// Featured projects
+const featuredProjects = (await getCollection("projects"))
   .filter((p) => p.data.featured)
   .sort((a, b) => a.data.order - b.data.order)
   .slice(0, 3)
@@ -27,13 +40,28 @@ const featured = (await getCollection("projects"))
     slug: p.slug,
     duration: p.data.duration,
   }));
+
+// Recent log entries
+const recentLog = (await getCollection("log"))
+  .filter((e) => !e.data.draft)
+  .sort((a, b) => b.data.firstWatched.getTime() - a.data.firstWatched.getTime())
+  .slice(0, 4)
+  .map((e) => ({
+    title: e.data.title,
+    type: e.data.type,
+    rating: e.data.rating,
+    status: e.data.status,
+    firstWatched: e.data.firstWatched,
+    slug: e.slug,
+    creator: e.data.creator,
+  }));
 ---
 
 <BaseLayout
   title="Arun Setty | Software developer & essayist"
-  description="Software developer building Broken (no-code platform). Essays at Ephemeral Thoughts on decisions, systems, and craft. IIT Bombay alum, eight years in the industry."
+  description="Software developer building Broken (no-code platform). Essays at Ephemeral Thoughts on decisions, systems, and craft. New essay most days."
 >
-  <Hero />
-  <RecentThoughts thoughts={recent} total={allThoughts.length} />
-  <CurrentlyBuilding projects={featured} />
+  <Hero featured={featured} />
+  <RecentThoughts thoughts={recent} total={totalThoughts} />
+  <BuildingAndLately projects={featuredProjects} log={recentLog} />
 </BaseLayout>

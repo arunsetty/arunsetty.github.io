@@ -87,7 +87,7 @@ export default function Timeline() {
         }
         .timeline-company {
           margin: 0;
-          font-family: var(--font-sans);
+          font-family: var(--font-display);
           font-size: 1.15rem;
           font-weight: 600;
           letter-spacing: -0.01em;
