@@ -19,29 +19,38 @@ export default function Hero({ featured }: HeroProps) {
       <div className="container">
         <div className="hero-grid">
           <div className="hero-left">
-            <p className="hero-eyebrow">Software developer · Essayist</p>
+            <p className="hero-eyebrow">Storyteller · Tinkerer · Thinker · Engineer</p>
             <h1 className="hero-name" aria-label="Arun Setty Kodavali">
               <span className="hero-mark">
                 A<span className="hero-mark-dot">·</span>S<span className="hero-mark-dot">·</span>K
               </span>
               <span className="hero-name-full">Arun Setty Kodavali</span>
             </h1>
+            <p className="hero-motto">
+              <span className="hero-motto-mark">&ldquo;</span>Human with the excellence reflex.<span className="hero-motto-mark">&rdquo;</span>
+            </p>
+
+            <div className="hero-divider" aria-hidden="true"></div>
+
             <p className="hero-frame">
-              Currently building{" "}
+              Stories, mostly &mdash; in essays at{" "}
+              <a href="/thoughts">Ephemeral Thoughts</a>,
+              in code at{" "}
               <a href="https://brokenatom.io" target="_blank" rel="noopener noreferrer">
                 Broken
               </a>
-              , a no-code platform. IIT&nbsp;Bombay alum, eight years in,
-              somewhere between a fullstack engineer and a philosopher.
+              {" "}(the no-code platform I'm building), and in everything I
+              read, watch, and play &mdash; logged at{" "}
+              <a href="/log">A·S·K Log</a>.
             </p>
             <p className="hero-frame">
-              I write at <a href="/thoughts">Ephemeral Thoughts</a> — short
-              essays on decisions, systems, behavior. <strong>New essay
-              most days.</strong>
+              <strong>New story most days.</strong> IIT Bombay alum, eight
+              years engineering, somewhere between a fullstack mind and a
+              philosophical one.
             </p>
 
             <div className="hero-meta">
-              <a href="/thoughts" className="hero-cta">Read the thoughts →</a>
+              <a href="/thoughts" className="hero-cta">Read the stories →</a>
               <span className="hero-sep">·</span>
               <a href="/log" className="hero-cta hero-cta-quiet">The log</a>
               <span className="hero-sep">·</span>
@@ -122,6 +131,26 @@ export default function Hero({ featured }: HeroProps) {
           color: var(--text-secondary);
           letter-spacing: 0.01em;
           margin-top: 4px;
+        }
+        .hero-motto {
+          font-family: var(--font-display);
+          font-size: clamp(1.1rem, 1.9vw, 1.3rem);
+          font-style: italic;
+          font-weight: 400;
+          color: var(--text-primary);
+          margin: 18px 0 0;
+          line-height: 1.4;
+        }
+        .hero-motto-mark {
+          color: var(--accent-primary);
+          font-weight: 600;
+          font-style: normal;
+        }
+        .hero-divider {
+          width: 48px;
+          height: 1px;
+          background: var(--accent-primary);
+          margin: 28px 0 24px;
         }
         .hero-frame {
           font-family: var(--font-serif);

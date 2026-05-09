@@ -5,10 +5,16 @@ const year = new Date().getFullYear();
 
 <footer class="footer">
   <div class="footer-inner">
+    <div class="footer-motto">
+      <span class="footer-mark">A·S·K</span>
+      <span class="footer-mark-sep">—</span>
+      <span class="footer-mark-text">{SITE.motto}</span>
+    </div>
+
     <div class="footer-row">
       <div class="footer-credit">
         <p>
-          {SITE.name} · <span class="footer-tag">essays · code · notes</span>
+          {SITE.name} · <span class="footer-tag">stories · essays · code · log</span>
         </p>
       </div>
 
@@ -54,7 +60,35 @@ const year = new Date().getFullYear();
     margin: 0 auto;
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 24px;
+  }
+
+  .footer-motto {
+    padding: 16px 0 20px;
+    border-bottom: 1px solid var(--rule-color);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 12px;
+  }
+
+  .footer-mark {
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    letter-spacing: 0.04em;
+  }
+
+  .footer-mark-sep {
+    color: var(--accent-primary);
+  }
+
+  .footer-mark-text {
+    font-family: var(--font-display);
+    font-size: 1rem;
+    font-style: italic;
+    color: var(--text-secondary);
   }
 
   .footer-row {

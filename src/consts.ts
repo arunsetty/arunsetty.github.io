@@ -2,11 +2,13 @@ export const SITE = {
   name: "Arun Setty Kodavali",
   shortName: "Arun Setty",
   initials: "A·S·K",
-  title: "Arun Setty Kodavali | Software developer & essayist",
-  description: "Software developer & essayist. Building Broken (no-code platform). Writing daily at Ephemeral Thoughts on decisions, systems, and behavior. A.S.K — Arun Setty Kodavali.",
+  title: "Arun Setty Kodavali | Storyteller, tinkerer, engineer",
+  description: "A·S·K — Arun Setty Kodavali. Storyteller, tinkerer, thinker, engineer. Human with the excellence reflex. Building Broken (no-code). Writing daily at Ephemeral Thoughts. Logging everything I read and watch.",
   url: "https://arunsetty.github.io",
   email: "arunsetty1729@gmail.com",
   image: "/img/og.png",
+  titles: ["Storyteller", "Tinkerer", "Thinker", "Engineer"],
+  motto: "Human with the excellence reflex.",
 } as const;
 
 export const SOCIAL = [

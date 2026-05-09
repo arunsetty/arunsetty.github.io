@@ -12,8 +12,11 @@ import { COLLEGE_PROJECTS } from "../consts";
       <header class="about-header">
         <span class="eyebrow">About</span>
         <h1 class="about-title">Arun Setty Kodavali</h1>
-        <p class="about-lede">
-          A·S·K — software developer, essayist, occasional philosopher.
+        <p class="about-titles">
+          Storyteller · Tinkerer · Thinker · Engineer
+        </p>
+        <p class="about-motto">
+          <span class="about-motto-mark">&ldquo;</span>Human with the excellence reflex.<span class="about-motto-mark">&rdquo;</span>
         </p>
       </header>
 
@@ -21,11 +24,19 @@ import { COLLEGE_PROJECTS } from "../consts";
 
       <div class="prose">
         <p>
-          I'm a fullstack developer and product architect. I build software,
-          and I write about how I think while I'm doing it. Most of what I
-          publish at <a href="/thoughts">Ephemeral Thoughts</a> sits in the
-          space between engineering and behavior — decisions, rules, mental
-          models, the small things that compound.
+          Storyteller, primarily. That's what I keep coming back to. I tell
+          them in essays at <a href="/thoughts">Ephemeral Thoughts</a>
+          (most days), in code at Broken (every day), and in a media diary
+          at <a href="/log">A·S·K Log</a> that ends up being a more honest
+          record of who I am than the rest of this page combined.
+        </p>
+
+        <p>
+          Below all of that: a tinkerer with an excellence reflex. The
+          kind of person who broke open the cassette player as a kid just
+          to see how it worked, and never quite stopped. Most of what I
+          publish sits in the space between engineering and behavior —
+          decisions, rules, mental models, the small things that compound.
         </p>
 
         <p>
@@ -126,12 +137,29 @@ import { COLLEGE_PROJECTS } from "../consts";
     color: var(--text-primary);
   }
 
-  .about-lede {
-    font-family: var(--font-serif);
-    font-size: 1.2rem;
-    color: var(--text-secondary);
+  .about-titles {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    margin: 0 0 12px;
+  }
+
+  .about-motto {
+    font-family: var(--font-display);
+    font-size: 1.25rem;
     font-style: italic;
+    font-weight: 400;
+    color: var(--text-primary);
     margin: 0;
+    line-height: 1.4;
+  }
+
+  .about-motto-mark {
+    color: var(--accent-primary);
+    font-weight: 600;
+    font-style: normal;
   }
 
   .about-rule {
