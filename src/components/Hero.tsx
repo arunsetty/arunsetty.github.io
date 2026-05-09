@@ -34,19 +34,18 @@ export default function Hero({ featured }: HeroProps) {
 
             <p className="hero-frame">
               Stories, mostly &mdash; in essays at{" "}
-              <a href="/thoughts">Ephemeral Thoughts</a>,
-              in code at{" "}
-              <a href="https://brokenatom.io" target="_blank" rel="noopener noreferrer">
-                Broken
+              <a href="/thoughts">Ephemeral Thoughts</a>, in code at{" "}
+              <a href="https://ur-ai.net" target="_blank" rel="noopener noreferrer">
+                Ur AI
               </a>
-              {" "}(the no-code platform I'm building), and in everything I
-              read, watch, and play &mdash; logged at{" "}
+              {" "}(the AI startup where I'm CTO and co-founder), and in
+              everything I read, watch, and play &mdash; logged at{" "}
               <a href="/log">A·S·K Log</a>.
             </p>
             <p className="hero-frame">
-              <strong>New story most days.</strong> IIT Bombay alum, eight
-              years engineering, somewhere between a fullstack mind and a
-              philosophical one.
+              <strong>New story most days.</strong> Previously founding
+              engineer at Trupeer and Brokenatom. IIT Bombay alum, somewhere
+              between a fullstack mind and a philosophical one.
             </p>
 
             <div className="hero-meta">
