@@ -11,13 +11,14 @@ const allThoughts = (await getCollection("thoughts"))
 
 const totalThoughts = allThoughts.length;
 
+// Numbering is 0-indexed: oldest entry is #00, newest is #(total - 1).
 const featured = allThoughts[0]
   ? {
       title: allThoughts[0].data.title,
       description: allThoughts[0].data.description,
       pubDate: allThoughts[0].data.pubDate,
       slug: allThoughts[0].slug,
-      number: totalThoughts,
+      number: totalThoughts - 1,
     }
   : undefined;
 
@@ -25,7 +26,7 @@ const recent = allThoughts.slice(1, 7).map((p, i) => ({
   title: p.data.title,
   pubDate: p.data.pubDate,
   slug: p.slug,
-  number: totalThoughts - 1 - i,
+  number: totalThoughts - 2 - i,
 }));
 
 // Featured projects

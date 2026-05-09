@@ -42,11 +42,11 @@ const formatDate = (d: Date) =>
       ) : (
         <ol class="thoughts-archive">
           {posts.map((p, i) => {
-            const num = total - i;
+            const num = total - 1 - i;
             return (
               <li class="archive-item">
                 <a href={`/thoughts/${p.slug}`} class="archive-link">
-                  <span class="archive-num">{num}.</span>
+                  <span class="archive-num">{String(num).padStart(2, "0")}.</span>
                   <div class="archive-body">
                     <h2 class="archive-title">{p.data.title}</h2>
                     <p class="archive-desc">{p.data.description}</p>
