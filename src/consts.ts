@@ -6,7 +6,6 @@ export const SITE = {
   description: "A·S·K, Arun Setty Kodavali. Storyteller, tinkerer, thinker, engineer. Human with the excellence reflex. Co-founder & CTO at Ur AI. Previously founding engineer at Trupeer and Brokenatom. Writing daily at Ephemeral Thoughts.",
   url: "https://arunsetty.github.io",
   email: "arunsetty1729@gmail.com",
-  image: "/img/og.png",
   titles: ["Storyteller", "Tinkerer", "Thinker", "Engineer"],
   motto: "Human with the excellence reflex.",
 } as const;
