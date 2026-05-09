@@ -62,6 +62,11 @@ const personSchema = {
     <!-- Canonical -->
     <link rel="canonical" href={canonicalURL} />
 
+    <!-- Favicon — A·S·K mark -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="mask-icon" href="/favicon.svg" color="#b8362d" />
+    <link rel="apple-touch-icon" href="/favicon.svg" />
+
     <!-- JSON-LD Person schema -->
     <script type="application/ld+json" set:html={JSON.stringify(personSchema)} />
 
