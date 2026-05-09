@@ -1,7 +1,9 @@
 export const SITE = {
-  name: "Arun Setty",
-  title: "Arun Setty | Fullstack Developer & Product Architect",
-  description: "Developer, philosopher, and product architect building beautiful, scalable web applications.",
+  name: "Arun Setty Kodavali",
+  shortName: "Arun Setty",
+  initials: "A·S·K",
+  title: "Arun Setty Kodavali | Software developer & essayist",
+  description: "Software developer & essayist. Building Broken (no-code platform). Writing daily at Ephemeral Thoughts on decisions, systems, and behavior. A.S.K — Arun Setty Kodavali.",
   url: "https://arunsetty.github.io",
   email: "arunsetty1729@gmail.com",
   image: "/img/og.png",

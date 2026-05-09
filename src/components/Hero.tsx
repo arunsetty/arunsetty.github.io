@@ -20,7 +20,12 @@ export default function Hero({ featured }: HeroProps) {
         <div className="hero-grid">
           <div className="hero-left">
             <p className="hero-eyebrow">Software developer · Essayist</p>
-            <h1 className="hero-name">Arun Setty</h1>
+            <h1 className="hero-name" aria-label="Arun Setty Kodavali">
+              <span className="hero-mark">
+                A<span className="hero-mark-dot">·</span>S<span className="hero-mark-dot">·</span>K
+              </span>
+              <span className="hero-name-full">Arun Setty Kodavali</span>
+            </h1>
             <p className="hero-frame">
               Currently building{" "}
               <a href="https://brokenatom.io" target="_blank" rel="noopener noreferrer">
@@ -89,13 +94,34 @@ export default function Hero({ featured }: HeroProps) {
           margin: 0 0 28px;
         }
         .hero-name {
-          font-family: var(--font-display);
-          font-size: clamp(3rem, 8vw, 5.6rem);
-          font-weight: 600;
-          letter-spacing: -0.025em;
-          line-height: 0.95;
           margin: 0 0 36px;
+          line-height: 1;
+          display: flex;
+          flex-direction: column;
+          gap: 6px;
+        }
+        .hero-mark {
+          font-family: var(--font-display);
+          font-size: clamp(3.4rem, 9vw, 6.2rem);
+          font-weight: 600;
+          letter-spacing: 0.02em;
           color: var(--text-primary);
+          line-height: 0.95;
+          font-feature-settings: "ss01", "salt";
+        }
+        .hero-mark-dot {
+          color: var(--accent-primary);
+          font-weight: 400;
+          margin: 0 0.05em;
+        }
+        .hero-name-full {
+          font-family: var(--font-serif);
+          font-size: clamp(0.95rem, 1.7vw, 1.05rem);
+          font-style: italic;
+          font-weight: 400;
+          color: var(--text-secondary);
+          letter-spacing: 0.01em;
+          margin-top: 4px;
         }
         .hero-frame {
           font-family: var(--font-serif);
