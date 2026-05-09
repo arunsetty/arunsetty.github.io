@@ -1,0 +1,122 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import ProjectCard from "../../components/ProjectCard.tsx";
+import { getCollection } from "astro:content";
+
+const projects = (await getCollection("projects")).sort(
+  (a, b) => a.data.order - b.data.order
+);
+---
+
+<BaseLayout title="Work | Arun Setty" description="Projects and experience from my career as a developer.">
+  <!-- Cinematic hero -->
+  <section class="hero-section cinematic-only">
+    <div class="container">
+      <span class="page-label">Work</span>
+      <h1 class="gradient-text page-title">Things I've Built</h1>
+      <p class="page-desc">
+        A collection of projects and roles that have shaped my journey as a developer.
+        Each one taught me something different about building software that matters.
+      </p>
+    </div>
+  </section>
+
+  <!-- Terminal hero -->
+  <section class="hero-section terminal-only">
+    <div class="container">
+      <span class="page-label">Work</span>
+      <h1 class="gradient-text page-title">$ ls -la ./work/</h1>
+      <p class="page-desc">
+        // {projects.length} projects indexed
+      </p>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="project-grid">
+        {projects.map((project) => (
+          <ProjectCard
+            client:load
+            title={project.data.title}
+            description={project.data.description}
+            tags={project.data.tags}
+            slug={project.slug}
+            featured={project.data.featured}
+          />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container" style="text-align: center;">
+      <a
+        href="/resume.pdf"
+        target="_blank"
+        class="glass-card resume-link"
+      >
+        <span class="cinematic-only">View Full Resume &rarr;</span>
+        <span class="terminal-only">$ open ./resume.pdf</span>
+      </a>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .hero-section {
+    padding-top: 140px;
+    padding-bottom: 40px;
+  }
+
+  .page-label {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--accent-primary);
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    display: block;
+    margin-bottom: 12px;
+  }
+
+  .page-title {
+    font-size: clamp(2rem, 5vw, 3rem);
+    margin: 0 0 20px;
+  }
+
+  .page-desc {
+    color: var(--text-muted);
+    font-size: 1.05rem;
+    max-width: 600px;
+    line-height: 1.7;
+    margin: 0;
+  }
+
+  .project-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    gap: 20px;
+  }
+
+  @media (max-width: 480px) {
+    .project-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .resume-link {
+    display: inline-block;
+    padding: 12px 28px;
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--accent-primary);
+    text-decoration: none;
+    letter-spacing: 0.05em;
+  }
+
+  .terminal-only { display: none; }
+  :global([data-theme="terminal"]) .cinematic-only { display: none; }
+  :global([data-theme="terminal"]) .terminal-only { display: block; }
+  :global([data-theme="terminal"]) span.terminal-only { display: inline; }
+  :global([data-theme="terminal"]) span.cinematic-only { display: none; }
+</style>

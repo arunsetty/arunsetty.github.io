@@ -1,28 +1,28 @@
 {
-  "name": "brittanychiang.com",
-  "version": "0.0.0",
-  "description": "Design-minded front-end software engineer focused on building beautiful interfaces and experiences",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/arunsetty/arunsetty.github.io"
-  },
-  "homepage": "https://github.com/arunsetty/arunsetty.github.io",
-  "main": "gulpfile.js",
-  "scripts": {
-    "start": "gulp serve --watch",
-    "build": "gulp build"
-  },
-  "author": "Arun Setty",
-  "license": "ISC",
+  "name": "arunsetty.github.io",
+  "private": true,
   "devDependencies": {
-    "@nuscout/eslint-config": "^0.2.1",
-    "browser-sync": "^2.26.7",
-    "gulp": "^4.0.0",
-    "gulp-autoprefixer": "^7.0.0",
-    "gulp-clean-css": "^4.3.0",
-    "gulp-eslint": "^6.0.0",
-    "gulp-imagemin": "6.0.0",
-    "gulp-sass": "^4.1.0",
-    "gulp-uglify": "3.0.2"
+    "@types/bun": "latest",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "dependencies": {
+    "@astrojs/mdx": "4",
+    "@astrojs/react": "4",
+    "@tailwindcss/postcss": "^4.2.2",
+    "astro": "5",
+    "gsap": "^3.15.0",
+    "motion": "^12.38.0",
+    "react": "^19.2.5",
+    "react-dom": "^19.2.5",
+    "tailwindcss": "^4.2.2"
   }
 }

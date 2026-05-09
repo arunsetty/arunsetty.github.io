@@ -1,0 +1,266 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
+
+export async function getStaticPaths() {
+  const projects = await getCollection("projects");
+  return projects.map((project) => ({
+    params: { slug: project.slug },
+    props: { project },
+  }));
+}
+
+const { project } = Astro.props;
+const { Content } = await project.render();
+---
+
+<BaseLayout title={`${project.data.title} | Arun Setty`} description={project.data.description}>
+  <article class="project-article">
+    <div class="container">
+      <!-- Cinematic header -->
+      <div class="project-header cinematic-only">
+        <a href="/work" class="back-link">&larr; All Work</a>
+
+        <div class="project-meta">
+          {project.data.company && (
+            <span class="meta-item">
+              <span class="meta-label">Company</span>
+              {project.data.url ? (
+                <a href={project.data.url} target="_blank" rel="noopener noreferrer">
+                  {project.data.company}
+                </a>
+              ) : (
+                project.data.company
+              )}
+            </span>
+          )}
+          {project.data.role && (
+            <span class="meta-item">
+              <span class="meta-label">Role</span>
+              {project.data.role}
+            </span>
+          )}
+          {project.data.duration && (
+            <span class="meta-item">
+              <span class="meta-label">Duration</span>
+              {project.data.duration}
+            </span>
+          )}
+        </div>
+
+        <h1 class="gradient-text project-title">{project.data.title}</h1>
+        <p class="project-desc">{project.data.description}</p>
+
+        <div class="project-tags">
+          {project.data.tags.map((tag) => (
+            <span class="tag">{tag}</span>
+          ))}
+        </div>
+      </div>
+
+      <!-- Terminal header -->
+      <div class="project-header terminal-only">
+        <a href="/work" class="back-link">$ cd ../work/</a>
+
+        <div class="terminal-meta-block">
+          <span class="t-comment">---</span>
+          {project.data.company && (
+            <div class="t-meta-line"><span class="t-key">company:</span> <span class="t-val">{project.data.company}</span></div>
+          )}
+          {project.data.role && (
+            <div class="t-meta-line"><span class="t-key">role:</span> <span class="t-val">{project.data.role}</span></div>
+          )}
+          {project.data.duration && (
+            <div class="t-meta-line"><span class="t-key">duration:</span> <span class="t-val">{project.data.duration}</span></div>
+          )}
+          <div class="t-meta-line"><span class="t-key">tags:</span> <span class="t-val">[{project.data.tags.join(", ")}]</span></div>
+          <span class="t-comment">---</span>
+        </div>
+
+        <h1 class="gradient-text project-title">$ cat ./work/{project.slug}/README.md</h1>
+        <p class="project-desc"># {project.data.description}</p>
+      </div>
+
+      <!-- Content -->
+      <div class="project-content">
+        <Content />
+      </div>
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .project-article {
+    padding-top: 120px;
+  }
+
+  .back-link {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    text-decoration: none;
+    margin-bottom: 40px;
+    transition: color 0.3s ease;
+  }
+
+  .back-link:hover {
+    color: var(--accent-primary);
+  }
+
+  .project-meta {
+    display: flex;
+    gap: 32px;
+    flex-wrap: wrap;
+    margin-bottom: 24px;
+  }
+
+  .meta-item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .meta-label {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  .meta-item a {
+    color: var(--accent-primary);
+    font-size: 0.9rem;
+  }
+
+  .meta-item {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+  }
+
+  .project-title {
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    margin: 0 0 16px;
+  }
+
+  .project-desc {
+    color: var(--text-muted);
+    font-size: 1.05rem;
+    line-height: 1.7;
+    max-width: 700px;
+    margin: 0 0 24px;
+  }
+
+  .project-tags {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 60px;
+  }
+
+  .tag {
+    padding: 4px 14px;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    font-family: var(--font-mono);
+    color: var(--accent-primary);
+    border: 1px solid var(--border-color);
+  }
+
+  .project-content {
+    max-width: 700px;
+  }
+
+  .project-content :global(h2) {
+    font-size: 1.4rem;
+    color: var(--text-primary);
+    margin: 48px 0 16px;
+    font-weight: 600;
+  }
+
+  .project-content :global(h3) {
+    font-size: 1.1rem;
+    color: var(--text-primary);
+    margin: 32px 0 12px;
+  }
+
+  .project-content :global(p) {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    line-height: 1.8;
+    margin: 0 0 20px;
+  }
+
+  .project-content :global(ul) {
+    padding-left: 20px;
+    margin: 0 0 20px;
+  }
+
+  .project-content :global(li) {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    line-height: 1.8;
+    margin-bottom: 8px;
+  }
+
+  .project-content :global(code) {
+    background: var(--bg-card);
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    color: var(--accent-primary);
+  }
+
+  .project-content :global(pre) {
+    background: var(--bg-secondary) !important;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 20px;
+    overflow-x: auto;
+    margin: 24px 0;
+  }
+
+  /* Theme visibility toggling */
+  .terminal-only { display: none; }
+  :global([data-theme="terminal"]) .cinematic-only { display: none; }
+  :global([data-theme="terminal"]) .terminal-only { display: block; }
+
+  /* Terminal meta block */
+  .terminal-meta-block {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    line-height: 1.8;
+    margin-bottom: 24px;
+  }
+
+  .t-comment {
+    color: #009922;
+    opacity: 0.6;
+    display: block;
+  }
+
+  .t-meta-line {
+    padding-left: 4px;
+  }
+
+  .t-key {
+    color: #00cc33;
+  }
+
+  .t-val {
+    color: #00ff41;
+  }
+
+  :global([data-theme="terminal"]) .tag {
+    border-radius: 0;
+  }
+
+  :global([data-theme="terminal"]) .project-content :global(pre) {
+    border-radius: 0;
+  }
+
+  :global([data-theme="terminal"]) .project-content :global(code) {
+    border-radius: 0;
+  }
+</style>

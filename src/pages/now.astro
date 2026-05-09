@@ -1,0 +1,229 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout title="Now | Arun Setty" description="What I'm currently doing and thinking about.">
+  <!-- Cinematic version -->
+  <section class="hero-section cinematic-only">
+    <div class="container">
+      <span class="page-label">Now</span>
+      <h1 class="gradient-text page-title">What I'm Doing Now</h1>
+      <p class="page-meta">
+        Last updated: April 2026
+      </p>
+    </div>
+  </section>
+
+  <section class="cinematic-only">
+    <div class="container">
+      <div class="now-content">
+        <h2>Building</h2>
+        <p>
+          Working at <a href="https://brokenatom.io" target="_blank" rel="noopener noreferrer">Broken</a>
+          as a Software Developer, building the core no-code platform. Focused on
+          making application creation accessible to everyone.
+        </p>
+
+        <h2>Learning</h2>
+        <p>
+          Diving deeper into systems design, distributed architecture, and the
+          intersection of AI with developer tooling. Also exploring philosophy of
+          mind and consciousness.
+        </p>
+
+        <h2>Reading</h2>
+        <ul>
+          <li>Currently reading and exploring various texts on philosophy and technology</li>
+        </ul>
+
+        <h2>Thinking About</h2>
+        <ul>
+          <li>The future of no-code and its implications for software development</li>
+          <li>How stoic philosophy applies to building products</li>
+          <li>The relationship between constraints and creativity in engineering</li>
+        </ul>
+
+        <p class="now-note">
+          This is a <a href="https://nownownow.com/about" target="_blank" rel="noopener noreferrer">/now page</a>.
+          It's a snapshot of what I'm focused on at this point in my life.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Terminal version -->
+  <section class="hero-section terminal-only">
+    <div class="container">
+      <span class="page-label">Now</span>
+      <h1 class="gradient-text page-title">$ cat .env.now</h1>
+      <p class="page-meta">
+        # last modified: April 2026
+      </p>
+    </div>
+  </section>
+
+  <section class="terminal-only">
+    <div class="container">
+      <div class="env-file">
+        <div class="env-comment"># ================================</div>
+        <div class="env-comment"># current status — arun setty</div>
+        <div class="env-comment"># ================================</div>
+
+        <div class="env-block">
+          <div class="env-comment"># building</div>
+          <div class="env-line"><span class="env-key">COMPANY</span>=<span class="env-val">"<a href="https://brokenatom.io" target="_blank" rel="noopener noreferrer">Broken</a>"</span></div>
+          <div class="env-line"><span class="env-key">ROLE</span>=<span class="env-val">"Software Developer"</span></div>
+          <div class="env-line"><span class="env-key">FOCUS</span>=<span class="env-val">"no-code platform — making application creation accessible to everyone"</span></div>
+        </div>
+
+        <div class="env-block">
+          <div class="env-comment"># learning</div>
+          <div class="env-line"><span class="env-key">STUDYING</span>=<span class="env-val">"systems design, distributed architecture, AI + developer tooling"</span></div>
+          <div class="env-line"><span class="env-key">EXPLORING</span>=<span class="env-val">"philosophy of mind, consciousness"</span></div>
+        </div>
+
+        <div class="env-block">
+          <div class="env-comment"># reading</div>
+          <div class="env-line"><span class="env-key">READING</span>=<span class="env-val">"various texts on philosophy and technology"</span></div>
+        </div>
+
+        <div class="env-block">
+          <div class="env-comment"># thinking about</div>
+          <div class="env-line"><span class="env-key">THOUGHT_1</span>=<span class="env-val">"the future of no-code and its implications for software development"</span></div>
+          <div class="env-line"><span class="env-key">THOUGHT_2</span>=<span class="env-val">"how stoic philosophy applies to building products"</span></div>
+          <div class="env-line"><span class="env-key">THOUGHT_3</span>=<span class="env-val">"the relationship between constraints and creativity in engineering"</span></div>
+        </div>
+
+        <div class="env-footer">
+          <div class="env-comment"># this is a <a href="https://nownownow.com/about" target="_blank" rel="noopener noreferrer">/now page</a> — a snapshot of what i'm focused on right now</div>
+          <div class="env-comment"># EOF</div>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .hero-section {
+    padding-top: 140px;
+    padding-bottom: 20px;
+  }
+
+  .page-label {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--accent-primary);
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    display: block;
+    margin-bottom: 12px;
+  }
+
+  .page-title {
+    font-size: clamp(2rem, 5vw, 3rem);
+    margin: 0 0 12px;
+  }
+
+  .page-meta {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin: 0;
+  }
+
+  .now-content {
+    max-width: 700px;
+  }
+
+  .now-content h2 {
+    font-size: 1.3rem;
+    color: var(--text-primary);
+    margin: 48px 0 16px;
+    font-weight: 600;
+  }
+
+  .now-content p {
+    color: var(--text-secondary);
+    font-size: 1rem;
+    line-height: 1.9;
+    margin: 0 0 20px;
+  }
+
+  .now-content a {
+    color: var(--accent-primary);
+  }
+
+  .now-content ul {
+    padding-left: 20px;
+    margin: 0 0 20px;
+  }
+
+  .now-content li {
+    color: var(--text-secondary);
+    font-size: 1rem;
+    line-height: 1.8;
+    margin-bottom: 8px;
+  }
+
+  .now-note {
+    margin-top: 60px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border-color);
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    font-style: italic;
+  }
+
+  /* Theme visibility toggling */
+  .terminal-only { display: none; }
+  :global([data-theme="terminal"]) .cinematic-only { display: none; }
+  :global([data-theme="terminal"]) .terminal-only { display: block; }
+
+  /* Env file styles */
+  .env-file {
+    max-width: 700px;
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    line-height: 1.8;
+  }
+
+  .env-comment {
+    color: #009922;
+    opacity: 0.7;
+  }
+
+  .env-comment a {
+    color: #00cc33;
+  }
+
+  .env-block {
+    margin: 20px 0;
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(0, 255, 65, 0.08);
+  }
+
+  .env-line {
+    padding-left: 4px;
+  }
+
+  .env-key {
+    color: #00ff41;
+    font-weight: 600;
+  }
+
+  .env-val {
+    color: #00cc33;
+  }
+
+  .env-val a {
+    color: #00ff41;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .env-footer {
+    margin-top: 32px;
+    padding-top: 16px;
+    border-top: 1px solid rgba(0, 255, 65, 0.1);
+  }
+</style>

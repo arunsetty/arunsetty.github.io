@@ -1,0 +1,283 @@
+@import "tailwindcss";
+
+/* ===== THEME: CINEMATIC ===== */
+[data-theme="cinematic"] {
+  --bg-primary: #0a0a0f;
+  --bg-secondary: #12121a;
+  --bg-card: rgba(255, 255, 255, 0.03);
+  --bg-card-hover: rgba(255, 255, 255, 0.06);
+  --text-primary: #e4e4e7;
+  --text-secondary: #a1a1aa;
+  --text-muted: #71717a;
+  --accent-primary: #00f0ff;
+  --accent-secondary: #a855f7;
+  --accent-gradient: linear-gradient(135deg, #00f0ff, #a855f7);
+  --border-color: rgba(255, 255, 255, 0.06);
+  --glow-color: rgba(0, 240, 255, 0.15);
+  --font-heading: "Inter", "SF Pro Display", system-ui, sans-serif;
+  --font-body: "Inter", "SF Pro Text", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", "Fira Code", monospace;
+  --grain-opacity: 0.03;
+  --scanline-opacity: 0;
+  --card-radius: 12px;
+  --nav-bg: rgba(10, 10, 15, 0.8);
+}
+
+/* ===== THEME: TERMINAL ===== */
+[data-theme="terminal"] {
+  --bg-primary: #000000;
+  --bg-secondary: #0a0a0a;
+  --bg-card: rgba(0, 255, 65, 0.04);
+  --bg-card-hover: rgba(0, 255, 65, 0.08);
+  --text-primary: #00ff41;
+  --text-secondary: #00cc33;
+  --text-muted: #009922;
+  --accent-primary: #00ff41;
+  --accent-secondary: #00ffaa;
+  --accent-gradient: linear-gradient(135deg, #00ff41, #00ffaa);
+  --border-color: rgba(0, 255, 65, 0.2);
+  --glow-color: rgba(0, 255, 65, 0.15);
+  --font-heading: "JetBrains Mono", "Fira Code", monospace;
+  --font-body: "JetBrains Mono", "Fira Code", monospace;
+  --font-mono: "JetBrains Mono", "Fira Code", monospace;
+  --grain-opacity: 0.03;
+  --scanline-opacity: 0.06;
+  --card-radius: 0px;
+  --nav-bg: rgba(0, 0, 0, 0.95);
+}
+
+/* ===== BASE STYLES ===== */
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    margin: 0;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    font-family: var(--font-body);
+    line-height: 1.7;
+    overflow-x: hidden;
+    transition: background-color 0.5s ease, color 0.5s ease;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    line-height: 1.2;
+    font-weight: 700;
+  }
+
+  a {
+    color: var(--accent-primary);
+    text-decoration: none;
+    transition: all 0.3s ease;
+  }
+
+  a:hover {
+    text-shadow: 0 0 8px var(--glow-color);
+  }
+
+  code, pre {
+    font-family: var(--font-mono);
+  }
+
+  ::selection {
+    background: var(--accent-primary);
+    color: var(--bg-primary);
+  }
+}
+
+/* ===== GRAIN OVERLAY ===== */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: var(--grain-opacity);
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 256px 256px;
+}
+
+/* ===== SCANLINE OVERLAY (Terminal theme) ===== */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  pointer-events: none;
+  opacity: var(--scanline-opacity);
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.3) 2px,
+    rgba(0, 0, 0, 0.3) 4px
+  );
+}
+
+/* ===== UTILITY CLASSES ===== */
+.gradient-text {
+  background: var(--accent-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.glass-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--card-radius);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: all 0.3s ease;
+}
+
+.glass-card:hover {
+  background: var(--bg-card-hover);
+  border-color: var(--accent-primary);
+  box-shadow: 0 0 30px var(--glow-color);
+  transform: translateY(-2px);
+}
+
+/* ===== TERMINAL-SPECIFIC STYLES ===== */
+[data-theme="terminal"] .glass-card {
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  border-style: solid;
+  box-shadow: 0 0 8px rgba(0, 255, 65, 0.05);
+}
+
+[data-theme="terminal"] .glass-card:hover {
+  box-shadow: 0 0 20px rgba(0, 255, 65, 0.2), inset 0 0 20px rgba(0, 255, 65, 0.03);
+}
+
+[data-theme="terminal"] .gradient-text {
+  background: none;
+  -webkit-background-clip: unset;
+  -webkit-text-fill-color: #00ff41;
+  background-clip: unset;
+  text-shadow: 0 0 10px rgba(0, 255, 65, 0.5), 0 0 40px rgba(0, 255, 65, 0.2);
+}
+
+[data-theme="terminal"] body {
+  text-shadow: 0 0 2px rgba(0, 255, 65, 0.3);
+}
+
+[data-theme="terminal"] a:hover {
+  text-shadow: 0 0 10px rgba(0, 255, 65, 0.6), 0 0 30px rgba(0, 255, 65, 0.3);
+}
+
+/* CRT flicker for terminal */
+@keyframes crt-flicker {
+  0% { opacity: 0.97; }
+  5% { opacity: 1; }
+  10% { opacity: 0.98; }
+  15% { opacity: 1; }
+  50% { opacity: 1; }
+  80% { opacity: 0.96; }
+  85% { opacity: 1; }
+  100% { opacity: 0.98; }
+}
+
+[data-theme="terminal"] main {
+  animation: crt-flicker 4s infinite;
+}
+
+/* Terminal prompt prefix for section labels */
+[data-theme="terminal"] .page-label::before {
+  content: "> ";
+  color: #00ff41;
+}
+
+/* Theme transition flash */
+@keyframes theme-flash {
+  0% { opacity: 1; }
+  100% { opacity: 0; pointer-events: none; }
+}
+
+.theme-flash {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  pointer-events: none;
+  animation: theme-flash 0.4s ease-out forwards;
+}
+
+.theme-flash--terminal {
+  background: #00ff41;
+}
+
+.theme-flash--cinematic {
+  background: #fff;
+}
+
+.glow {
+  box-shadow: 0 0 20px var(--glow-color);
+}
+
+.glow-text {
+  text-shadow: 0 0 10px var(--glow-color), 0 0 40px var(--glow-color);
+}
+
+/* ===== SCROLL PROGRESS BAR ===== */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 2px;
+  background: var(--accent-gradient);
+  z-index: 10000;
+  transition: width 0.1s linear;
+}
+
+/* ===== RESPONSIVE CONTAINER ===== */
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+@media (min-width: 768px) {
+  .container {
+    padding: 0 48px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .container {
+    padding: 0 64px;
+  }
+}
+
+/* ===== CURSOR BLINK (Terminal theme) ===== */
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+.cursor-blink::after {
+  content: "█";
+  animation: blink 1s step-end infinite;
+  color: var(--accent-primary);
+}
+
+/* ===== PAGE SECTION SPACING ===== */
+section {
+  padding: 80px 0;
+}
+
+@media (min-width: 768px) {
+  section {
+    padding: 120px 0;
+  }
+}

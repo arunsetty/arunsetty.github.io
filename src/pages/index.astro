@@ -1,0 +1,43 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Hero from "../components/Hero.tsx";
+import {
+  FeaturedWorkSection,
+  SkillsFlowSection,
+  StatsSection,
+  ExperiencePreview,
+  WritingTeaser,
+} from "../components/HomeSections.tsx";
+import { getCollection } from "astro:content";
+
+const projects = (await getCollection("projects"))
+  .sort((a, b) => a.data.order - b.data.order)
+  .filter((p) => p.data.featured)
+  .map((p) => ({
+    title: p.data.title,
+    description: p.data.description,
+    tags: p.data.tags,
+    slug: p.slug,
+    featured: p.data.featured,
+  }));
+---
+
+<BaseLayout title="Arun Setty | Developer & Philosopher">
+  <!-- Hero with staggered text animation -->
+  <Hero client:load />
+
+  <!-- Stats counter -->
+  <StatsSection client:load />
+
+  <!-- Featured Work -->
+  <FeaturedWorkSection client:load projects={projects} />
+
+  <!-- Skills -->
+  <SkillsFlowSection client:load />
+
+  <!-- Experience preview -->
+  <ExperiencePreview client:load />
+
+  <!-- Writing teaser -->
+  <WritingTeaser client:load />
+</BaseLayout>

@@ -1,0 +1,94 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Timeline from "../components/Timeline.tsx";
+---
+
+<BaseLayout title="Journey | Arun Setty" description="My career journey from mentoring to AI to fullstack development.">
+  <!-- Cinematic hero -->
+  <section class="hero-section cinematic-only">
+    <div class="container">
+      <span class="page-label">Journey</span>
+      <h1 class="gradient-text page-title">Where I've Been</h1>
+      <p class="page-desc">
+        From mentoring students to building AI systems to architecting no-code platforms.
+        Each role shaped how I think about building software.
+      </p>
+    </div>
+  </section>
+
+  <!-- Terminal hero -->
+  <section class="hero-section terminal-only">
+    <div class="container">
+      <span class="page-label">Journey</span>
+      <h1 class="gradient-text page-title">$ git log --author="arun"</h1>
+      <p class="page-desc">
+        // career history — 8 commits across 6+ years
+      </p>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <Timeline client:visible />
+    </div>
+  </section>
+
+  <section>
+    <div class="container" style="text-align: center;">
+      <a
+        href="/resume.pdf"
+        target="_blank"
+        class="glass-card resume-link"
+      >
+        <span class="cinematic-only">Download Resume &rarr;</span>
+        <span class="terminal-only">$ open ./resume.pdf</span>
+      </a>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .hero-section {
+    padding-top: 140px;
+    padding-bottom: 40px;
+  }
+
+  .page-label {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--accent-primary);
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    display: block;
+    margin-bottom: 12px;
+  }
+
+  .page-title {
+    font-size: clamp(2rem, 5vw, 3rem);
+    margin: 0 0 20px;
+  }
+
+  .page-desc {
+    color: var(--text-muted);
+    font-size: 1.05rem;
+    max-width: 600px;
+    line-height: 1.7;
+    margin: 0;
+  }
+
+  .resume-link {
+    display: inline-block;
+    padding: 12px 28px;
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--accent-primary);
+    text-decoration: none;
+    letter-spacing: 0.05em;
+  }
+
+  .terminal-only { display: none; }
+  :global([data-theme="terminal"]) .cinematic-only { display: none; }
+  :global([data-theme="terminal"]) .terminal-only { display: block; }
+  :global([data-theme="terminal"]) span.terminal-only { display: inline; }
+  :global([data-theme="terminal"]) span.cinematic-only { display: none; }
+</style>

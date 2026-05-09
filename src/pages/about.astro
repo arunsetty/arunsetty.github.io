@@ -1,0 +1,286 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout title="About | Arun Setty" description="Developer, philosopher, builder. Learn more about who I am.">
+  <!-- Cinematic version -->
+  <section class="hero-section cinematic-only">
+    <div class="container">
+      <span class="page-label">About</span>
+      <h1 class="gradient-text page-title">About Me</h1>
+    </div>
+  </section>
+
+  <section class="cinematic-only">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-content">
+          <p>
+            I'm a fullstack developer and product architect with a passion for building
+            beautiful, scalable, and performant web applications. I think deeply about
+            the systems that shape our world — both technical and philosophical.
+          </p>
+
+          <p>
+            Currently, I'm building the core product at
+            <a href="https://brokenatom.io" target="_blank" rel="noopener noreferrer">Broken</a>,
+            a no-code platform that empowers anyone to create structural applications
+            from scratch. Before that, I worked across companies like
+            <a href="https://www.hotstar.com" target="_blank" rel="noopener noreferrer">Hotstar</a>,
+            <a href="https://www.foxsense.io" target="_blank" rel="noopener noreferrer">Foxsense</a>,
+            and several AI startups.
+          </p>
+
+          <h2>Education</h2>
+          <p>
+            I graduated from the
+            <a href="https://www.iitb.ac.in/" target="_blank" rel="noopener noreferrer">Indian Institute of Technology, Bombay</a>
+            with a Bachelor's degree in Computer Science and Engineering. IIT Bombay
+            is where I fell in love with both the rigour of computer science and the
+            breadth of philosophical thinking.
+          </p>
+
+          <h2>Philosophy</h2>
+          <p>
+            I believe the best software comes from understanding people, not just
+            technology. Every system we build is a reflection of how we think about
+            the world. I'm drawn to questions about consciousness, systems thinking,
+            and the ethics of the tools we create.
+          </p>
+          <p>
+            My approach to building is influenced by stoic philosophy — focus on what
+            you can control, build with intention, and always ask whether what you're
+            building genuinely serves the people who'll use it.
+          </p>
+
+          <h2>Beyond Code</h2>
+          <p>
+            When I'm not in front of a computer, I'm probably reading, driving,
+            writing, or sleeping. I'm passionate about open source software and
+            contributing to the developer community.
+          </p>
+
+          <div class="about-links">
+            <a href="/resume.pdf" target="_blank" class="glass-card about-link">
+              Resume &rarr;
+            </a>
+            <a href="/journey" class="glass-card about-link">
+              My Journey &rarr;
+            </a>
+            <a href="/writing" class="glass-card about-link">
+              My Writing &rarr;
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Terminal version -->
+  <section class="hero-section terminal-only">
+    <div class="container">
+      <span class="page-label">About</span>
+      <h1 class="gradient-text page-title">$ cat about.md</h1>
+    </div>
+  </section>
+
+  <section class="terminal-only">
+    <div class="container">
+      <div class="terminal-file">
+        <div class="terminal-file-header">
+          <span class="terminal-comment">---</span>
+          <br/>
+          <span class="terminal-key">name:</span> <span class="terminal-val">Arun Setty Kodavali</span>
+          <br/>
+          <span class="terminal-key">role:</span> <span class="terminal-val">Fullstack Developer & Product Architect</span>
+          <br/>
+          <span class="terminal-key">location:</span> <span class="terminal-val">India</span>
+          <br/>
+          <span class="terminal-key">education:</span> <span class="terminal-val">IIT Bombay — B.Tech CSE</span>
+          <br/>
+          <span class="terminal-comment">---</span>
+        </div>
+
+        <div class="terminal-section">
+          <span class="terminal-heading">## current</span>
+          <p class="terminal-text">
+            Building the core product at <a href="https://brokenatom.io" target="_blank" rel="noopener noreferrer">Broken</a> — a no-code platform that empowers anyone to create structural applications from scratch. Before that, worked across <a href="https://www.hotstar.com" target="_blank" rel="noopener noreferrer">Hotstar</a>, <a href="https://www.foxsense.io" target="_blank" rel="noopener noreferrer">Foxsense</a>, and several AI startups.
+          </p>
+        </div>
+
+        <div class="terminal-section">
+          <span class="terminal-heading">## education</span>
+          <p class="terminal-text">
+            Graduated from <a href="https://www.iitb.ac.in/" target="_blank" rel="noopener noreferrer">Indian Institute of Technology, Bombay</a> with a Bachelor's in Computer Science and Engineering. Where I fell in love with both the rigour of CS and the breadth of philosophical thinking.
+          </p>
+        </div>
+
+        <div class="terminal-section">
+          <span class="terminal-heading">## philosophy</span>
+          <p class="terminal-text">
+            The best software comes from understanding people, not just technology. Every system we build is a reflection of how we think about the world. Drawn to questions about consciousness, systems thinking, and the ethics of the tools we create.
+          </p>
+          <p class="terminal-text">
+            Influenced by stoic philosophy — focus on what you can control, build with intention, and always ask whether what you're building genuinely serves the people who'll use it.
+          </p>
+        </div>
+
+        <div class="terminal-section">
+          <span class="terminal-heading">## beyond_code</span>
+          <p class="terminal-text">
+            When not in front of a computer: reading, driving, writing, or sleeping. Passionate about open source software and contributing to the developer community.
+          </p>
+        </div>
+
+        <div class="terminal-links">
+          <a href="/resume.pdf" target="_blank" class="glass-card about-link">
+            ./resume.pdf
+          </a>
+          <a href="/journey" class="glass-card about-link">
+            ./journey/
+          </a>
+          <a href="/writing" class="glass-card about-link">
+            ./writing/
+          </a>
+        </div>
+
+        <div class="terminal-eof">
+          <span class="terminal-comment">// EOF</span>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .hero-section {
+    padding-top: 140px;
+    padding-bottom: 20px;
+  }
+
+  .page-label {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--accent-primary);
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    display: block;
+    margin-bottom: 12px;
+  }
+
+  .page-title {
+    font-size: clamp(2rem, 5vw, 3rem);
+    margin: 0;
+  }
+
+  .about-content {
+    max-width: 700px;
+  }
+
+  .about-content p {
+    color: var(--text-secondary);
+    font-size: 1rem;
+    line-height: 1.9;
+    margin: 0 0 24px;
+  }
+
+  .about-content a {
+    color: var(--accent-primary);
+  }
+
+  .about-content h2 {
+    font-size: 1.3rem;
+    color: var(--text-primary);
+    margin: 48px 0 16px;
+    font-weight: 600;
+  }
+
+  .about-links {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 40px;
+  }
+
+  .about-link {
+    padding: 10px 24px;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--accent-primary);
+    text-decoration: none;
+    letter-spacing: 0.05em;
+  }
+
+  /* Theme visibility toggling */
+  .terminal-only { display: none; }
+
+  :global([data-theme="terminal"]) .cinematic-only { display: none; }
+  :global([data-theme="terminal"]) .terminal-only { display: block; }
+
+  /* Terminal file styles */
+  .terminal-file {
+    max-width: 700px;
+    font-family: var(--font-mono);
+  }
+
+  .terminal-file-header {
+    padding: 16px 0;
+    border-bottom: 1px solid rgba(0, 255, 65, 0.15);
+    margin-bottom: 24px;
+    line-height: 1.8;
+  }
+
+  .terminal-comment {
+    color: #009922;
+    opacity: 0.6;
+  }
+
+  .terminal-key {
+    color: #00cc33;
+  }
+
+  .terminal-val {
+    color: #00ff41;
+  }
+
+  .terminal-section {
+    margin-bottom: 24px;
+  }
+
+  .terminal-heading {
+    color: #00ff41;
+    font-size: 1.1rem;
+    font-weight: 600;
+    display: block;
+    margin-bottom: 12px;
+    text-shadow: 0 0 8px rgba(0, 255, 65, 0.3);
+  }
+
+  .terminal-text {
+    color: #00cc33;
+    font-size: 0.9rem;
+    line-height: 1.8;
+    margin: 0 0 12px;
+  }
+
+  .terminal-text a {
+    color: #00ff41;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .terminal-links {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 32px;
+    padding-top: 24px;
+    border-top: 1px solid rgba(0, 255, 65, 0.15);
+  }
+
+  .terminal-eof {
+    margin-top: 32px;
+    padding-top: 16px;
+    border-top: 1px solid rgba(0, 255, 65, 0.1);
+  }
+</style>
