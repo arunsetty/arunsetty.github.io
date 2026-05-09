@@ -621,9 +621,9 @@ export function ExperiencePreview() {
 }
 
 // ============================================
-// SECTION 5: Writing teaser
+// SECTION 5: Thoughts teaser
 // ============================================
-export function WritingTeaser() {
+export function ThoughtsTeaser() {
   const theme = useTheme();
   const isTerminal = theme === "terminal";
   const ref = useRef<HTMLDivElement>(null);
@@ -652,14 +652,14 @@ export function WritingTeaser() {
         {isTerminal ? (
           <>
             <div style={{ fontFamily: "var(--font-mono)", fontSize: "0.8rem", color: "#009922", marginBottom: "12px" }}>
-              <span style={{ color: "#00ff41" }}>$</span> cat ./writing/README.md
+              <span style={{ color: "#00ff41" }}>$</span> cat ./thoughts/README.md
             </div>
             <h2 className="gradient-text" style={{ fontSize: "clamp(2rem, 5vw, 3rem)", margin: "0 0 20px", fontWeight: 700 }}>
-              ./writing/
+              ./thoughts/
             </h2>
             <p style={{ color: "#00cc33", fontSize: "1rem", lineHeight: 1.8, maxWidth: "500px", margin: "0 auto 36px", fontFamily: "var(--font-mono)" }}>
-              // On building software, philosophy,<br />
-              // and the spaces in between.
+              // ephemeral thoughts.<br />
+              // things I think before I forget.
             </p>
           </>
         ) : (
@@ -667,21 +667,20 @@ export function WritingTeaser() {
             <div style={{ display: "flex", alignItems: "center", gap: "16px", justifyContent: "center", marginBottom: "16px" }}>
               <div style={{ width: "40px", height: "1px", background: "var(--accent-primary)" }} />
               <span style={{ fontFamily: "var(--font-mono)", fontSize: "0.8rem", color: "var(--accent-primary)", textTransform: "uppercase", letterSpacing: "0.15em" }}>
-                Writing
+                Ephemeral Thoughts
               </span>
               <div style={{ width: "40px", height: "1px", background: "var(--accent-primary)" }} />
             </div>
             <h2 className="gradient-text" style={{ fontSize: "clamp(2rem, 5vw, 3rem)", margin: "0 0 20px", fontWeight: 700 }}>
-              Thoughts & Essays
+              Things I think before I forget
             </h2>
             <p style={{ color: "var(--text-muted)", fontSize: "1.05rem", lineHeight: 1.8, maxWidth: "500px", margin: "0 auto 36px" }}>
-              On building software, philosophy, and the spaces in between.
-              Slow thinking in a fast world.
+              Short, often half-formed. Notes I'd rather catch than lose.
             </p>
           </>
         )}
         <a
-          href="/writing"
+          href="/thoughts"
           className="glass-card"
           style={{
             display: "inline-flex",
@@ -695,7 +694,7 @@ export function WritingTeaser() {
             gap: "8px",
           }}
         >
-          {isTerminal ? "$ ls ./writing/" : "Read My Writing"}
+          {isTerminal ? "$ ls ./thoughts/" : "Read Thoughts"}
           {!isTerminal && (
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
               <path d="M5 12h14M12 5l7 7-7 7" />

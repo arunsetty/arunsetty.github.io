@@ -18,10 +18,18 @@ export const SOCIAL = [
 export const NAV_LINKS = [
   { name: "Work", href: "/work" },
   { name: "Journey", href: "/journey" },
-  { name: "Writing", href: "/writing" },
+  { name: "Thoughts", href: "/thoughts" },
   { name: "About", href: "/about" },
   { name: "Now", href: "/now" },
 ] as const;
+
+export const THOUGHTS = {
+  brand: "Ephemeral Thoughts",
+  tagline: "Things I think before I forget.",
+  blurb: "Short, often half-formed. Notes I'd rather catch than lose.",
+} as const;
+
+export const NOW_UPDATED = "May 2026";
 
 export const SKILLS = {
   languages: ["JavaScript (ES6)", "TypeScript", "HTML", "CSS", "Python", "SQL", "C", "C++", "Java", "Racket", "Prolog"],

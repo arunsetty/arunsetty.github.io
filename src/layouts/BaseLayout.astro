@@ -5,6 +5,7 @@ import Footer from "../components/Footer.astro";
 import ScrollProgress from "../components/ScrollProgress.tsx";
 import AnimatedBackground from "../components/AnimatedBackground.tsx";
 import CursorGlow from "../components/CursorGlow.tsx";
+import { SITE, SOCIAL } from "../consts";
 import "../styles/global.css";
 
 interface Props {
@@ -12,7 +13,23 @@ interface Props {
   description?: string;
 }
 
-const { title, description = "Developer, philosopher, and product architect." } = Astro.props;
+const { title, description = SITE.description } = Astro.props;
+const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? "https://arunsetty.github.io");
+const ogImage = new URL(SITE.image, Astro.site ?? "https://arunsetty.github.io").toString();
+
+const personSchema = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: SITE.name,
+  url: SITE.url,
+  email: `mailto:${SITE.email}`,
+  jobTitle: "Fullstack Developer & Product Architect",
+  alumniOf: {
+    "@type": "CollegeOrUniversity",
+    name: "Indian Institute of Technology, Bombay",
+  },
+  sameAs: SOCIAL.filter((s) => s.icon !== "email").map((s) => s.url),
+};
 ---
 
 <!doctype html>
@@ -27,17 +44,21 @@ const { title, description = "Developer, philosopher, and product architect." } 
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content={Astro.url} />
-    <meta property="og:image" content="/img/og.png" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:site_name" content={SITE.name} />
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content="/img/og.png" />
+    <meta name="twitter:image" content={ogImage} />
 
     <!-- Canonical -->
-    <link rel="canonical" href={Astro.url} />
+    <link rel="canonical" href={canonicalURL} />
+
+    <!-- JSON-LD Person schema -->
+    <script type="application/ld+json" set:html={JSON.stringify(personSchema)} />
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />

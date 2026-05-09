@@ -16,7 +16,7 @@ const formattedDate = pubDate.toLocaleDateString("en-US", {
 ---
 
 <!-- Cinematic card -->
-<a href={`/writing/${slug}`} class="blog-card glass-card cinematic-card">
+<a href={`/thoughts/${slug}`} class="blog-card glass-card cinematic-card">
   <div class="blog-card-meta">
     <time>{formattedDate}</time>
     {tags.length > 0 && (
@@ -32,7 +32,7 @@ const formattedDate = pubDate.toLocaleDateString("en-US", {
 </a>
 
 <!-- Terminal card -->
-<a href={`/writing/${slug}`} class="terminal-card">
+<a href={`/thoughts/${slug}`} class="terminal-card">
   <div class="terminal-card-row">
     <span class="terminal-perms">-rw-r--r--</span>
     <span class="terminal-date">{formattedDate}</span>

@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { NOW_UPDATED } from "../consts";
 ---
 
 <BaseLayout title="Now | Arun Setty" description="What I'm currently doing and thinking about.">
@@ -9,7 +10,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
       <span class="page-label">Now</span>
       <h1 class="gradient-text page-title">What I'm Doing Now</h1>
       <p class="page-meta">
-        Last updated: April 2026
+        Last updated: {NOW_UPDATED}
       </p>
     </div>
   </section>
@@ -57,7 +58,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
       <span class="page-label">Now</span>
       <h1 class="gradient-text page-title">$ cat .env.now</h1>
       <p class="page-meta">
-        # last modified: April 2026
+        # last modified: {NOW_UPDATED}
       </p>
     </div>
   </section>
@@ -74,6 +75,11 @@ import BaseLayout from "../layouts/BaseLayout.astro";
           <div class="env-line"><span class="env-key">COMPANY</span>=<span class="env-val">"<a href="https://brokenatom.io" target="_blank" rel="noopener noreferrer">Broken</a>"</span></div>
           <div class="env-line"><span class="env-key">ROLE</span>=<span class="env-val">"Software Developer"</span></div>
           <div class="env-line"><span class="env-key">FOCUS</span>=<span class="env-val">"no-code platform — making application creation accessible to everyone"</span></div>
+        </div>
+
+        <div class="env-block">
+          <div class="env-comment"># last updated</div>
+          <div class="env-line"><span class="env-key">UPDATED</span>=<span class="env-val">"{NOW_UPDATED}"</span></div>
         </div>
 
         <div class="env-block">
