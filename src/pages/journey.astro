@@ -3,92 +3,86 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import Timeline from "../components/Timeline.tsx";
 ---
 
-<BaseLayout title="Journey | Arun Setty" description="My career journey from mentoring to AI to fullstack development.">
-  <!-- Cinematic hero -->
-  <section class="hero-section cinematic-only">
-    <div class="container">
-      <span class="page-label">Journey</span>
-      <h1 class="gradient-text page-title">Where I've Been</h1>
-      <p class="page-desc">
-        From mentoring students to building AI systems to architecting no-code platforms.
-        Each role shaped how I think about building software.
-      </p>
-    </div>
-  </section>
+<BaseLayout
+  title="Journey | Arun Setty"
+  description="Eight years of building software — from mentoring students to AI to fullstack development to no-code platforms."
+>
+  <article class="journey">
+    <div class="container narrow">
+      <header class="journey-header">
+        <span class="eyebrow">Journey</span>
+        <h1 class="journey-title">Where I've been</h1>
+        <p class="journey-lede">
+          Eight years across mentoring, AI, fullstack, and now no-code. Each
+          role taught me something different about building software people
+          actually use.
+        </p>
+      </header>
 
-  <!-- Terminal hero -->
-  <section class="hero-section terminal-only">
-    <div class="container">
-      <span class="page-label">Journey</span>
-      <h1 class="gradient-text page-title">$ git log --author="arun"</h1>
-      <p class="page-desc">
-        // career history — 8 commits across 6+ years
-      </p>
-    </div>
-  </section>
+      <div class="journey-rule"></div>
 
-  <section>
-    <div class="container">
       <Timeline client:visible />
-    </div>
-  </section>
 
-  <section>
-    <div class="container" style="text-align: center;">
-      <a
-        href="/resume.pdf"
-        target="_blank"
-        class="glass-card resume-link"
-      >
-        <span class="cinematic-only">Download Resume &rarr;</span>
-        <span class="terminal-only">$ open ./resume.pdf</span>
-      </a>
+      <div class="journey-footer">
+        <a href="/resume.pdf" target="_blank" class="journey-link">Download resume →</a>
+      </div>
     </div>
-  </section>
+  </article>
 </BaseLayout>
 
 <style>
-  .hero-section {
-    padding-top: 140px;
-    padding-bottom: 40px;
+  .journey {
+    padding-top: 120px;
+    padding-bottom: 80px;
   }
 
-  .page-label {
-    font-family: var(--font-mono);
-    font-size: 0.8rem;
-    color: var(--accent-primary);
-    text-transform: uppercase;
-    letter-spacing: 0.15em;
-    display: block;
-    margin-bottom: 12px;
+  .journey-header {
+    margin-bottom: 28px;
   }
 
-  .page-title {
-    font-size: clamp(2rem, 5vw, 3rem);
-    margin: 0 0 20px;
+  .journey-title {
+    font-family: var(--font-sans);
+    font-size: clamp(2.2rem, 5.5vw, 3.5rem);
+    font-weight: 800;
+    letter-spacing: -0.025em;
+    line-height: 1.05;
+    margin: 12px 0 16px;
+    color: var(--text-primary);
   }
 
-  .page-desc {
-    color: var(--text-muted);
-    font-size: 1.05rem;
-    max-width: 600px;
-    line-height: 1.7;
+  .journey-lede {
+    font-family: var(--font-serif);
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    font-style: italic;
     margin: 0;
+    max-width: 60ch;
   }
 
-  .resume-link {
-    display: inline-block;
-    padding: 12px 28px;
+  .journey-rule {
+    height: 1px;
+    background: var(--rule-color);
+    margin: 40px 0;
+  }
+
+  .journey-footer {
+    margin-top: 56px;
+    padding-top: 32px;
+    border-top: 1px solid var(--rule-color);
+  }
+
+  .journey-link {
     font-family: var(--font-mono);
     font-size: 0.85rem;
     color: var(--accent-primary);
     text-decoration: none;
-    letter-spacing: 0.05em;
+    padding-bottom: 2px;
+    border-bottom: 1px solid rgba(232, 182, 88, 0.4);
+    letter-spacing: 0.04em;
   }
 
-  .terminal-only { display: none; }
-  :global([data-theme="terminal"]) .cinematic-only { display: none; }
-  :global([data-theme="terminal"]) .terminal-only { display: block; }
-  :global([data-theme="terminal"]) span.terminal-only { display: inline; }
-  :global([data-theme="terminal"]) span.cinematic-only { display: none; }
+  .journey-link:hover {
+    border-bottom-color: var(--accent-primary);
+  }
 </style>

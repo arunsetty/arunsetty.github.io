@@ -1,46 +1,39 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Hero from "../components/Hero.tsx";
-import {
-  FeaturedWorkSection,
-  SkillsFlowSection,
-  StatsSection,
-  ExperiencePreview,
-  ThoughtsTeaser,
-} from "../components/HomeSections.tsx";
+import { RecentThoughts, CurrentlyBuilding } from "../components/HomeSections.tsx";
 import { getCollection } from "astro:content";
 
-const projects = (await getCollection("projects"))
-  .sort((a, b) => a.data.order - b.data.order)
+const allThoughts = (await getCollection("thoughts"))
+  .filter((p) => !p.data.draft)
+  .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
+
+const recent = allThoughts.slice(0, 4).map((p, i) => ({
+  title: p.data.title,
+  description: p.data.description,
+  pubDate: p.data.pubDate,
+  slug: p.slug,
+  number: allThoughts.length - i,
+}));
+
+const featured = (await getCollection("projects"))
   .filter((p) => p.data.featured)
+  .sort((a, b) => a.data.order - b.data.order)
+  .slice(0, 3)
   .map((p) => ({
     title: p.data.title,
     description: p.data.description,
     tags: p.data.tags,
     slug: p.slug,
-    featured: p.data.featured,
+    duration: p.data.duration,
   }));
 ---
 
 <BaseLayout
-  title="Arun Setty | Fullstack Developer & Product Architect"
-  description="Fullstack developer and product architect. Building Broken, an alum of Hotstar and Foxsense, IIT Bombay graduate. Developer, philosopher, builder."
+  title="Arun Setty | Software developer & essayist"
+  description="Software developer building Broken (no-code platform). Essays at Ephemeral Thoughts on decisions, systems, and craft. IIT Bombay alum, eight years in the industry."
 >
-  <!-- Hero with staggered text animation -->
-  <Hero client:load />
-
-  <!-- Stats counter -->
-  <StatsSection client:load />
-
-  <!-- Featured Work -->
-  <FeaturedWorkSection client:load projects={projects} />
-
-  <!-- Skills -->
-  <SkillsFlowSection client:load />
-
-  <!-- Experience preview -->
-  <ExperiencePreview client:load />
-
-  <!-- Thoughts teaser -->
-  <ThoughtsTeaser client:load />
+  <Hero />
+  <RecentThoughts thoughts={recent} total={allThoughts.length} />
+  <CurrentlyBuilding projects={featured} />
 </BaseLayout>

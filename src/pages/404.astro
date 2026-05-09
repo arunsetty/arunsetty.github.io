@@ -2,123 +2,71 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
-<BaseLayout title="404 — Page Not Found | Arun Setty" description="The page you're looking for doesn't exist.">
-  <!-- Cinematic 404 -->
-  <section class="hero-section cinematic-only">
-    <div class="container">
-      <span class="page-label">Error 404</span>
-      <h1 class="gradient-text page-title">Lost in the void</h1>
-      <p class="page-desc">
+<BaseLayout
+  title="404 — Page Not Found | Arun Setty"
+  description="The page you're looking for doesn't exist."
+>
+  <article class="four-oh-four">
+    <div class="container narrow">
+      <span class="eyebrow">Error · 404</span>
+      <h1 class="title">Lost in the void</h1>
+      <p class="lede">
         The page you're looking for doesn't exist — or it once did and has
-        moved on. Either way, let's get you back to somewhere real.
+        moved on. Either way, let's get you somewhere real.
       </p>
 
-      <div class="four-oh-four-links">
-        <a href="/" class="glass-card four-oh-four-link">Take me home &rarr;</a>
-        <a href="/work" class="glass-card four-oh-four-link">View my work &rarr;</a>
-        <a href="/thoughts" class="glass-card four-oh-four-link">Read my thoughts &rarr;</a>
+      <div class="links">
+        <a href="/" class="link">Take me home →</a>
+        <a href="/thoughts" class="link">Read my thoughts →</a>
+        <a href="/work" class="link">View my work →</a>
       </div>
     </div>
-  </section>
-
-  <!-- Terminal 404 -->
-  <section class="hero-section terminal-only">
-    <div class="container">
-      <span class="page-label">Error 404</span>
-      <h1 class="gradient-text page-title">$ cat ./requested-page.md</h1>
-
-      <div class="terminal-error">
-        <span class="terminal-comment">// stderr</span><br />
-        <span class="terminal-err">cat: ./requested-page.md: No such file or directory</span>
-      </div>
-
-      <p class="terminal-hint">
-        // the page you requested doesn't exist on this filesystem.
-        <br />// try one of the directories below.
-      </p>
-
-      <div class="four-oh-four-links">
-        <a href="/" class="glass-card four-oh-four-link">$ cd /</a>
-        <a href="/work" class="glass-card four-oh-four-link">$ cd ./work</a>
-        <a href="/thoughts" class="glass-card four-oh-four-link">$ cd ./thoughts</a>
-      </div>
-    </div>
-  </section>
+  </article>
 </BaseLayout>
 
 <style>
-  .hero-section {
+  .four-oh-four {
     padding-top: 140px;
     padding-bottom: 120px;
   }
 
-  .page-label {
-    font-family: var(--font-mono);
-    font-size: 0.8rem;
-    color: var(--accent-primary);
-    text-transform: uppercase;
-    letter-spacing: 0.15em;
-    display: block;
-    margin-bottom: 12px;
+  .title {
+    font-family: var(--font-sans);
+    font-size: clamp(2.4rem, 6vw, 4rem);
+    font-weight: 800;
+    letter-spacing: -0.025em;
+    line-height: 1.05;
+    margin: 12px 0 20px;
+    color: var(--text-primary);
   }
 
-  .page-title {
-    font-size: clamp(2.5rem, 6vw, 4rem);
-    margin: 0 0 24px;
-  }
-
-  .page-desc {
-    color: var(--text-muted);
-    font-size: 1.05rem;
-    max-width: 600px;
-    line-height: 1.7;
+  .lede {
+    font-family: var(--font-serif);
+    font-size: 1.18rem;
+    color: var(--text-secondary);
+    line-height: 1.65;
+    font-style: italic;
     margin: 0 0 40px;
+    max-width: 55ch;
   }
 
-  .four-oh-four-links {
+  .links {
     display: flex;
-    gap: 12px;
+    gap: 18px;
     flex-wrap: wrap;
-    margin-top: 32px;
   }
 
-  .four-oh-four-link {
-    padding: 10px 24px;
+  .link {
     font-family: var(--font-mono);
-    font-size: 0.8rem;
+    font-size: 0.85rem;
     color: var(--accent-primary);
     text-decoration: none;
-    letter-spacing: 0.05em;
+    padding-bottom: 2px;
+    border-bottom: 1px solid rgba(232, 182, 88, 0.4);
+    letter-spacing: 0.04em;
   }
 
-  .terminal-only { display: none; }
-  :global([data-theme="terminal"]) .cinematic-only { display: none; }
-  :global([data-theme="terminal"]) .terminal-only { display: block; }
-
-  .terminal-error {
-    font-family: var(--font-mono);
-    font-size: 0.95rem;
-    line-height: 1.8;
-    margin: 24px 0;
-    padding: 16px 20px;
-    border-left: 2px solid #ff5555;
-    background: rgba(255, 85, 85, 0.05);
-  }
-
-  .terminal-comment {
-    color: #009922;
-    opacity: 0.7;
-  }
-
-  .terminal-err {
-    color: #ff5555;
-  }
-
-  .terminal-hint {
-    font-family: var(--font-mono);
-    font-size: 0.9rem;
-    color: #009922;
-    margin: 24px 0 32px;
-    line-height: 1.8;
+  .link:hover {
+    border-bottom-color: var(--accent-primary);
   }
 </style>

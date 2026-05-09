@@ -1,6 +1,5 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import ProjectCard from "../../components/ProjectCard.tsx";
 import { getCollection } from "astro:content";
 
 const projects = (await getCollection("projects")).sort(
@@ -8,115 +7,198 @@ const projects = (await getCollection("projects")).sort(
 );
 ---
 
-<BaseLayout title="Work | Arun Setty" description="Projects and experience from my career as a developer.">
-  <!-- Cinematic hero -->
-  <section class="hero-section cinematic-only">
-    <div class="container">
-      <span class="page-label">Work</span>
-      <h1 class="gradient-text page-title">Things I've Built</h1>
-      <p class="page-desc">
-        A collection of projects and roles that have shaped my journey as a developer.
-        Each one taught me something different about building software that matters.
-      </p>
-    </div>
-  </section>
+<BaseLayout
+  title="Work | Arun Setty"
+  description="Eight years of work across no-code platforms, application health monitoring, DevOps tooling, AI systems, and full-stack development."
+>
+  <article class="work">
+    <div class="container narrow">
+      <header class="work-header">
+        <span class="eyebrow">Work</span>
+        <h1 class="work-title">Things I've built</h1>
+        <p class="work-lede">
+          A handful of projects and roles that have shaped my view of what
+          good software looks like.
+        </p>
+      </header>
 
-  <!-- Terminal hero -->
-  <section class="hero-section terminal-only">
-    <div class="container">
-      <span class="page-label">Work</span>
-      <h1 class="gradient-text page-title">$ ls -la ./work/</h1>
-      <p class="page-desc">
-        // {projects.length} projects indexed
-      </p>
-    </div>
-  </section>
+      <div class="work-rule"></div>
 
-  <section>
-    <div class="container">
-      <div class="project-grid">
-        {projects.map((project) => (
-          <ProjectCard
-            client:load
-            title={project.data.title}
-            description={project.data.description}
-            tags={project.data.tags}
-            slug={project.slug}
-            featured={project.data.featured}
-          />
+      <ul class="work-list">
+        {projects.map((p) => (
+          <li class="work-item">
+            <a href={`/work/${p.slug}`} class="work-link">
+              <div class="work-row">
+                <h2 class="work-name">{p.data.title}</h2>
+                {p.data.duration && (
+                  <span class="work-duration">{p.data.duration}</span>
+                )}
+              </div>
+              {p.data.role && p.data.company && (
+                <p class="work-role">
+                  {p.data.role} · {p.data.company}
+                </p>
+              )}
+              <p class="work-desc">{p.data.description}</p>
+              <div class="work-tags">
+                {p.data.tags.map((tag) => (
+                  <span class="work-tag">{tag}</span>
+                ))}
+              </div>
+            </a>
+          </li>
         ))}
+      </ul>
+
+      <div class="work-footer">
+        <a href="/resume.pdf" target="_blank" class="work-resume-link">
+          Full resume →
+        </a>
       </div>
     </div>
-  </section>
-
-  <section>
-    <div class="container" style="text-align: center;">
-      <a
-        href="/resume.pdf"
-        target="_blank"
-        class="glass-card resume-link"
-      >
-        <span class="cinematic-only">View Full Resume &rarr;</span>
-        <span class="terminal-only">$ open ./resume.pdf</span>
-      </a>
-    </div>
-  </section>
+  </article>
 </BaseLayout>
 
 <style>
-  .hero-section {
-    padding-top: 140px;
-    padding-bottom: 40px;
+  .work {
+    padding-top: 120px;
+    padding-bottom: 80px;
   }
 
-  .page-label {
-    font-family: var(--font-mono);
-    font-size: 0.8rem;
-    color: var(--accent-primary);
-    text-transform: uppercase;
-    letter-spacing: 0.15em;
-    display: block;
-    margin-bottom: 12px;
+  .work-header {
+    margin-bottom: 28px;
   }
 
-  .page-title {
-    font-size: clamp(2rem, 5vw, 3rem);
-    margin: 0 0 20px;
+  .work-title {
+    font-family: var(--font-sans);
+    font-size: clamp(2.2rem, 5.5vw, 3.5rem);
+    font-weight: 800;
+    letter-spacing: -0.025em;
+    line-height: 1.05;
+    margin: 12px 0 16px;
+    color: var(--text-primary);
   }
 
-  .page-desc {
-    color: var(--text-muted);
-    font-size: 1.05rem;
-    max-width: 600px;
-    line-height: 1.7;
+  .work-lede {
+    font-family: var(--font-serif);
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    font-style: italic;
+    margin: 0;
+    max-width: 60ch;
+  }
+
+  .work-rule {
+    height: 1px;
+    background: var(--rule-color);
+    margin: 40px 0 24px;
+  }
+
+  .work-list {
+    list-style: none;
+    padding: 0;
     margin: 0;
   }
 
-  .project-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-    gap: 20px;
+  .work-item {
+    border-bottom: 1px solid var(--rule-color);
   }
 
-  @media (max-width: 480px) {
-    .project-grid {
-      grid-template-columns: 1fr;
-    }
+  .work-item:first-child {
+    border-top: 1px solid var(--rule-color);
   }
 
-  .resume-link {
-    display: inline-block;
-    padding: 12px 28px;
+  .work-link {
+    display: block;
+    padding: 26px 0;
+    text-decoration: none;
+    color: inherit;
+    transition: padding 0.18s ease;
+  }
+
+  .work-link:hover {
+    padding-left: 8px;
+  }
+
+  .work-link:hover .work-name {
+    color: var(--accent-primary);
+  }
+
+  .work-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: 4px;
+  }
+
+  .work-name {
+    font-family: var(--font-sans);
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0;
+    letter-spacing: -0.015em;
+    transition: color 0.18s ease;
+  }
+
+  .work-duration {
+    font-family: var(--font-mono);
+    font-size: 0.74rem;
+    color: var(--text-muted);
+    letter-spacing: 0.04em;
+  }
+
+  .work-role {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--accent-primary);
+    margin: 0 0 8px;
+    letter-spacing: 0.02em;
+  }
+
+  .work-desc {
+    font-family: var(--font-serif);
+    font-size: 1rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin: 0 0 12px;
+  }
+
+  .work-tags {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+
+  .work-tag {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    padding: 1px 8px;
+    border: 1px solid var(--border-color);
+    border-radius: 3px;
+    color: var(--text-muted);
+  }
+
+  .work-footer {
+    margin-top: 48px;
+    padding-top: 32px;
+    border-top: 1px solid var(--rule-color);
+  }
+
+  .work-resume-link {
     font-family: var(--font-mono);
     font-size: 0.85rem;
     color: var(--accent-primary);
     text-decoration: none;
-    letter-spacing: 0.05em;
+    padding-bottom: 2px;
+    border-bottom: 1px solid rgba(232, 182, 88, 0.4);
+    letter-spacing: 0.04em;
   }
 
-  .terminal-only { display: none; }
-  :global([data-theme="terminal"]) .cinematic-only { display: none; }
-  :global([data-theme="terminal"]) .terminal-only { display: block; }
-  :global([data-theme="terminal"]) span.terminal-only { display: inline; }
-  :global([data-theme="terminal"]) span.cinematic-only { display: none; }
+  .work-resume-link:hover {
+    border-bottom-color: var(--accent-primary);
+  }
 </style>

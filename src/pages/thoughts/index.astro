@@ -1,6 +1,5 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import BlogCard from "../../components/BlogCard.astro";
 import { getCollection } from "astro:content";
 import { THOUGHTS } from "../../consts";
 
@@ -8,158 +7,241 @@ const posts = (await getCollection("thoughts"))
   .filter((p) => !p.data.draft)
   .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
 
-const count = posts.length;
-const countLabel = count === 1 ? "thought" : "thoughts";
+const total = posts.length;
+const formatDate = (d: Date) =>
+  d.toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" });
 ---
 
 <BaseLayout
   title={`${THOUGHTS.brand} | Arun Setty`}
   description={`${THOUGHTS.tagline} ${THOUGHTS.blurb}`}
 >
-  <!-- Cinematic hero -->
-  <section class="hero-section cinematic-only">
-    <div class="container">
-      <span class="page-label">{THOUGHTS.brand}</span>
-      <h1 class="gradient-text page-title">{THOUGHTS.tagline}</h1>
-      <p class="page-desc">{THOUGHTS.blurb}</p>
-      <p class="thought-count">
-        <span class="thought-count-num">{count}</span>
-        <span class="thought-count-label">{countLabel} and counting</span>
+  <section class="thoughts-hero">
+    <div class="container narrow">
+      <span class="eyebrow">{THOUGHTS.brand}</span>
+      <h1 class="thoughts-title">{THOUGHTS.tagline}</h1>
+      <p class="thoughts-blurb">{THOUGHTS.blurb}</p>
+      <p class="thoughts-meta">
+        <span class="thoughts-count">{total}</span>
+        <span class="thoughts-count-label">{total === 1 ? "thought" : "thoughts"}</span>
+        <span class="thoughts-meta-sep">·</span>
+        <span class="thoughts-meta-rss">
+          <a href="/rss.xml">RSS</a>
+        </span>
       </p>
     </div>
   </section>
 
-  <!-- Terminal hero -->
-  <section class="hero-section terminal-only">
-    <div class="container">
-      <span class="page-label">{THOUGHTS.brand}</span>
-      <h1 class="gradient-text page-title">$ ls -lt ./thoughts/</h1>
-      <p class="page-desc">// {THOUGHTS.tagline.toLowerCase()}</p>
-      <p class="thought-count terminal-count">
-        // total: <span class="thought-count-num">{count}</span> {countLabel}
-      </p>
-    </div>
-  </section>
-
-  <section>
-    <div class="container">
-      {count === 0 ? (
-        <div class="empty-state glass-card">
-          <p class="cinematic-only">
-            No thoughts yet. Check back soon — or
-            <a href={`mailto:arunsetty1729@gmail.com?subject=Hi`}>say hi</a> in
-            the meantime.
-          </p>
-          <p class="terminal-only">
-            <span class="t-comment"># total: 0 thoughts</span><br />
-            <span class="t-comment"># nothing here yet — check back soon</span>
-          </p>
-        </div>
+  <section class="thoughts-archive-section">
+    <div class="container narrow">
+      {total === 0 ? (
+        <p class="thoughts-empty">
+          Nothing here yet. Check back soon — or
+          <a href="mailto:arunsetty1729@gmail.com">say hi</a> in the meantime.
+        </p>
       ) : (
-        <div class="posts-grid">
-          {posts.map((post) => (
-            <BlogCard
-              title={post.data.title}
-              description={post.data.description}
-              pubDate={post.data.pubDate}
-              tags={post.data.tags}
-              slug={post.slug}
-            />
-          ))}
-        </div>
+        <ol class="thoughts-archive">
+          {posts.map((p, i) => {
+            const num = total - i;
+            return (
+              <li class="archive-item">
+                <a href={`/thoughts/${p.slug}`} class="archive-link">
+                  <span class="archive-num">{num}.</span>
+                  <div class="archive-body">
+                    <h2 class="archive-title">{p.data.title}</h2>
+                    <p class="archive-desc">{p.data.description}</p>
+                    <div class="archive-meta">
+                      <time>{formatDate(p.data.pubDate)}</time>
+                      {p.data.tags.length > 0 && (
+                        <>
+                          <span class="archive-meta-sep">·</span>
+                          <span class="archive-tags">
+                            {p.data.tags.map((tag) => (
+                              <span class="archive-tag">{tag}</span>
+                            ))}
+                          </span>
+                        </>
+                      )}
+                    </div>
+                  </div>
+                </a>
+              </li>
+            );
+          })}
+        </ol>
       )}
     </div>
   </section>
 </BaseLayout>
 
 <style>
-  .hero-section {
+  .thoughts-hero {
     padding-top: 140px;
-    padding-bottom: 40px;
+    padding-bottom: 24px;
   }
 
-  .page-label {
+  .thoughts-title {
+    font-family: var(--font-sans);
+    font-size: clamp(2.2rem, 5.5vw, 3.5rem);
+    font-weight: 800;
+    letter-spacing: -0.025em;
+    line-height: 1.05;
+    margin: 12px 0 16px;
+    color: var(--text-primary);
+  }
+
+  .thoughts-blurb {
+    font-family: var(--font-serif);
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    font-style: italic;
+    margin: 0 0 16px;
+    max-width: 60ch;
+    line-height: 1.6;
+  }
+
+  .thoughts-meta {
     font-family: var(--font-mono);
     font-size: 0.8rem;
-    color: var(--accent-primary);
-    text-transform: uppercase;
-    letter-spacing: 0.15em;
-    display: block;
-    margin-bottom: 12px;
-  }
-
-  .page-title {
-    font-size: clamp(2rem, 5vw, 3rem);
-    margin: 0 0 20px;
-  }
-
-  .page-desc {
-    color: var(--text-muted);
-    font-size: 1.05rem;
-    max-width: 500px;
-    line-height: 1.7;
-    margin: 0 0 16px;
-  }
-
-  .thought-count {
-    font-family: var(--font-mono);
-    font-size: 0.85rem;
     color: var(--text-muted);
     margin: 0;
     display: flex;
     align-items: baseline;
     gap: 8px;
+    letter-spacing: 0.04em;
   }
 
-  .thought-count-num {
+  .thoughts-count {
     color: var(--accent-primary);
     font-weight: 600;
-    font-size: 1.05rem;
+    font-size: 0.95rem;
   }
 
-  .thought-count-label {
+  .thoughts-count-label {
     text-transform: uppercase;
-    letter-spacing: 0.1em;
-    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    font-size: 0.72rem;
   }
 
-  .terminal-count {
-    color: #009922;
+  .thoughts-meta-sep {
+    color: var(--text-quiet);
   }
 
-  .terminal-count .thought-count-num {
-    color: #00ff41;
-  }
-
-  .posts-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    max-width: 700px;
-  }
-
-  .empty-state {
-    padding: 32px;
-    max-width: 700px;
-  }
-
-  .empty-state p {
+  .thoughts-meta-rss a {
     color: var(--text-muted);
-    font-family: var(--font-mono);
-    font-size: 0.9rem;
-    margin: 0;
-    line-height: 1.7;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 0.72rem;
   }
 
-  .empty-state a {
+  .thoughts-meta-rss a:hover {
     color: var(--accent-primary);
   }
 
-  .t-comment {
-    color: #009922;
+  .thoughts-archive-section {
+    padding-top: 32px;
   }
 
-  .terminal-only { display: none; }
-  :global([data-theme="terminal"]) .cinematic-only { display: none; }
-  :global([data-theme="terminal"]) .terminal-only { display: block; }
+  .thoughts-archive {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    border-top: 1px solid var(--rule-color);
+  }
+
+  .archive-item {
+    border-bottom: 1px solid var(--rule-color);
+  }
+
+  .archive-link {
+    display: flex;
+    gap: 24px;
+    align-items: baseline;
+    padding: 28px 0;
+    text-decoration: none;
+    color: inherit;
+    transition: padding 0.18s ease;
+  }
+
+  .archive-link:hover {
+    padding-left: 8px;
+  }
+
+  .archive-link:hover .archive-title {
+    color: var(--accent-primary);
+  }
+
+  .archive-num {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    min-width: 40px;
+    flex-shrink: 0;
+    letter-spacing: 0.02em;
+  }
+
+  .archive-body { flex: 1; min-width: 0; }
+
+  .archive-title {
+    font-family: var(--font-sans);
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0 0 8px;
+    letter-spacing: -0.015em;
+    line-height: 1.25;
+    transition: color 0.18s ease;
+  }
+
+  .archive-desc {
+    font-family: var(--font-serif);
+    font-size: 1rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin: 0 0 12px;
+  }
+
+  .archive-meta {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    letter-spacing: 0.04em;
+  }
+
+  .archive-meta-sep {
+    color: var(--text-quiet);
+  }
+
+  .archive-tags {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+
+  .archive-tag {
+    color: var(--text-muted);
+  }
+
+  .archive-tag::before {
+    content: "#";
+    color: var(--text-quiet);
+    margin-right: 1px;
+  }
+
+  .thoughts-empty {
+    color: var(--text-secondary);
+    font-style: italic;
+    font-size: 1.05rem;
+    line-height: 1.7;
+    padding: 32px 0;
+  }
+
+  .thoughts-empty a {
+    color: var(--accent-primary);
+  }
 </style>
