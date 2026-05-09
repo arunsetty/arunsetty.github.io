@@ -3,382 +3,295 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import { COLLEGE_PROJECTS } from "../consts";
 ---
 
-<BaseLayout title="About | Arun Setty" description="Developer, philosopher, builder. Learn more about who I am.">
-  <!-- Cinematic version -->
-  <section class="hero-section cinematic-only">
-    <div class="container">
-      <span class="page-label">About</span>
-      <h1 class="gradient-text page-title">About Me</h1>
-    </div>
-  </section>
+<BaseLayout
+  title="About | Arun Setty"
+  description="A·S·K, Storyteller, tinkerer, engineer. Co-founder & CTO at Ur AI. Previously founding engineer at Trupeer and Brokenatom. IIT Bombay alum."
+>
+  <article class="about">
+    <div class="container narrow">
+      <header class="about-header">
+        <span class="eyebrow">About</span>
+        <h1 class="about-title">Arun Setty Kodavali</h1>
+        <p class="about-titles">
+          Storyteller · Tinkerer · Thinker · Engineer
+        </p>
+        <p class="about-motto">
+          <span class="about-motto-mark">&ldquo;</span>Human with the excellence reflex.<span class="about-motto-mark">&rdquo;</span>
+        </p>
+      </header>
 
-  <section class="cinematic-only">
-    <div class="container">
-      <div class="about-grid">
-        <div class="about-content">
-          <p>
-            I'm a fullstack developer and product architect with a passion for building
-            beautiful, scalable, and performant web applications. I think deeply about
-            the systems that shape our world — both technical and philosophical.
-          </p>
+      <div class="about-rule"></div>
 
-          <p>
-            Currently, I'm building the core product at
-            <a href="https://brokenatom.io" target="_blank" rel="noopener noreferrer">Broken</a>,
-            a no-code platform that empowers anyone to create structural applications
-            from scratch. Before that, I worked across companies like
-            <a href="https://www.hotstar.com" target="_blank" rel="noopener noreferrer">Hotstar</a>,
-            <a href="https://www.foxsense.io" target="_blank" rel="noopener noreferrer">Foxsense</a>,
-            and several AI startups.
-          </p>
+      <div class="prose">
+        <p>
+          Storyteller, primarily. That's what I keep coming back to. I tell
+          them in essays at <a href="/thoughts">Ephemeral Thoughts</a>
+          (most days), in code at <a href="https://ur-ai.net" target="_blank"
+          rel="noopener noreferrer">Ur AI</a> (every day), and in a media
+          diary at <a href="/log">A·S·K Log</a> that ends up being a more
+          honest record of who I am than the rest of this page combined.
+        </p>
 
-          <h2>Education</h2>
-          <p>
-            I graduated from the
-            <a href="https://www.iitb.ac.in/" target="_blank" rel="noopener noreferrer">Indian Institute of Technology, Bombay</a>
-            with a Bachelor's degree in Computer Science and Engineering. IIT Bombay
-            is where I fell in love with both the rigour of computer science and the
-            breadth of philosophical thinking.
-          </p>
+        <p>
+          Below all of that: a tinkerer with an excellence reflex. The
+          kind of person who broke open the cassette player as a kid
+          just to see how it worked, and never quite stopped. Years
+          later that same instinct meant taping my dad's old phone to
+          a fish-pond engine and using the accelerometer to detect
+          when the vibration stopped, so we'd get an alert instead of
+          losing the fish to an oxygen failure. Aquaculture, hacked
+          with Android sensors. Most of what I publish at <a
+          href="/thoughts">Ephemeral Thoughts</a> sits in that same
+          space, between engineering and behavior: decisions, rules,
+          mental models, the small things that compound.
+        </p>
 
-          <h2>Earlier Projects</h2>
-          <p>
-            A selection of academic work from IIT Bombay — the projects that
-            shaped how I think about systems, languages, and computation.
-          </p>
-          <div class="college-grid">
-            {COLLEGE_PROJECTS.map((p) => (
-              <div class="college-card glass-card">
-                <h3 class="college-name">{p.name}</h3>
-                <p class="college-desc">{p.description}</p>
-                <div class="college-tags">
-                  {p.tags.map((tag) => (
-                    <span class="college-tag">{tag}</span>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
+        <p>
+          Currently CTO and co-founder of <a
+            href="https://ur-ai.net"
+            target="_blank"
+            rel="noopener noreferrer">Ur AI</a
+          >, building AI products for structured workflows, document
+          intelligence, automation, the things knowledge workers actually do.
+          Before this: founding engineer at <a
+            href="https://app.trupeer.ai"
+            target="_blank"
+            rel="noopener noreferrer">Trupeer</a
+          > (where I shipped a video-first knowledge system in two days
+          that hit $150K in revenue its first week), then <a
+            href="https://brokenatom.io"
+            target="_blank"
+            rel="noopener noreferrer">Brokenatom</a
+          > (a full-stack no-code platform I built end-to-end in the
+          pre-AI era). Software intern at <a
+            href="https://www.hotstar.com"
+            target="_blank"
+            rel="noopener noreferrer">Disney Hotstar</a
+          > before any of that. Twenty-five years old, four out of college.
+        </p>
 
-          <h2>Philosophy</h2>
-          <p>
-            I believe the best software comes from understanding people, not just
-            technology. Every system we build is a reflection of how we think about
-            the world. I'm drawn to questions about consciousness, systems thinking,
-            and the ethics of the tools we create.
-          </p>
-          <p>
-            My approach to building is influenced by stoic philosophy — focus on what
-            you can control, build with intention, and always ask whether what you're
-            building genuinely serves the people who'll use it.
-          </p>
+        <h2>Education</h2>
+        <p>
+          B.Tech in Computer Science from the <a
+            href="https://www.iitb.ac.in/"
+            target="_blank"
+            rel="noopener noreferrer">Indian Institute of Technology, Bombay</a
+          >. That's where I fell into both the rigour of CS and the breadth
+          of philosophical thinking, and never quite separated them again.
+        </p>
 
-          <h2>Beyond Code</h2>
-          <p>
-            When I'm not in front of a computer, I'm probably reading, driving,
-            writing, or sleeping. I'm passionate about open source software and
-            contributing to the developer community.
-          </p>
+        <h2>How I think about building</h2>
+        <p>
+          The best software comes from understanding people, not just
+          technology. Every system we build is a reflection of how we think
+          about the world. I'm drawn to questions about consciousness,
+          systems thinking, and the ethics of the tools we make.
+        </p>
+        <p>
+          I have been a stoic, hedonist, atheist, theist, and many other
+          things along the way. Now I just am a philo-suffer (a pun).
+        </p>
 
-          <div class="about-links">
-            <a href="/resume.pdf" target="_blank" class="glass-card about-link">
-              Resume &rarr;
-            </a>
-            <a href="/journey" class="glass-card about-link">
-              My Journey &rarr;
-            </a>
-            <a href="/thoughts" class="glass-card about-link">
-              Ephemeral Thoughts &rarr;
-            </a>
-          </div>
-        </div>
+        <p>
+          Whatever I'm calling myself this week, the working method has
+          stayed the same: focus on what you can control, build with
+          intention, and ask whether what you're making genuinely serves
+          the people who'll use it.
+        </p>
+
+        <h2>Earlier projects</h2>
+        <p>
+          A selection of academic work from IIT Bombay, the projects that
+          shaped how I think about systems, languages, and computation.
+        </p>
       </div>
-    </div>
-  </section>
 
-  <!-- Terminal version -->
-  <section class="hero-section terminal-only">
-    <div class="container">
-      <span class="page-label">About</span>
-      <h1 class="gradient-text page-title">$ cat about.md</h1>
-    </div>
-  </section>
-
-  <section class="terminal-only">
-    <div class="container">
-      <div class="terminal-file">
-        <div class="terminal-file-header">
-          <span class="terminal-comment">---</span>
-          <br/>
-          <span class="terminal-key">name:</span> <span class="terminal-val">Arun Setty Kodavali</span>
-          <br/>
-          <span class="terminal-key">role:</span> <span class="terminal-val">Fullstack Developer & Product Architect</span>
-          <br/>
-          <span class="terminal-key">education:</span> <span class="terminal-val">IIT Bombay — B.Tech CSE</span>
-          <br/>
-          <span class="terminal-comment">---</span>
-        </div>
-
-        <div class="terminal-section">
-          <span class="terminal-heading">## current</span>
-          <p class="terminal-text">
-            Building the core product at <a href="https://brokenatom.io" target="_blank" rel="noopener noreferrer">Broken</a> — a no-code platform that empowers anyone to create structural applications from scratch. Before that, worked across <a href="https://www.hotstar.com" target="_blank" rel="noopener noreferrer">Hotstar</a>, <a href="https://www.foxsense.io" target="_blank" rel="noopener noreferrer">Foxsense</a>, and several AI startups.
-          </p>
-        </div>
-
-        <div class="terminal-section">
-          <span class="terminal-heading">## education</span>
-          <p class="terminal-text">
-            Graduated from <a href="https://www.iitb.ac.in/" target="_blank" rel="noopener noreferrer">Indian Institute of Technology, Bombay</a> with a Bachelor's in Computer Science and Engineering. Where I fell in love with both the rigour of CS and the breadth of philosophical thinking.
-          </p>
-        </div>
-
-        <div class="terminal-section">
-          <span class="terminal-heading">## earlier_projects</span>
-          <p class="terminal-text">
-            // academic work — IIT Bombay
-          </p>
-          {COLLEGE_PROJECTS.map((p) => (
-            <div class="college-entry-terminal">
-              <span class="college-name-terminal">[ {p.name} ]</span>
-              <p class="terminal-text">{p.description}</p>
-              <span class="terminal-comment">// tags: {p.tags.join(", ")}</span>
+      <ul class="college-list">
+        {COLLEGE_PROJECTS.map((p) => (
+          <li class="college-item">
+            <h3 class="college-name">{p.name}</h3>
+            <p class="college-desc">{p.description}</p>
+            <div class="college-tags">
+              {p.tags.map((tag) => (
+                <span class="college-tag">{tag}</span>
+              ))}
             </div>
-          ))}
-        </div>
+          </li>
+        ))}
+      </ul>
 
-        <div class="terminal-section">
-          <span class="terminal-heading">## philosophy</span>
-          <p class="terminal-text">
-            The best software comes from understanding people, not just technology. Every system we build is a reflection of how we think about the world. Drawn to questions about consciousness, systems thinking, and the ethics of the tools we create.
-          </p>
-          <p class="terminal-text">
-            Influenced by stoic philosophy — focus on what you can control, build with intention, and always ask whether what you're building genuinely serves the people who'll use it.
-          </p>
-        </div>
+      <div class="prose">
+        <h2>What I do on weekends</h2>
+        <p>
+          I run an informal weekend hacker house in Bangalore with a
+          small group of friends. It started after an Anthropic
+          hackathon when we built something usable in 48 hours and
+          realised that having a focused group in the same room was
+          the unlock. Now it's a regular ritual: 5 to 6-hour Saturday
+          sessions, pizza, laptops, a strong bias toward shipping.
+        </p>
 
-        <div class="terminal-section">
-          <span class="terminal-heading">## beyond_code</span>
-          <p class="terminal-text">
-            When not in front of a computer: reading, driving, writing, or sleeping. Passionate about open source software and contributing to the developer community.
-          </p>
-        </div>
+        <p>
+          One of the things I built through it is <strong>Arise</strong>,
+          a health-tech app that tracks daily vitals and visualizes
+          progress through a gamified leveling system. About 20 people
+          in beta, ~40% active every two days, over 5 million steps
+          tracked between us. Currently studying the power-user
+          patterns to design nudges that get the rest of the group
+          walking more.
+        </p>
 
-        <div class="terminal-links">
-          <a href="/resume.pdf" target="_blank" class="glass-card about-link">
-            ./resume.pdf
-          </a>
-          <a href="/journey" class="glass-card about-link">
-            ./journey/
-          </a>
-          <a href="/thoughts" class="glass-card about-link">
-            ./thoughts/
-          </a>
-        </div>
+        <h2>For the record</h2>
+        <p>
+          25 years old, based in Bengaluru. Won the Salesforce AI
+          Pitchfield (2025) with the Trupeer team, $100K from
+          Salesforce Ventures. JEE Advanced AIR 222 back when that
+          was the metric. Otherwise: reading, driving, writing,
+          sleeping. Trying to write more than I consume.
+        </p>
+      </div>
 
-        <div class="terminal-eof">
-          <span class="terminal-comment">// EOF</span>
-        </div>
+      <div class="about-links">
+        <a href="/resume.pdf" target="_blank" class="about-link">Resume →</a>
+        <a href="/journey" class="about-link">Journey →</a>
+        <a href="/thoughts" class="about-link">Ephemeral Thoughts →</a>
+        <a href="/log" class="about-link">A·S·K Log →</a>
       </div>
     </div>
-  </section>
+  </article>
 </BaseLayout>
 
 <style>
-  .hero-section {
-    padding-top: 140px;
-    padding-bottom: 20px;
+  .about {
+    padding-top: 120px;
+    padding-bottom: 80px;
   }
 
-  .page-label {
-    font-family: var(--font-mono);
-    font-size: 0.8rem;
-    color: var(--accent-primary);
-    text-transform: uppercase;
-    letter-spacing: 0.15em;
-    display: block;
-    margin-bottom: 12px;
+  .about-header {
+    margin-bottom: 28px;
   }
 
-  .page-title {
-    font-size: clamp(2rem, 5vw, 3rem);
-    margin: 0;
-  }
-
-  .about-content {
-    max-width: 700px;
-  }
-
-  .about-content p {
-    color: var(--text-secondary);
-    font-size: 1rem;
-    line-height: 1.9;
-    margin: 0 0 24px;
-  }
-
-  .about-content a {
-    color: var(--accent-primary);
-  }
-
-  .about-content h2 {
-    font-size: 1.3rem;
+  .about-title {
+    font-family: var(--font-display);
+    font-size: clamp(2.2rem, 5.5vw, 3.5rem);
+    font-weight: 800;
+    letter-spacing: -0.025em;
+    line-height: 1.05;
+    margin: 12px 0 16px;
     color: var(--text-primary);
-    margin: 48px 0 16px;
-    font-weight: 600;
   }
 
-  .about-links {
-    display: flex;
-    gap: 12px;
-    flex-wrap: wrap;
-    margin-top: 40px;
-  }
-
-  .about-link {
-    padding: 10px 24px;
+  .about-titles {
     font-family: var(--font-mono);
-    font-size: 0.8rem;
-    color: var(--accent-primary);
-    text-decoration: none;
-    letter-spacing: 0.05em;
-  }
-
-  /* Theme visibility toggling */
-  .terminal-only { display: none; }
-
-  :global([data-theme="terminal"]) .cinematic-only { display: none; }
-  :global([data-theme="terminal"]) .terminal-only { display: block; }
-
-  /* Terminal file styles */
-  .terminal-file {
-    max-width: 700px;
-    font-family: var(--font-mono);
-  }
-
-  .terminal-file-header {
-    padding: 16px 0;
-    border-bottom: 1px solid rgba(0, 255, 65, 0.15);
-    margin-bottom: 24px;
-    line-height: 1.8;
-  }
-
-  .terminal-comment {
-    color: #009922;
-    opacity: 0.6;
-  }
-
-  .terminal-key {
-    color: #00cc33;
-  }
-
-  .terminal-val {
-    color: #00ff41;
-  }
-
-  .terminal-section {
-    margin-bottom: 24px;
-  }
-
-  .terminal-heading {
-    color: #00ff41;
-    font-size: 1.1rem;
-    font-weight: 600;
-    display: block;
-    margin-bottom: 12px;
-    text-shadow: 0 0 8px rgba(0, 255, 65, 0.3);
-  }
-
-  .terminal-text {
-    color: #00cc33;
-    font-size: 0.9rem;
-    line-height: 1.8;
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
     margin: 0 0 12px;
   }
 
-  .terminal-text a {
-    color: #00ff41;
-    text-decoration: underline;
-    text-underline-offset: 3px;
+  .about-motto {
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    font-style: italic;
+    font-weight: 400;
+    color: var(--text-primary);
+    margin: 0;
+    line-height: 1.4;
   }
 
-  .terminal-links {
-    display: flex;
-    gap: 12px;
-    flex-wrap: wrap;
-    margin-top: 32px;
-    padding-top: 24px;
-    border-top: 1px solid rgba(0, 255, 65, 0.15);
+  .about-motto-mark {
+    color: var(--accent-primary);
+    font-weight: 600;
+    font-style: normal;
   }
 
-  .terminal-eof {
-    margin-top: 32px;
-    padding-top: 16px;
-    border-top: 1px solid rgba(0, 255, 65, 0.1);
+  .about-rule {
+    height: 1px;
+    background: var(--rule-color);
+    margin: 32px 0;
   }
 
-  /* College projects — cinematic */
-  .college-grid {
+  .college-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 40px;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 16px;
-    margin: 24px 0 8px;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 14px;
   }
 
-  .college-card {
-    padding: 20px;
+  .college-item {
+    padding: 18px 20px;
+    border: 1px solid var(--border-color);
+    background: var(--bg-card);
+    border-radius: 4px;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 8px;
+    transition: border-color 0.18s ease, background 0.18s ease;
+  }
+
+  .college-item:hover {
+    border-color: var(--accent-quiet);
+    background: var(--bg-card-hover);
   }
 
   .college-name {
+    font-family: var(--font-display);
     font-size: 1rem;
     font-weight: 600;
     color: var(--text-primary);
     margin: 0;
+    letter-spacing: -0.01em;
   }
 
   .college-desc {
-    font-size: 0.9rem !important;
-    line-height: 1.6 !important;
-    margin: 0 !important;
-    color: var(--text-secondary) !important;
+    font-family: var(--font-serif);
+    font-size: 0.92rem;
+    line-height: 1.55;
+    color: var(--text-secondary);
+    margin: 0;
   }
 
   .college-tags {
     display: flex;
     flex-wrap: wrap;
-    gap: 6px;
+    gap: 5px;
     margin-top: auto;
     padding-top: 4px;
   }
 
   .college-tag {
     font-family: var(--font-mono);
-    font-size: 0.7rem;
-    padding: 3px 9px;
+    font-size: 0.68rem;
+    padding: 1px 7px;
     border: 1px solid var(--border-color);
-    border-radius: 4px;
+    border-radius: 3px;
+    color: var(--text-muted);
+    letter-spacing: 0.02em;
+  }
+
+  .about-links {
+    display: flex;
+    gap: 18px;
+    flex-wrap: wrap;
+    margin-top: 48px;
+    padding-top: 32px;
+    border-top: 1px solid var(--rule-color);
+  }
+
+  .about-link {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
     color: var(--accent-primary);
-    letter-spacing: 0.03em;
+    text-decoration: none;
+    padding-bottom: 2px;
+    border-bottom: 1px solid rgba(184, 54, 45, 0.4);
+    letter-spacing: 0.04em;
   }
 
-  /* College projects — terminal */
-  .college-entry-terminal {
-    margin: 16px 0;
-    padding-left: 12px;
-    border-left: 1px solid rgba(0, 255, 65, 0.2);
-  }
-
-  .college-name-terminal {
-    color: #00ff41;
-    font-weight: 600;
-    display: block;
-    margin-bottom: 6px;
-    text-shadow: 0 0 6px rgba(0, 255, 65, 0.25);
-  }
-
-  .college-entry-terminal .terminal-text {
-    margin: 0 0 6px;
+  .about-link:hover {
+    border-bottom-color: var(--accent-primary);
   }
 </style>

@@ -1,245 +1,183 @@
 @import "tailwindcss";
 
-/* ===== THEME: CINEMATIC ===== */
-[data-theme="cinematic"] {
-  --bg-primary: #0a0a0f;
-  --bg-secondary: #12121a;
-  --bg-card: rgba(255, 255, 255, 0.03);
-  --bg-card-hover: rgba(255, 255, 255, 0.06);
-  --text-primary: #e4e4e7;
-  --text-secondary: #a1a1aa;
-  --text-muted: #71717a;
-  --accent-primary: #00f0ff;
-  --accent-secondary: #a855f7;
-  --accent-gradient: linear-gradient(135deg, #00f0ff, #a855f7);
-  --border-color: rgba(255, 255, 255, 0.06);
-  --glow-color: rgba(0, 240, 255, 0.15);
-  --font-heading: "Inter", "SF Pro Display", system-ui, sans-serif;
-  --font-body: "Inter", "SF Pro Text", system-ui, sans-serif;
-  --font-mono: "JetBrains Mono", "Fira Code", monospace;
-  --grain-opacity: 0.03;
-  --scanline-opacity: 0;
-  --card-radius: 12px;
-  --nav-bg: rgba(10, 10, 15, 0.8);
+/* Fonts are self-hosted via Fontsource and imported in BaseLayout.astro
+   so Vite processes the woff2 url() references and copies the files
+   into dist/_astro alongside the bundled CSS. Importing them as CSS
+   @imports here would inline the @font-face rules but skip the asset
+   pipeline, leaving the urls pointing into node_modules. */
+
+/* ============================================
+   DESIGN TOKENS : Editorial light theme.
+   Paper cream, ink, crimson. Magazine voice.
+   ============================================ */
+:root {
+  /* Surfaces */
+  --bg-primary: #f5efe1;
+  --bg-secondary: #ede5d3;
+  --bg-card: #ede5d3;
+  --bg-card-hover: #e6dcc6;
+
+  /* Type */
+  --text-primary: #1a1715;
+  --text-secondary: #5a534a;
+  --text-muted: #8a8175;
+  --text-quiet: #b5ad9d;
+
+  /* Accent : deep crimson, not signal-red */
+  --accent-primary: #b8362d;
+  --accent-soft: #a02d24;
+  --accent-quiet: rgba(184, 54, 45, 0.55);
+  --glow-color: rgba(184, 54, 45, 0.15);
+
+  /* Lines */
+  --border-color: #d8cfbc;
+  --border-soft: #e2dac9;
+  --rule-color: #d8cfbc;
+
+  /* Selection */
+  --selection-bg: rgba(184, 54, 45, 0.18);
+
+  /* Type stacks : Fontsource ships these as `<Name> Variable`.
+     The `<Name> Fallback` faces below override the system font's
+     metrics to roughly match the web font's, so when the swap
+     happens layout doesn't shift visibly. */
+  --font-serif: "Newsreader Variable", "Newsreader Fallback", "Newsreader", "Iowan Old Style", Georgia, serif;
+  --font-display: "Fraunces Variable", "Fraunces Fallback", "Fraunces", Georgia, serif;
+  --font-sans: "Inter Variable", "Inter Fallback", "Inter", "SF Pro Text", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono Variable", "JetBrains Mono", "Fira Code", ui-monospace, monospace;
+  font-optical-sizing: auto;
 }
 
-/* ===== THEME: TERMINAL ===== */
-[data-theme="terminal"] {
-  --bg-primary: #000000;
-  --bg-secondary: #0a0a0a;
-  --bg-card: rgba(0, 255, 65, 0.04);
-  --bg-card-hover: rgba(0, 255, 65, 0.08);
-  --text-primary: #00ff41;
-  --text-secondary: #00cc33;
-  --text-muted: #009922;
-  --accent-primary: #00ff41;
-  --accent-secondary: #00ffaa;
-  --accent-gradient: linear-gradient(135deg, #00ff41, #00ffaa);
-  --border-color: rgba(0, 255, 65, 0.2);
-  --glow-color: rgba(0, 255, 65, 0.15);
-  --font-heading: "JetBrains Mono", "Fira Code", monospace;
-  --font-body: "JetBrains Mono", "Fira Code", monospace;
-  --font-mono: "JetBrains Mono", "Fira Code", monospace;
-  --grain-opacity: 0.03;
-  --scanline-opacity: 0.06;
-  --card-radius: 0px;
-  --nav-bg: rgba(0, 0, 0, 0.95);
+/* ============================================
+   FALLBACK METRIC MATCHING
+   While the web font is loading, render in a system font (Georgia
+   for serifs, Arial for sans) but override its metrics so the
+   font-swap happens without visible layout shift / jump.
+   ============================================ */
+@font-face {
+  font-family: "Fraunces Fallback";
+  src: local("Georgia"), local("Times New Roman"), local("serif");
+  size-adjust: 100%;
+  ascent-override: 90%;
+  descent-override: 23%;
+  line-gap-override: 0%;
 }
 
-/* ===== BASE STYLES ===== */
+@font-face {
+  font-family: "Newsreader Fallback";
+  src: local("Georgia"), local("Times New Roman"), local("serif");
+  size-adjust: 100%;
+  ascent-override: 92%;
+  descent-override: 23%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: "Inter Fallback";
+  src: local("Arial"), local("Helvetica"), local("sans-serif");
+  size-adjust: 107%;
+  ascent-override: 90%;
+  descent-override: 22%;
+  line-gap-override: 0%;
+}
+
+/* ============================================ */
 @layer base {
-  * {
-    box-sizing: border-box;
-  }
+  * { box-sizing: border-box; }
 
   html {
     scroll-behavior: smooth;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    font-feature-settings: "kern", "liga", "calt", "ss01", "onum";
   }
 
   body {
     margin: 0;
-    background-color: var(--bg-primary);
+    background: var(--bg-primary);
     color: var(--text-primary);
-    font-family: var(--font-body);
+    font-family: var(--font-serif);
+    font-size: 1.0625rem;
     line-height: 1.7;
     overflow-x: hidden;
-    transition: background-color 0.5s ease, color 0.5s ease;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-heading);
-    line-height: 1.2;
-    font-weight: 700;
+    font-family: var(--font-display);
+    line-height: 1.1;
+    font-weight: 600;
+    letter-spacing: -0.015em;
+    color: var(--text-primary);
+    font-feature-settings: "kern", "liga", "ss01";
   }
 
   a {
     color: var(--accent-primary);
-    text-decoration: none;
-    transition: all 0.3s ease;
+    text-decoration: underline;
+    text-decoration-color: rgba(184, 54, 45, 0.35);
+    text-underline-offset: 3px;
+    text-decoration-thickness: 1px;
+    transition: color 0.18s ease, text-decoration-color 0.18s ease;
   }
 
   a:hover {
-    text-shadow: 0 0 8px var(--glow-color);
+    color: var(--accent-soft);
+    text-decoration-color: var(--accent-primary);
   }
 
-  code, pre {
-    font-family: var(--font-mono);
-  }
+  code, pre, kbd, samp { font-family: var(--font-mono); }
 
   ::selection {
-    background: var(--accent-primary);
-    color: var(--bg-primary);
+    background: var(--selection-bg);
+    color: var(--text-primary);
+  }
+
+  hr {
+    border: 0;
+    border-top: 1px solid var(--rule-color);
+    margin: 2.5rem 0;
   }
 }
 
-/* ===== GRAIN OVERLAY ===== */
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  z-index: 9999;
-  pointer-events: none;
-  opacity: var(--grain-opacity);
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
-  background-repeat: repeat;
-  background-size: 256px 256px;
-}
+/* ============================================
+   UTILITIES
+   ============================================ */
 
-/* ===== SCANLINE OVERLAY (Terminal theme) ===== */
-body::after {
-  content: "";
-  position: fixed;
-  inset: 0;
-  z-index: 9998;
-  pointer-events: none;
-  opacity: var(--scanline-opacity);
-  background: repeating-linear-gradient(
-    0deg,
-    transparent,
-    transparent 2px,
-    rgba(0, 0, 0, 0.3) 2px,
-    rgba(0, 0, 0, 0.3) 4px
-  );
-}
-
-/* ===== UTILITY CLASSES ===== */
+/* Title accent : flat crimson, not gradient */
 .gradient-text {
-  background: var(--accent-gradient);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: var(--accent-primary);
+  background: none;
+  -webkit-background-clip: unset;
+  -webkit-text-fill-color: var(--accent-primary);
+  background-clip: unset;
 }
 
+/* Block primitive : flat editorial border */
 .glass-card {
   background: var(--bg-card);
   border: 1px solid var(--border-color);
-  border-radius: var(--card-radius);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  transition: all 0.3s ease;
+  border-radius: 4px;
+  transition: border-color 0.18s ease, background 0.18s ease;
 }
 
 .glass-card:hover {
   background: var(--bg-card-hover);
-  border-color: var(--accent-primary);
-  box-shadow: 0 0 30px var(--glow-color);
-  transform: translateY(-2px);
+  border-color: var(--accent-quiet);
 }
 
-/* ===== TERMINAL-SPECIFIC STYLES ===== */
-[data-theme="terminal"] .glass-card {
-  backdrop-filter: none;
-  -webkit-backdrop-filter: none;
-  border-style: solid;
-  box-shadow: 0 0 8px rgba(0, 255, 65, 0.05);
-}
-
-[data-theme="terminal"] .glass-card:hover {
-  box-shadow: 0 0 20px rgba(0, 255, 65, 0.2), inset 0 0 20px rgba(0, 255, 65, 0.03);
-}
-
-[data-theme="terminal"] .gradient-text {
-  background: none;
-  -webkit-background-clip: unset;
-  -webkit-text-fill-color: #00ff41;
-  background-clip: unset;
-  text-shadow: 0 0 10px rgba(0, 255, 65, 0.5), 0 0 40px rgba(0, 255, 65, 0.2);
-}
-
-[data-theme="terminal"] body {
-  text-shadow: 0 0 2px rgba(0, 255, 65, 0.3);
-}
-
-[data-theme="terminal"] a:hover {
-  text-shadow: 0 0 10px rgba(0, 255, 65, 0.6), 0 0 30px rgba(0, 255, 65, 0.3);
-}
-
-/* CRT flicker for terminal */
-@keyframes crt-flicker {
-  0% { opacity: 0.97; }
-  5% { opacity: 1; }
-  10% { opacity: 0.98; }
-  15% { opacity: 1; }
-  50% { opacity: 1; }
-  80% { opacity: 0.96; }
-  85% { opacity: 1; }
-  100% { opacity: 0.98; }
-}
-
-[data-theme="terminal"] main {
-  animation: crt-flicker 4s infinite;
-}
-
-/* Terminal prompt prefix for section labels */
-[data-theme="terminal"] .page-label::before {
-  content: "> ";
-  color: #00ff41;
-}
-
-/* Theme transition flash */
-@keyframes theme-flash {
-  0% { opacity: 1; }
-  100% { opacity: 0; pointer-events: none; }
-}
-
-.theme-flash {
-  position: fixed;
-  inset: 0;
-  z-index: 99999;
-  pointer-events: none;
-  animation: theme-flash 0.4s ease-out forwards;
-}
-
-.theme-flash--terminal {
-  background: #00ff41;
-}
-
-.theme-flash--cinematic {
-  background: #fff;
-}
-
-.glow {
-  box-shadow: 0 0 20px var(--glow-color);
-}
-
-.glow-text {
-  text-shadow: 0 0 10px var(--glow-color), 0 0 40px var(--glow-color);
-}
-
-/* ===== SCROLL PROGRESS BAR ===== */
+/* Scroll progress (kept) */
 .scroll-progress {
   position: fixed;
   top: 0;
   left: 0;
   height: 2px;
-  background: var(--accent-gradient);
+  background: var(--accent-primary);
   z-index: 10000;
   transition: width 0.1s linear;
 }
 
-/* ===== RESPONSIVE CONTAINER ===== */
+/* Container */
 .container {
   width: 100%;
   max-width: 1200px;
@@ -247,37 +185,206 @@ body::after {
   padding: 0 24px;
 }
 
+.container.narrow {
+  max-width: 760px;
+}
+
 @media (min-width: 768px) {
-  .container {
-    padding: 0 48px;
-  }
+  .container { padding: 0 48px; }
 }
 
 @media (min-width: 1024px) {
-  .container {
-    padding: 0 64px;
-  }
+  .container { padding: 0 64px; }
 }
 
-/* ===== CURSOR BLINK (Terminal theme) ===== */
-@keyframes blink {
-  0%, 50% { opacity: 1; }
-  51%, 100% { opacity: 0; }
-}
-
-.cursor-blink::after {
-  content: "█";
-  animation: blink 1s step-end infinite;
-  color: var(--accent-primary);
-}
-
-/* ===== PAGE SECTION SPACING ===== */
 section {
-  padding: 80px 0;
+  padding: 64px 0;
 }
 
 @media (min-width: 768px) {
-  section {
-    padding: 120px 0;
+  section { padding: 96px 0; }
+}
+
+/* ============================================
+   EDITORIAL HELPERS
+   ============================================ */
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  display: inline-block;
+}
+
+.timestamp {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  letter-spacing: 0.04em;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Mono numerals (tabular) for archive numbers */
+.mono-num {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.01em;
+}
+
+/* Drop cap for essay first paragraph */
+.drop-cap > p:first-of-type::first-letter {
+  font-family: var(--font-display);
+  font-size: 4.4em;
+  font-weight: 600;
+  float: left;
+  line-height: 0.85;
+  margin: 0.04em 0.08em -0.05em 0;
+  color: var(--accent-primary);
+}
+
+/* Section ornament : three dots, centered */
+.essay-ornament {
+  text-align: center;
+  margin: 48px 0;
+  color: var(--text-quiet);
+  font-family: var(--font-mono);
+  letter-spacing: 0.5em;
+  font-size: 0.9rem;
+}
+
+.essay-ornament::before { content: "· · ·"; }
+
+/* ============================================
+   PROSE : body content styling
+   ============================================ */
+
+.prose {
+  font-family: var(--font-serif);
+  font-size: 1.18rem;
+  line-height: 1.78;
+  color: var(--text-primary);
+  max-width: 64ch;
+  position: relative;
+}
+
+.prose p {
+  margin: 0 0 1.4em;
+}
+
+.prose h2 {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 2.6em 0 0.7em;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+}
+
+.prose h3 {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin: 2em 0 0.5em;
+  color: var(--text-primary);
+}
+
+.prose ul, .prose ol {
+  padding-left: 1.4em;
+  margin: 0 0 1.4em;
+}
+
+.prose li {
+  margin-bottom: 0.5em;
+}
+
+.prose strong {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.prose em {
+  color: var(--text-primary);
+  font-style: italic;
+}
+
+.prose a {
+  color: var(--accent-primary);
+}
+
+/* Pull quote */
+.prose blockquote {
+  border-left: 3px solid var(--accent-primary);
+  padding: 4px 0 4px 24px;
+  margin: 32px 0;
+  font-size: 1.3rem;
+  line-height: 1.5;
+  font-style: italic;
+  color: var(--text-primary);
+  font-family: var(--font-display);
+}
+
+.prose blockquote p { margin: 0; }
+
+/* Code blocks : quiet, no aggressive styling */
+.prose pre {
+  background: #efe9da;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  padding: 18px 20px;
+  overflow-x: auto;
+  margin: 28px 0;
+  font-size: 0.875rem;
+  line-height: 1.6;
+}
+
+.prose pre code {
+  background: none;
+  padding: 0;
+  font-size: inherit;
+  color: var(--text-primary);
+}
+
+.prose code {
+  font-size: 0.9em;
+  padding: 1px 6px;
+  background: #ebe2cf;
+  border: 1px solid var(--border-color);
+  border-radius: 3px;
+  color: var(--accent-soft);
+}
+
+/* ============================================
+   MARGIN FOOTNOTES
+   On wide viewports, <aside class="note"> floats
+   into the right margin. On narrow, falls inline.
+   ============================================ */
+
+.prose aside.note,
+.prose-with-margins aside.note {
+  display: block;
+  margin: 1em 0;
+  padding: 8px 0 8px 14px;
+  border-left: 2px solid var(--accent-soft);
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  line-height: 1.55;
+  color: var(--text-secondary);
+}
+
+@media (min-width: 1180px) {
+  .prose-with-margins {
+    /* The reading column stays narrow; margins extend into the gutter */
+  }
+  .prose-with-margins aside.note {
+    float: right;
+    width: 220px;
+    margin: 6px -260px 18px 0;
+    clear: right;
+    border-left: 1px solid var(--rule-color);
+    padding: 0 0 0 14px;
+    font-size: 0.78rem;
+    color: var(--text-muted);
   }
 }

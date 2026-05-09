@@ -1,187 +1,151 @@
 ---
 import { SOCIAL, SITE } from "../consts";
+const year = new Date().getFullYear();
 ---
 
 <footer class="footer">
   <div class="footer-inner">
-    <!-- Cinematic footer -->
-    <div class="footer-cinematic">
+    <div class="footer-motto">
+      <span class="footer-mark">A·S·K</span>
+      <span class="footer-mark-sep">·</span>
+      <span class="footer-mark-text">{SITE.motto}</span>
+    </div>
+
+    <div class="footer-row">
+      <div class="footer-credit">
+        <p>
+          {SITE.name} · <span class="footer-tag">stories · essays · code · log</span>
+        </p>
+      </div>
+
       <div class="footer-links">
         {SOCIAL.map((s) => (
           <a
             href={s.url}
-            target="_blank"
-            rel="noopener noreferrer"
+            target={s.url.startsWith("http") ? "_blank" : undefined}
+            rel={s.url.startsWith("http") ? "noopener noreferrer" : undefined}
             class="footer-social"
-            aria-label={s.name}
           >
             {s.name}
           </a>
         ))}
-      </div>
-      <div class="footer-info">
-        <p class="footer-credit">
-          Built by <span class="gradient-text">{SITE.name}</span>
-        </p>
-        <p class="footer-year">&copy; {new Date().getFullYear()}</p>
+        <a
+          href="https://github.com/arunsetty/arunsetty.github.io"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="footer-social footer-source"
+        >
+          View source
+        </a>
       </div>
     </div>
 
-    <!-- Terminal footer -->
-    <div class="footer-terminal">
-      <div class="terminal-status-bar">
-        <span class="terminal-status-item">
-          <span class="terminal-label">user</span>@<span class="terminal-value">arun</span>
-        </span>
-        <span class="terminal-divider">|</span>
-        <span class="terminal-status-item">
-          <span class="terminal-label">pid</span>=<span class="terminal-value">{new Date().getFullYear()}</span>
-        </span>
-        <span class="terminal-divider">|</span>
-        <span class="terminal-status-item">
-          <span class="terminal-label">uptime</span>=<span class="terminal-value">8y+</span>
-        </span>
-        <span class="terminal-divider">|</span>
-        {SOCIAL.slice(0, 3).map((s) => (
-          <a
-            href={s.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="terminal-link"
-          >
-            {s.icon}
-          </a>
-        ))}
-      </div>
-      <div class="terminal-exit">
-        <span class="terminal-muted">// EOF — built with astro + caffeine</span>
-      </div>
+    <div class="footer-meta">
+      <span class="footer-year">© {year}</span>
+      <span class="footer-sep">·</span>
+      <span class="footer-built">Astro · Bun · GitHub Pages</span>
     </div>
   </div>
 </footer>
 
 <style>
   .footer {
-    padding: 48px 24px;
+    padding: 48px 24px 32px;
     border-top: 1px solid var(--border-color);
+    margin-top: 64px;
   }
 
   .footer-inner {
-    max-width: 1200px;
+    max-width: 1100px;
     margin: 0 auto;
-  }
-
-  /* Cinematic footer */
-  .footer-cinematic {
     display: flex;
     flex-direction: column;
-    align-items: center;
     gap: 24px;
+  }
+
+  .footer-motto {
+    padding: 16px 0 20px;
+    border-bottom: 1px solid var(--rule-color);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 12px;
+  }
+
+  .footer-mark {
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    letter-spacing: 0.04em;
+  }
+
+  .footer-mark-sep {
+    color: var(--accent-primary);
+  }
+
+  .footer-mark-text {
+    font-family: var(--font-display);
+    font-size: 1rem;
+    font-style: italic;
+    color: var(--text-secondary);
+  }
+
+  .footer-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 24px;
+  }
+
+  .footer-credit p {
+    margin: 0;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+  }
+
+  .footer-tag {
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.04em;
+    margin-left: 8px;
   }
 
   .footer-links {
     display: flex;
-    gap: 24px;
+    gap: 18px;
     flex-wrap: wrap;
-    justify-content: center;
   }
 
   .footer-social {
     color: var(--text-muted);
     font-family: var(--font-mono);
-    font-size: 0.8rem;
-    text-transform: uppercase;
+    font-size: 0.75rem;
     letter-spacing: 0.1em;
+    text-transform: uppercase;
     text-decoration: none;
-    transition: color 0.3s ease;
   }
 
   .footer-social:hover {
     color: var(--accent-primary);
   }
 
-  .footer-info {
-    text-align: center;
+  .footer-source::before {
+    content: "→ ";
+    color: var(--accent-primary);
   }
 
-  .footer-credit {
-    color: var(--text-muted);
-    font-size: 0.85rem;
-    margin: 0 0 4px;
-  }
-
-  .footer-year {
-    color: var(--text-muted);
-    font-size: 0.75rem;
-    margin: 0;
+  .footer-meta {
+    color: var(--text-quiet);
     font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
   }
 
-  /* Terminal footer — hidden by default */
-  .footer-terminal {
-    display: none;
-  }
-
-  /* Theme switching */
-  :global([data-theme="terminal"]) .footer-cinematic {
-    display: none;
-  }
-
-  :global([data-theme="terminal"]) .footer-terminal {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    font-family: var(--font-mono);
-    font-size: 0.75rem;
-  }
-
-  :global([data-theme="terminal"]) .footer {
-    border-top-color: rgba(0, 255, 65, 0.3);
-    padding: 24px;
-  }
-
-  .terminal-status-bar {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    flex-wrap: wrap;
-  }
-
-  .terminal-label {
-    color: #009922;
-  }
-
-  .terminal-value {
-    color: #00ff41;
-  }
-
-  .terminal-divider {
-    color: rgba(0, 255, 65, 0.2);
-  }
-
-  .terminal-link {
-    color: #009922;
-    text-decoration: none;
-    transition: color 0.2s;
-    margin-left: 4px;
-  }
-
-  .terminal-link:hover {
-    color: #00ff41;
-    text-shadow: 0 0 8px rgba(0, 255, 65, 0.5);
-  }
-
-  .terminal-exit {
-    text-align: center;
-    margin-top: 8px;
-  }
-
-  .terminal-muted {
-    color: #009922;
-    opacity: 0.6;
-  }
-
-  .terminal-status-item {
-    color: #00cc33;
+  .footer-sep {
+    margin: 0 8px;
+    opacity: 0.5;
   }
 </style>

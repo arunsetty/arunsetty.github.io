@@ -1,10 +1,14 @@
 export const SITE = {
-  name: "Arun Setty",
-  title: "Arun Setty | Fullstack Developer & Product Architect",
-  description: "Developer, philosopher, and product architect building beautiful, scalable web applications.",
+  name: "Arun Setty Kodavali",
+  shortName: "Arun Setty",
+  initials: "A·S·K",
+  title: "Arun Setty Kodavali | Storyteller, tinkerer, engineer",
+  description: "A·S·K, Arun Setty Kodavali. Storyteller, tinkerer, thinker, engineer. Human with the excellence reflex. Co-founder & CTO at Ur AI. Previously founding engineer at Trupeer and Brokenatom. Writing daily at Ephemeral Thoughts.",
   url: "https://arunsetty.github.io",
   email: "arunsetty1729@gmail.com",
   image: "/img/og.png",
+  titles: ["Storyteller", "Tinkerer", "Thinker", "Engineer"],
+  motto: "Human with the excellence reflex.",
 } as const;
 
 export const SOCIAL = [
@@ -16,9 +20,10 @@ export const SOCIAL = [
 ] as const;
 
 export const NAV_LINKS = [
-  { name: "Work", href: "/work" },
-  { name: "Journey", href: "/journey" },
   { name: "Thoughts", href: "/thoughts" },
+  { name: "Work", href: "/work" },
+  { name: "Log", href: "/log" },
+  { name: "Journey", href: "/journey" },
   { name: "About", href: "/about" },
   { name: "Now", href: "/now" },
 ] as const;
@@ -27,6 +32,13 @@ export const THOUGHTS = {
   brand: "Ephemeral Thoughts",
   tagline: "Things I think before I forget.",
   blurb: "Short, often half-formed. Notes I'd rather catch than lose.",
+  cadence: "New essay most days.",
+} as const;
+
+export const LOG = {
+  brand: "Log",
+  tagline: "Everything I watch, read, play.",
+  blurb: "Films, shows, anime, books, games. Episode-level when something hits, with what I was thinking at the time.",
 } as const;
 
 export const NOW_UPDATED = "May 2026";
@@ -40,13 +52,35 @@ export const SKILLS = {
 
 export const EXPERIENCE = [
   {
-    company: "Broken",
-    url: "https://brokenatom.io",
-    time: "Jun 2022 - Present",
-    position: "Software Developer",
+    company: "Ur AI",
+    url: "https://ur-ai.net",
+    time: "Nov 2025 - Present",
+    position: "Co-Founder & CTO",
     points: [
-      "Been involved in the development of main product for the company.",
-      "Developed a no-code system which can successfully create a structural application from scratch given the specifications from the user.",
+      "Building AI products focused on structured workflows: document intelligence, automation, the things knowledge workers actually do.",
+      "Owning product, engineering, and system architecture end-to-end as the technical co-founder.",
+    ],
+  },
+  {
+    company: "Trupeer",
+    url: "https://app.trupeer.ai",
+    time: "Jan - Oct 2025",
+    position: "Founding Engineer",
+    points: [
+      "Built core video, documentation, and search systems: transcription pipelines, low-latency retrieval, and AI features (docs, translation, voiceovers, avatars).",
+      "Shipped a video-first knowledge system in under two days that generated $150K in revenue within its first week, with instant search and navigation inside videos through a custom low-latency transcription and indexing pipeline.",
+      "Won the Salesforce AI Pitchfield with the team in 2025. Salesforce Ventures awarded $100K.",
+    ],
+  },
+  {
+    company: "Brokenatom",
+    url: "https://brokenatom.io",
+    time: "Jun 2022 - Dec 2024",
+    position: "Founding Engineer",
+    points: [
+      "Built a full-stack no-code platform end-to-end in the pre-AI era: UI, backend, data flow, the whole stack from first principles, no AI assistance.",
+      "Wrote a custom React parser that turned HTML-like input into React code in the browser, enabling Figma-style visual building that produced real, usable code.",
+      "Designed the integration layer for state management, data flow, and backend connections.",
     ],
   },
   {
@@ -55,21 +89,19 @@ export const EXPERIENCE = [
     time: "Jan - Apr 2022",
     position: "Software Developer",
     points: [
-      "Designed and Developed a service which accurately determines the Application Health analysing each of the APIs and their dependencies.",
-      "Integrated the service with the existing monitoring system to provide a holistic view of the application health.",
-      "Designed a fully integratable user system for the service which can be used by other services to provide a unified user experience.",
-      "Developed a notification system which can be used by other services to notify the user about any changes in the application health.",
+      "Designed and developed a service to determine application health by analysing each API and its dependencies.",
+      "Integrated the service with the existing monitoring system for a holistic view of application health.",
+      "Designed a fully integratable user system that could be reused by other services for unified UX.",
+      "Built a notification system used by other services to surface application-health changes.",
     ],
   },
   {
-    company: "Hotstar",
+    company: "Disney Hotstar",
     url: "https://www.hotstar.com/in",
     time: "May - Jul 2021",
-    position: "Software Developer",
+    position: "Software Intern",
     points: [
-      "Designed and developed a service which handles the whole spectrum of activities from dawn of a project through its entire lifecycle using GoCD pipelines.",
-      "Integrated various github APIs ranging from generating a repo to setting up checks for its content with the aforementioned service to build a state maintained system for tracking all the changes in the organisation.",
-      "Designed the service to be OpenAPI compliant so that it could be transitioned into a CLI tool.",
+      "Built an internal tool to automate CI/CD and repo setup, reducing project setup time and enabling one-click secure onboarding for engineering teams.",
     ],
   },
   {
@@ -78,7 +110,7 @@ export const EXPERIENCE = [
     time: "Nov 2020 - Jan 2021",
     position: "AI Developer",
     points: [
-      "Created an API which collects details from a conversation and searches for most suitable product in scraped data from a wide range of articles gathered from various sources.",
+      "Built an API that extracted intent from a conversation and matched it against scraped product data sourced from a wide range of articles.",
     ],
   },
   {
@@ -87,9 +119,9 @@ export const EXPERIENCE = [
     time: "May - Jul 2020",
     position: "AI Developer",
     points: [
-      "Developed APIs that enable creation and management of events in Google Calendar.",
-      "Integrated the aforementioned APIs with an AI powered conversational bot using RASA system.",
-      "Interpreted the data models and designed the bot with ability to handle various conversations and reply in given context by gathering sufficient information from the ongoing discussion.",
+      "Built APIs for creating and managing Google Calendar events.",
+      "Integrated those APIs with a RASA-based conversational bot capable of contextual dialogue.",
+      "Designed the bot's data model and dialogue flow so it could pick up enough context from the conversation to respond usefully.",
     ],
   },
   {
@@ -98,10 +130,10 @@ export const EXPERIENCE = [
     time: "Dec 2019 - Jan 2020",
     position: "MEAN Stack Developer",
     points: [
-      "Implemented a pipeline for automated continuous integration and continuous deployment for a web application built on MEAN Stack using CIRCLE CI and bitbucket integration in GCP.",
-      "Wrote testcases for testing functionality and UI of the web application using Protractor and Jasmine.",
-      "Built and developed Auto Draft Saving System and Payment Integration for web application.",
-      "Developed a custom mailer for sending mails automatically during a period of time with a chosen frequency.",
+      "Implemented a CI/CD pipeline for a MEAN-stack web app using CircleCI and Bitbucket on GCP.",
+      "Wrote functional and UI tests using Protractor and Jasmine.",
+      "Built an auto-draft saving system and payment integration.",
+      "Built a custom mailer for scheduled, recurring emails.",
     ],
   },
   {
@@ -111,8 +143,8 @@ export const EXPERIENCE = [
     position: "Mentor",
     points: [
       "Mentored a group of 83 students preparing for JEE through the platform.",
-      "Created a suitable time table for each student on daily basis to excel in their preparation.",
-      "Taught and cleared the doubts in various topics for all the students during the period.",
+      "Built a daily study plan tailored to each student's strengths and gaps.",
+      "Held doubt sessions across topics throughout the program.",
     ],
   },
   {
@@ -121,9 +153,9 @@ export const EXPERIENCE = [
     time: "Nov 2018 - May 2019",
     position: "Mentor",
     points: [
-      "Managed critical project impacting thousands of students, demonstrating strong project management skills.",
-      "Recognized for creativity, independent thinking, and a passion for learning, showcasing a strong inclination towards innovation.",
-      "Highly valued team member with excellent interpersonal skills, indicating effective collaboration and teamwork abilities.",
+      "Managed a critical project impacting thousands of students.",
+      "Recognised for creativity, independent thinking, and a bias toward shipping.",
+      "Worked closely with a small team to keep the program running smoothly.",
     ],
   },
 ] as const;
@@ -138,7 +170,7 @@ export const COLLEGE_PROJECTS = [
   {
     name: "Online Forms & Surveys",
     description:
-      "Platform for creating forms and surveys with built-in analytics — graphs and charts over MySQL — and granular sharing controls (public, organization, or specific users).",
+      "Platform for creating forms and surveys with built-in analytics, graphs and charts over MySQL, and granular sharing controls (public, organization, or specific users).",
     tags: ["Django", "JavaScript", "MySQL"],
   },
   {
@@ -156,7 +188,7 @@ export const COLLEGE_PROJECTS = [
   {
     name: "Racket Interpreter",
     description:
-      "Internal interpreter for Racket using the environment model of execution — frames, pointers, and lexical scope from scratch.",
+      "Internal interpreter for Racket using the environment model of execution: frames, pointers, and lexical scope from scratch.",
     tags: ["Racket", "Interpreters"],
   },
   {

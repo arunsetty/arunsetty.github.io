@@ -1,46 +1,68 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Hero from "../components/Hero.tsx";
-import {
-  FeaturedWorkSection,
-  SkillsFlowSection,
-  StatsSection,
-  ExperiencePreview,
-  ThoughtsTeaser,
-} from "../components/HomeSections.tsx";
+import { RecentThoughts, BuildingAndLately } from "../components/HomeSections.tsx";
 import { getCollection } from "astro:content";
 
-const projects = (await getCollection("projects"))
-  .sort((a, b) => a.data.order - b.data.order)
+// Thoughts
+const allThoughts = (await getCollection("thoughts"))
+  .filter((p) => !p.data.draft)
+  .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
+
+const totalThoughts = allThoughts.length;
+
+// Numbering is 0-indexed: oldest entry is #00, newest is #(total - 1).
+const featured = allThoughts[0]
+  ? {
+      title: allThoughts[0].data.title,
+      description: allThoughts[0].data.description,
+      pubDate: allThoughts[0].data.pubDate,
+      slug: allThoughts[0].slug,
+      number: totalThoughts - 1,
+    }
+  : undefined;
+
+const recent = allThoughts.slice(1, 7).map((p, i) => ({
+  title: p.data.title,
+  pubDate: p.data.pubDate,
+  slug: p.slug,
+  number: totalThoughts - 2 - i,
+}));
+
+// Featured projects
+const featuredProjects = (await getCollection("projects"))
   .filter((p) => p.data.featured)
+  .sort((a, b) => a.data.order - b.data.order)
+  .slice(0, 3)
   .map((p) => ({
     title: p.data.title,
     description: p.data.description,
     tags: p.data.tags,
     slug: p.slug,
-    featured: p.data.featured,
+    duration: p.data.duration,
+  }));
+
+// Recent log entries
+const recentLog = (await getCollection("log"))
+  .filter((e) => !e.data.draft)
+  .sort((a, b) => b.data.firstWatched.getTime() - a.data.firstWatched.getTime())
+  .slice(0, 4)
+  .map((e) => ({
+    title: e.data.title,
+    type: e.data.type,
+    rating: e.data.rating,
+    status: e.data.status,
+    firstWatched: e.data.firstWatched,
+    slug: e.slug,
+    creator: e.data.creator,
   }));
 ---
 
 <BaseLayout
-  title="Arun Setty | Fullstack Developer & Product Architect"
-  description="Fullstack developer and product architect. Building Broken, an alum of Hotstar and Foxsense, IIT Bombay graduate. Developer, philosopher, builder."
+  title="Arun Setty Kodavali | Storyteller, tinkerer, engineer"
+  description="A·S·K, Co-founder & CTO at Ur AI. Previously founding engineer at Trupeer and Brokenatom. Daily essays at Ephemeral Thoughts on decisions, systems, and craft. IIT Bombay alum."
 >
-  <!-- Hero with staggered text animation -->
-  <Hero client:load />
-
-  <!-- Stats counter -->
-  <StatsSection client:load />
-
-  <!-- Featured Work -->
-  <FeaturedWorkSection client:load projects={projects} />
-
-  <!-- Skills -->
-  <SkillsFlowSection client:load />
-
-  <!-- Experience preview -->
-  <ExperiencePreview client:load />
-
-  <!-- Thoughts teaser -->
-  <ThoughtsTeaser client:load />
+  <Hero featured={featured} />
+  <RecentThoughts thoughts={recent} total={totalThoughts} />
+  <BuildingAndLately projects={featuredProjects} log={recentLog} />
 </BaseLayout>
