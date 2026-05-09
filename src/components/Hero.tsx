@@ -27,7 +27,7 @@ export default function Hero({ featured }: HeroProps) {
               <span className="hero-name-full">Arun Setty Kodavali</span>
             </h1>
             <p className="hero-motto">
-              <span className="hero-motto-mark">&ldquo;</span>Human with the excellence reflex.<span className="hero-motto-mark">&rdquo;</span>
+              Human with the excellence reflex.
             </p>
 
             <div className="hero-divider" aria-hidden="true"></div>
@@ -44,8 +44,7 @@ export default function Hero({ featured }: HeroProps) {
             </p>
             <p className="hero-frame">
               <strong>New story most days.</strong> Previously founding
-              engineer at Trupeer and Brokenatom. IIT Bombay alum, somewhere
-              between a fullstack mind and a philosophical one.
+              engineer at Trupeer and Brokenatom.
             </p>
 
             <div className="hero-meta">
@@ -139,11 +138,6 @@ export default function Hero({ featured }: HeroProps) {
           color: var(--text-primary);
           margin: 18px 0 0;
           line-height: 1.4;
-        }
-        .hero-motto-mark {
-          color: var(--accent-primary);
-          font-weight: 600;
-          font-style: normal;
         }
         .hero-divider {
           width: 48px;

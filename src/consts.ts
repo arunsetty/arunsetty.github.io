@@ -21,11 +21,9 @@ export const SOCIAL = [
 
 export const NAV_LINKS = [
   { name: "Thoughts", href: "/thoughts" },
-  { name: "Work", href: "/work" },
-  { name: "Log", href: "/log" },
-  { name: "Journey", href: "/journey" },
-  { name: "About", href: "/about" },
   { name: "Now", href: "/now" },
+  { name: "Work", href: "/work" },
+  { name: "About", href: "/about" },
 ] as const;
 
 export const THOUGHTS = {
