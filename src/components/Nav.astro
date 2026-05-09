@@ -180,7 +180,31 @@ const isActive = (href: string) =>
 </style>
 
 <script>
+  function updateActiveNav() {
+    const pathname = window.location.pathname.replace(/\/+$/, "") || "/";
+    const isActive = (href: string) =>
+      href === "/"
+        ? pathname === "/"
+        : pathname === href || pathname.startsWith(`${href}/`);
+
+    document.querySelectorAll<HTMLAnchorElement>(".nav-link, .mobile-link").forEach((link) => {
+      const href = link.getAttribute("href");
+      if (!href) return;
+      const active = isActive(href);
+      link.classList.toggle("is-active", active);
+      if (active) {
+        link.setAttribute("aria-current", "page");
+      } else {
+        link.removeAttribute("aria-current");
+      }
+    });
+  }
+
   document.addEventListener("astro:page-load", () => {
+    // Recompute active state — nav is `transition:persist` so the
+    // server-rendered class doesn't update across view transitions.
+    updateActiveNav();
+
     const btn = document.querySelector(".mobile-menu-btn");
     const menu = document.querySelector(".mobile-menu");
 
