@@ -84,12 +84,78 @@ export const EXPERIENCE = [
     ],
   },
   {
+    company: "Foxsense Innovations",
+    url: "https://www.foxsense.io",
+    time: "Jan — Apr 2022",
+    position: "Software Developer",
+    points: [
+      "Designed and developed a service to determine application health by analysing each API and its dependencies.",
+      "Integrated the service with the existing monitoring system for a holistic view of application health.",
+      "Designed a fully integratable user system that could be reused by other services for unified UX.",
+      "Built a notification system used by other services to surface application-health changes.",
+    ],
+  },
+  {
     company: "Disney Hotstar",
     url: "https://www.hotstar.com/in",
     time: "May — Jul 2021",
     position: "Software Intern",
     points: [
       "Built an internal tool to automate CI/CD and repo setup, reducing project setup time and enabling one-click secure onboarding for engineering teams.",
+    ],
+  },
+  {
+    company: "Inscripta",
+    url: "https://inscripta.ai",
+    time: "Nov 2020 — Jan 2021",
+    position: "AI Developer",
+    points: [
+      "Built an API that extracted intent from a conversation and matched it against scraped product data sourced from a wide range of articles.",
+    ],
+  },
+  {
+    company: "Oficio Cloud Software",
+    url: "https://talkingmart.com",
+    time: "May — Jul 2020",
+    position: "AI Developer",
+    points: [
+      "Built APIs for creating and managing Google Calendar events.",
+      "Integrated those APIs with a RASA-based conversational bot capable of contextual dialogue.",
+      "Designed the bot's data model and dialogue flow so it could pick up enough context from the conversation to respond usefully.",
+    ],
+  },
+  {
+    company: "The Right Doctors",
+    url: "https://therightdoctors.com",
+    time: "Dec 2019 — Jan 2020",
+    position: "MEAN Stack Developer",
+    points: [
+      "Implemented a CI/CD pipeline for a MEAN-stack web app using CircleCI and Bitbucket on GCP.",
+      "Wrote functional and UI tests using Protractor and Jasmine.",
+      "Built an auto-draft saving system and payment integration.",
+      "Built a custom mailer for scheduled, recurring emails.",
+    ],
+  },
+  {
+    company: "MyTutor 247",
+    url: "https://www.mytutor247.in/",
+    time: "Jul — Nov 2019",
+    position: "Mentor",
+    points: [
+      "Mentored a group of 83 students preparing for JEE through the platform.",
+      "Built a daily study plan tailored to each student's strengths and gaps.",
+      "Held doubt sessions across topics throughout the program.",
+    ],
+  },
+  {
+    company: "Dubbtr",
+    url: "https://in.linkedin.com/company/dubbtr-edu",
+    time: "Nov 2018 — May 2019",
+    position: "Mentor",
+    points: [
+      "Managed a critical project impacting thousands of students.",
+      "Recognised for creativity, independent thinking, and a bias toward shipping.",
+      "Worked closely with a small team to keep the program running smoothly.",
     ],
   },
 ] as const;
