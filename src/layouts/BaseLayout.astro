@@ -4,6 +4,16 @@ import Nav from "../components/Nav.astro";
 import Footer from "../components/Footer.astro";
 import ScrollProgress from "../components/ScrollProgress.tsx";
 import { SITE, SOCIAL } from "../consts";
+
+// Self-hosted fonts (bundled by Vite). JS-side imports so Vite
+// processes the woff2 url()s and copies the files into dist/.
+import "@fontsource-variable/fraunces/opsz.css";
+import "@fontsource-variable/fraunces/opsz-italic.css";
+import "@fontsource-variable/newsreader/opsz.css";
+import "@fontsource-variable/newsreader/opsz-italic.css";
+import "@fontsource-variable/inter";
+import "@fontsource-variable/jetbrains-mono";
+
 import "../styles/global.css";
 
 interface Props {
@@ -70,13 +80,9 @@ const personSchema = {
     <!-- JSON-LD Person schema -->
     <script type="application/ld+json" set:html={JSON.stringify(personSchema)} />
 
-    <!-- Fonts: Newsreader (serif body) + Inter (display) + JetBrains Mono -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..900,0..100,0..1;1,9..144,300..900,0..100,0..1&family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,300..700;1,6..72,300..700&display=swap"
-      rel="stylesheet"
-    />
+    <!-- Fonts are self-hosted via Fontsource (bundled at build time)
+         and imported in global.css. No CDN round-trip needed. -->
+
 
     <!-- RSS feed (placeholder, may be added later) -->
     <link rel="alternate" type="application/rss+xml" title="Ephemeral Thoughts" href="/rss.xml" />

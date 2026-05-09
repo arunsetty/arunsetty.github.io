@@ -1,5 +1,11 @@
 @import "tailwindcss";
 
+/* Fonts are self-hosted via Fontsource and imported in BaseLayout.astro
+   so Vite processes the woff2 url() references and copies the files
+   into dist/_astro alongside the bundled CSS. Importing them as CSS
+   @imports here would inline the @font-face rules but skip the asset
+   pipeline, leaving the urls pointing into node_modules. */
+
 /* ============================================
    DESIGN TOKENS — Editorial light theme.
    Paper cream, ink, crimson. Magazine voice.
@@ -31,11 +37,12 @@
   /* Selection */
   --selection-bg: rgba(184, 54, 45, 0.18);
 
-  /* Type stacks */
-  --font-serif: "Newsreader", "Source Serif 4", "Iowan Old Style", "Charter", Georgia, serif;
-  --font-display: "Fraunces", "Newsreader", Georgia, serif;
-  --font-sans: "Inter", "SF Pro Text", system-ui, sans-serif;
-  --font-mono: "JetBrains Mono", "Fira Code", ui-monospace, monospace;
+  /* Type stacks — Fontsource ships these as `<Name> Variable` */
+  --font-serif: "Newsreader Variable", "Newsreader", "Iowan Old Style", "Charter", Georgia, serif;
+  --font-display: "Fraunces Variable", "Fraunces", "Newsreader", Georgia, serif;
+  --font-sans: "Inter Variable", "Inter", "SF Pro Text", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono Variable", "JetBrains Mono", "Fira Code", ui-monospace, monospace;
+  font-optical-sizing: auto;
 }
 
 /* ============================================ */
