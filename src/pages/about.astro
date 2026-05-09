@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { COLLEGE_PROJECTS } from "../consts";
 ---
 
 <BaseLayout title="About | Arun Setty" description="Developer, philosopher, builder. Learn more about who I am.">
@@ -39,6 +40,25 @@ import BaseLayout from "../layouts/BaseLayout.astro";
             is where I fell in love with both the rigour of computer science and the
             breadth of philosophical thinking.
           </p>
+
+          <h2>Earlier Projects</h2>
+          <p>
+            A selection of academic work from IIT Bombay — the projects that
+            shaped how I think about systems, languages, and computation.
+          </p>
+          <div class="college-grid">
+            {COLLEGE_PROJECTS.map((p) => (
+              <div class="college-card glass-card">
+                <h3 class="college-name">{p.name}</h3>
+                <p class="college-desc">{p.description}</p>
+                <div class="college-tags">
+                  {p.tags.map((tag) => (
+                    <span class="college-tag">{tag}</span>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
 
           <h2>Philosophy</h2>
           <p>
@@ -113,6 +133,20 @@ import BaseLayout from "../layouts/BaseLayout.astro";
           <p class="terminal-text">
             Graduated from <a href="https://www.iitb.ac.in/" target="_blank" rel="noopener noreferrer">Indian Institute of Technology, Bombay</a> with a Bachelor's in Computer Science and Engineering. Where I fell in love with both the rigour of CS and the breadth of philosophical thinking.
           </p>
+        </div>
+
+        <div class="terminal-section">
+          <span class="terminal-heading">## earlier_projects</span>
+          <p class="terminal-text">
+            // academic work — IIT Bombay
+          </p>
+          {COLLEGE_PROJECTS.map((p) => (
+            <div class="college-entry-terminal">
+              <span class="college-name-terminal">[ {p.name} ]</span>
+              <p class="terminal-text">{p.description}</p>
+              <span class="terminal-comment">// tags: {p.tags.join(", ")}</span>
+            </div>
+          ))}
         </div>
 
         <div class="terminal-section">
@@ -282,5 +316,71 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     margin-top: 32px;
     padding-top: 16px;
     border-top: 1px solid rgba(0, 255, 65, 0.1);
+  }
+
+  /* College projects — cinematic */
+  .college-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 16px;
+    margin: 24px 0 8px;
+  }
+
+  .college-card {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .college-name {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0;
+  }
+
+  .college-desc {
+    font-size: 0.9rem !important;
+    line-height: 1.6 !important;
+    margin: 0 !important;
+    color: var(--text-secondary) !important;
+  }
+
+  .college-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: auto;
+    padding-top: 4px;
+  }
+
+  .college-tag {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    padding: 3px 9px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    color: var(--accent-primary);
+    letter-spacing: 0.03em;
+  }
+
+  /* College projects — terminal */
+  .college-entry-terminal {
+    margin: 16px 0;
+    padding-left: 12px;
+    border-left: 1px solid rgba(0, 255, 65, 0.2);
+  }
+
+  .college-name-terminal {
+    color: #00ff41;
+    font-weight: 600;
+    display: block;
+    margin-bottom: 6px;
+    text-shadow: 0 0 6px rgba(0, 255, 65, 0.25);
+  }
+
+  .college-entry-terminal .terminal-text {
+    margin: 0 0 6px;
   }
 </style>
