@@ -201,7 +201,7 @@ const isActive = (href: string) =>
   }
 
   document.addEventListener("astro:page-load", () => {
-    // Recompute active state — nav is `transition:persist` so the
+    // Recompute active state, nav is `transition:persist` so the
     // server-rendered class doesn't update across view transitions.
     updateActiveNav();
 

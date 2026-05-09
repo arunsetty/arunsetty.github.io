@@ -127,7 +127,7 @@ export default function Timeline() {
           position: relative;
         }
         .timeline-point::before {
-          content: "—";
+          content: "·";
           position: absolute;
           left: 0;
           color: var(--text-quiet);

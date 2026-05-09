@@ -33,13 +33,13 @@ export default function Hero({ featured }: HeroProps) {
             <div className="hero-divider" aria-hidden="true"></div>
 
             <p className="hero-frame">
-              Stories, mostly &mdash; in essays at{" "}
+              Stories, mostly, in essays at{" "}
               <a href="/thoughts">Ephemeral Thoughts</a>, in code at{" "}
               <a href="https://ur-ai.net" target="_blank" rel="noopener noreferrer">
                 Ur AI
               </a>
               {" "}(the AI startup where I'm CTO and co-founder), and in
-              everything I read, watch, and play &mdash; logged at{" "}
+              everything I read, watch, and play, logged at{" "}
               <a href="/log">A·S·K Log</a>.
             </p>
             <p className="hero-frame">

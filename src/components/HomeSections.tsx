@@ -30,7 +30,7 @@ const formatYear = (d: Date) =>
   d.toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" });
 
 // ============================================================
-// RECENT THOUGHTS — dense numbered list
+// RECENT THOUGHTS, dense numbered list
 // ============================================================
 export function RecentThoughts({
   thoughts,
@@ -49,7 +49,7 @@ export function RecentThoughts({
         </header>
 
         {thoughts.length === 0 ? (
-          <p className="rt-empty">Nothing here yet — first thought coming soon.</p>
+          <p className="rt-empty">Nothing here yet, first thought coming soon.</p>
         ) : (
           <ol className="rt-list">
             {thoughts.map((t) => (
@@ -179,7 +179,7 @@ export function RecentThoughts({
 }
 
 // ============================================================
-// BUILDING + LATELY — 2-column row
+// BUILDING + LATELY, 2-column row
 // ============================================================
 export function BuildingAndLately({
   projects,
@@ -229,7 +229,7 @@ export function BuildingAndLately({
             </header>
 
             {log.length === 0 ? (
-              <p className="bl-empty">Log is fresh — first entries on the way.</p>
+              <p className="bl-empty">Log is fresh, first entries on the way.</p>
             ) : (
               <ul className="bl-list">
                 {log.map((entry) => (
