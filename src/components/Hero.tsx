@@ -275,8 +275,8 @@ function CinematicHero() {
               <path d="M5 12h14M12 5l7 7-7 7" />
             </svg>
           </a>
-          <a href="/writing" className="glass-card cta-button cta-secondary">
-            Read My Writing
+          <a href="/thoughts" className="glass-card cta-button cta-secondary">
+            Read Thoughts
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" style={{ marginLeft: "6px" }}>
               <path d="M5 12h14M12 5l7 7-7 7" />
             </svg>
@@ -563,7 +563,7 @@ function TerminalHero() {
                 >
                   {[
                     { name: "work/", href: "/work", color: "#00ffaa" },
-                    { name: "writing/", href: "/writing", color: "#00ffaa" },
+                    { name: "thoughts/", href: "/thoughts", color: "#00ffaa" },
                     { name: "journey/", href: "/journey", color: "#00ffaa" },
                     { name: "about.md", href: "/about", color: "#00cc33" },
                     { name: "now.md", href: "/now", color: "#00cc33" },

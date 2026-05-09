@@ -1,17 +1,25 @@
 ---
 import { NAV_LINKS } from "../consts";
 import ThemeToggle from "./ThemeToggle.tsx";
+
+const pathname = Astro.url.pathname.replace(/\/+$/, "") || "/";
+const isActive = (href: string) =>
+  href === "/" ? pathname === "/" : pathname === href || pathname.startsWith(`${href}/`);
 ---
 
 <nav class="nav" transition:persist>
   <div class="nav-inner">
-    <a href="/" class="nav-logo">
+    <a href="/" class="nav-logo" aria-current={pathname === "/" ? "page" : undefined}>
       <span class="gradient-text font-bold text-lg">AS</span>
     </a>
 
     <div class="nav-links">
       {NAV_LINKS.map((link) => (
-        <a href={link.href} class="nav-link">
+        <a
+          href={link.href}
+          class={`nav-link ${isActive(link.href) ? "is-active" : ""}`}
+          aria-current={isActive(link.href) ? "page" : undefined}
+        >
           {link.name}
         </a>
       ))}
@@ -28,7 +36,11 @@ import ThemeToggle from "./ThemeToggle.tsx";
   <!-- Mobile menu -->
   <div class="mobile-menu">
     {NAV_LINKS.map((link) => (
-      <a href={link.href} class="mobile-link">
+      <a
+        href={link.href}
+        class={`mobile-link ${isActive(link.href) ? "is-active" : ""}`}
+        aria-current={isActive(link.href) ? "page" : undefined}
+      >
         {link.name}
       </a>
     ))}
@@ -99,6 +111,18 @@ import ThemeToggle from "./ThemeToggle.tsx";
 
   .nav-link:hover::after {
     width: 100%;
+  }
+
+  .nav-link.is-active {
+    color: var(--accent-primary);
+  }
+
+  .nav-link.is-active::after {
+    width: 100%;
+  }
+
+  .mobile-link.is-active {
+    color: var(--accent-primary);
   }
 
   .nav-actions {

@@ -3,7 +3,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import { getCollection } from "astro:content";
 
 export async function getStaticPaths() {
-  const posts = await getCollection("blog");
+  const posts = await getCollection("thoughts");
   return posts.map((post) => ({
     params: { slug: post.slug },
     props: { post },
@@ -29,7 +29,7 @@ const readingTime = Math.max(1, Math.ceil(wordCount / 250));
     <div class="container">
       <!-- Cinematic header -->
       <div class="cinematic-only">
-        <a href="/writing" class="back-link">&larr; All Writing</a>
+        <a href="/thoughts" class="back-link">&larr; All Thoughts</a>
 
         <header class="blog-header">
           <div class="blog-meta">
@@ -53,7 +53,7 @@ const readingTime = Math.max(1, Math.ceil(wordCount / 250));
 
       <!-- Terminal header -->
       <div class="terminal-only">
-        <a href="/writing" class="back-link">$ cd ../writing/</a>
+        <a href="/thoughts" class="back-link">$ cd ../thoughts/</a>
 
         <header class="blog-header">
           <div class="terminal-file-meta">
@@ -67,7 +67,7 @@ const readingTime = Math.max(1, Math.ceil(wordCount / 250));
             <span class="t-comment">---</span>
           </div>
 
-          <h1 class="gradient-text blog-title">$ cat ./writing/{post.slug}.md</h1>
+          <h1 class="gradient-text blog-title">$ cat ./thoughts/{post.slug}.md</h1>
         </header>
       </div>
 
@@ -76,9 +76,9 @@ const readingTime = Math.max(1, Math.ceil(wordCount / 250));
       </div>
 
       <footer class="blog-footer">
-        <a href="/writing" class="back-link">
-          <span class="cinematic-only">&larr; Back to all writing</span>
-          <span class="terminal-only">$ cd ../writing/</span>
+        <a href="/thoughts" class="back-link">
+          <span class="cinematic-only">&larr; Back to all thoughts</span>
+          <span class="terminal-only">$ cd ../thoughts/</span>
         </a>
       </footer>
     </div>
