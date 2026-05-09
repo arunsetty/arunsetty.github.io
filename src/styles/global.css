@@ -37,12 +37,48 @@
   /* Selection */
   --selection-bg: rgba(184, 54, 45, 0.18);
 
-  /* Type stacks — Fontsource ships these as `<Name> Variable` */
-  --font-serif: "Newsreader Variable", "Newsreader", "Iowan Old Style", "Charter", Georgia, serif;
-  --font-display: "Fraunces Variable", "Fraunces", "Newsreader", Georgia, serif;
-  --font-sans: "Inter Variable", "Inter", "SF Pro Text", system-ui, sans-serif;
+  /* Type stacks — Fontsource ships these as `<Name> Variable`.
+     The `<Name> Fallback` faces below override the system font's
+     metrics to roughly match the web font's, so when the swap
+     happens layout doesn't shift visibly. */
+  --font-serif: "Newsreader Variable", "Newsreader Fallback", "Newsreader", "Iowan Old Style", Georgia, serif;
+  --font-display: "Fraunces Variable", "Fraunces Fallback", "Fraunces", Georgia, serif;
+  --font-sans: "Inter Variable", "Inter Fallback", "Inter", "SF Pro Text", system-ui, sans-serif;
   --font-mono: "JetBrains Mono Variable", "JetBrains Mono", "Fira Code", ui-monospace, monospace;
   font-optical-sizing: auto;
+}
+
+/* ============================================
+   FALLBACK METRIC MATCHING
+   While the web font is loading, render in a system font (Georgia
+   for serifs, Arial for sans) but override its metrics so the
+   font-swap happens without visible layout shift / jump.
+   ============================================ */
+@font-face {
+  font-family: "Fraunces Fallback";
+  src: local("Georgia"), local("Times New Roman"), local("serif");
+  size-adjust: 100%;
+  ascent-override: 90%;
+  descent-override: 23%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: "Newsreader Fallback";
+  src: local("Georgia"), local("Times New Roman"), local("serif");
+  size-adjust: 100%;
+  ascent-override: 92%;
+  descent-override: 23%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: "Inter Fallback";
+  src: local("Arial"), local("Helvetica"), local("sans-serif");
+  size-adjust: 107%;
+  ascent-override: 90%;
+  descent-override: 22%;
+  line-gap-override: 0%;
 }
 
 /* ============================================ */
