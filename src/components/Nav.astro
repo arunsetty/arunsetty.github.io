@@ -9,7 +9,7 @@ const isActive = (href: string) =>
 <nav class="nav" transition:persist>
   <div class="nav-inner">
     <a href="/" class="nav-logo" aria-current={pathname === "/" ? "page" : undefined}>
-      <span class="nav-logo-mark">A·S·K</span>
+      <span class="nav-logo-mark">A<span class="nav-logo-dot">·</span>S<span class="nav-logo-dot">·</span>K</span>
     </a>
 
     <div class="nav-links">
@@ -50,9 +50,9 @@ const isActive = (href: string) =>
     right: 0;
     z-index: 1000;
     padding: 16px 24px;
-    background: rgba(20, 17, 13, 0.78);
-    backdrop-filter: blur(14px) saturate(120%);
-    -webkit-backdrop-filter: blur(14px) saturate(120%);
+    background: rgba(245, 239, 225, 0.82);
+    backdrop-filter: blur(14px) saturate(115%);
+    -webkit-backdrop-filter: blur(14px) saturate(115%);
     border-bottom: 1px solid var(--border-color);
   }
 
@@ -65,16 +65,24 @@ const isActive = (href: string) =>
   }
 
   .nav-logo {
-    font-family: var(--font-mono);
+    font-family: var(--font-display);
     text-decoration: none;
-    font-size: 0.85rem;
+    font-size: 1rem;
     color: var(--text-primary);
     letter-spacing: 0.04em;
+    line-height: 1;
   }
 
   .nav-logo-mark {
-    color: var(--accent-primary);
+    color: var(--text-primary);
     font-weight: 600;
+    font-feature-settings: "ss01";
+  }
+
+  .nav-logo-dot {
+    color: var(--accent-primary);
+    font-weight: 400;
+    margin: 0 0.04em;
   }
 
   .nav-links {
@@ -97,12 +105,12 @@ const isActive = (href: string) =>
   .nav-link::after {
     content: "";
     position: absolute;
-    bottom: -2px;
+    bottom: -3px;
     left: 0;
     width: 0;
     height: 1px;
     background: var(--accent-primary);
-    transition: width 0.18s ease;
+    transition: width 0.18s ease, height 0.18s ease;
   }
 
   .nav-link:hover { color: var(--accent-primary); }
@@ -110,8 +118,12 @@ const isActive = (href: string) =>
 
   .nav-link.is-active {
     color: var(--accent-primary);
+    font-weight: 500;
   }
-  .nav-link.is-active::after { width: 100%; }
+  .nav-link.is-active::after {
+    width: 100%;
+    height: 2px;
+  }
 
   .mobile-menu-btn {
     display: none;
